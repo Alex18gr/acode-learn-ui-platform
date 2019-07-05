@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header"><a [routerLink]="['/course', course.id]">{{course.name}}</a></div>
+  <div class="card-body">
+    {{course.description}}
+      <div style="float: right; vertical-align:text-top">
+          <table style="text-align: end">
+            <tr><span style="color: skyblue">{{course.professor}}</span></tr>
+            <tr><span style="color: skyblue">Semester: {{course.semester}}</span></tr>
+          </table>
+      </div>
+  </div>
+</div>
