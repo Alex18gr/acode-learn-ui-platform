@@ -4,7 +4,7 @@ export class Course {
   public description: string;
   public semester: number;
 
-  constructor(id: number, name: string, desc: string, semester: string) {
+  constructor(id: number, name: string, desc: string, semester: number) {
     this.id = id;
     this.name = name;
     this.description = desc;
