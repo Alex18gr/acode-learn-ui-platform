@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import {Router, ActivatedRoute, ParamMap, Params} from '@angular/router';
+import {CoursesService} from "../courses.service";
+import {Course} from "../course.model";
+import {switchMap} from "rxjs/operators";
 
 @Component({
   selector: 'app-course',
@@ -7,12 +10,24 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
+  currentCourse: Course;
+  currentCourseId: number;
 
   constructor(private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private coursesService: CoursesService) { }
 
   ngOnInit() {
+    // this.route.paramMap.pipe(
+    //   switchMap((params: ParamMap) =>
+    //     this.coursesService.getCourseById(params.get('id'))
+    //   )
+    // );
 
+    this.route.params.subscribe((params: Params) => {
+      this.currentCourseId = +params.id;
+      this.currentCourse = this.coursesService.getCourseById(this.currentCourseId);
+    });
   }
 
 }

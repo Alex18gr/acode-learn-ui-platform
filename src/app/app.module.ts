@@ -9,6 +9,9 @@ import { CourseComponent } from './course/course/course.component';
 import { CourseNavbarComponent } from './course/course-navbar/course-navbar.component';
 import { CourseListComponent } from './course/course-list/course-list.component';
 import { CourseListItemComponent } from './course/course-list/course-list-item/course-list-item.component';
+import {CoursesService} from './course/courses.service';
+import { ResourcesComponent } from './course/course/resources/resources.component';
+import { CourseDashboardComponent } from './course/course/course-dashboard/course-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -18,13 +21,17 @@ import { CourseListItemComponent } from './course/course-list/course-list-item/c
     CourseComponent,
     CourseNavbarComponent,
     CourseListComponent,
-    CourseListItemComponent
+    CourseListItemComponent,
+    ResourcesComponent,
+    CourseDashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    CoursesService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

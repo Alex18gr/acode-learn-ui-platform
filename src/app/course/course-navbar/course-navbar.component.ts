@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Course} from "../course.model";
 
 @Component({
   selector: 'app-course-navbar',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./course-navbar.component.css']
 })
 export class CourseNavbarComponent implements OnInit {
+  @Input() course: Course;
 
   constructor() { }
 

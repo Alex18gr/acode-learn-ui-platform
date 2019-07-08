@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse" data-spy="affix">
   <!--  <a class="navbar-brand" href="#">Navbar</a>-->
   <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    A very very large lesson title
+    Course Title: {{course.name}}
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
     <a class="dropdown-item" href="#">Another Lesson</a>
@@ -16,10 +16,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent2">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="./">Dashboard <span class="sr-only">(current)</span></a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Resources <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="resources">Resources <span class="sr-only">(current)</span></a>
         </li>
           <li class="nav-item">
           <a class="nav-link" href="#">Tasks <span class="sr-only">(current)</span></a>
@@ -31,10 +31,10 @@
           <a class="nav-link" href="#">Link</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
             <a class="dropdown-item" href="#">Action</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>

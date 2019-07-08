@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {Course} from "../../course.model";
 
 @Component({
   selector: 'app-course-list-item',
@@ -6,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./course-list-item.component.css']
 })
 export class CourseListItemComponent implements OnInit {
-  @Input() course: {id: number, name: string, professor: string, semester: number, description: string};
+  @Input() course: Course;
+  @Input() courseItemIndex;
   constructor() { }
 
   ngOnInit() {
