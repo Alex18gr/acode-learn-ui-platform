@@ -32,4 +32,14 @@ export class CoursesService {
   getCourseById(id) {
     return this.courses[id];
   }
+
+  findCourseNameById(id: number) {
+    let courseName = '';
+    this.courses.forEach(course => {
+      if(course.id === id) {
+        courseName = course.name;
+      }
+    });
+    return courseName;
+  }
 }

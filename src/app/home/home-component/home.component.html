@@ -1,4 +1,67 @@
-<div class="container-fluid my-container">
-  <p>home-component works!</p>
+<div class="container my-container">
+  <div class="row">
+    <div class="col-md-12">
+        <h1>Home Page</h1>
+
+        <div class="container-fluid">
+          <div class="row flex-nowrap" style="overflow-x: auto;white-space: nowrap;">
+            <div class="d-flex flex-nowrap">
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <!-- Announcements Container -->
+          <div class="col-md-6">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row
+              mb-4 shadow-sm h-md-250 position-relative p-3">
+              <h3 class="mt-4">Announcements</h3>
+              <hr>
+              <app-home-announcement-list-item *ngFor="let announcement of myAnnouncements; let i = index" [announcement]="announcement"></app-home-announcement-list-item>
+            </div>
+          </div>
+
+          <!-- Tasks Container -->
+          <div class="col-md-6">
+              <div class="row no-gutters border rounded overflow-hidden flex-md-row
+              mb-4 shadow-sm h-md-250 position-relative p-3">
+              <h3 class="mt-4">Tasks</h3>
+              <hr>
+              <p>Sed sodales sit amet ex vitae posuere. Maecenas nunc nunc, posuere eget aliquam id, efficitur sit amet ante. Morbi euismod lorem quis purus pharetra, ac sollicitudin dolor euismod. Sed eu est ante. Nam ac ultricies eros. Ut sit amet mi imperdiet, consequat tortor a, sollicitudin dui. Ut blandit, sapien quis elementum egestas, dolor libero convallis nibh, non finibus ex ipsum vitae odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed maximus, sapien nec scelerisque blandit, magna diam consectetur risus, et convallis dolor metus a libero. Aliquam velit elit, tincidunt vel lorem at, laoreet pellentesque ex. Sed sed ullamcorper magna. Nam neque diam, tempor at consectetur at, malesuada sollicitudin quam. Cras commodo magna sit amet accumsan pulvinar. Sed finibus, elit eget tincidunt euismod, ligula nibh suscipit nisl, eget viverra enim felis at lorem.</p>
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+  </div>
 </div>
 

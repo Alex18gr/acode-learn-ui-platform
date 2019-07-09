@@ -13,6 +13,7 @@ import {CoursesService} from './course/courses.service';
 import { ResourcesComponent } from './course/course/resources/resources.component';
 import { CourseDashboardComponent } from './course/course/course-dashboard/course-dashboard.component';
 import { CourseAnnouncementsComponent } from './course/course-announcements/course-announcements.component';
+import { HomeAnnouncementListItemComponent } from './home/home-announcement-list-item/home-announcement-list-item.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CourseAnnouncementsComponent } from './course/course-announcements/cour
     CourseListItemComponent,
     ResourcesComponent,
     CourseDashboardComponent,
-    CourseAnnouncementsComponent
+    CourseAnnouncementsComponent,
+    HomeAnnouncementListItemComponent
   ],
   imports: [
     BrowserModule,
