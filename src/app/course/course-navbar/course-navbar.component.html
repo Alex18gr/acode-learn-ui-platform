@@ -1,13 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse" data-spy="affix">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse shadow-sm sps" data-sps-offset="56">
   <!--  <a class="navbar-brand" href="#">Navbar</a>-->
   <a class="navbar-brand dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Course Title: {{course.name}}
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <a class="dropdown-item" href="#">Another Lesson</a>
-    <a class="dropdown-item" href="#">Another Lesson</a>
+    <span class="dropdown-item-text">Enrolled Courses</span>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Something else here</a>
+    <a *ngFor="let course of courses; let i = index" class="dropdown-item" [routerLink]="['/course', i]">{{course.name}}</a>
   </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -25,7 +24,7 @@
           <a class="nav-link" href="#">Tasks <span class="sr-only">(current)</span></a>
         </li>
           <li class="nav-item">
-          <a class="nav-link" href="#">Anouncements <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="announcements">Announcements <span class="badge badge-pill badge-danger">4</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>

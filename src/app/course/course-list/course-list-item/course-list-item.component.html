@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card shadow-sm" (click)="onCourseClicked()">
   <div class="card-header"><a [routerLink]="['/course', courseItemIndex]">{{course.name}}</a></div>
   <div class="card-body">
     {{course.description}}

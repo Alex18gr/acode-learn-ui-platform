@@ -12,6 +12,7 @@ import { CourseListItemComponent } from './course/course-list/course-list-item/c
 import {CoursesService} from './course/courses.service';
 import { ResourcesComponent } from './course/course/resources/resources.component';
 import { CourseDashboardComponent } from './course/course/course-dashboard/course-dashboard.component';
+import { CourseAnnouncementsComponent } from './course/course-announcements/course-announcements.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CourseDashboardComponent } from './course/course/course-dashboard/cours
     CourseListComponent,
     CourseListItemComponent,
     ResourcesComponent,
-    CourseDashboardComponent
+    CourseDashboardComponent,
+    CourseAnnouncementsComponent
   ],
   imports: [
     BrowserModule,
