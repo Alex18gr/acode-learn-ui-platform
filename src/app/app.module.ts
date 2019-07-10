@@ -13,7 +13,8 @@ import {CoursesService} from './course/courses.service';
 import { ResourcesComponent } from './course/course/resources/resources.component';
 import { CourseDashboardComponent } from './course/course/course-dashboard/course-dashboard.component';
 import { CourseAnnouncementsComponent } from './course/course-announcements/course-announcements.component';
-import { HomeAnnouncementListItemComponent } from './home/home-announcement-list-item/home-announcement-list-item.component';
+import { HomeAnnouncementListItemComponent } from './home/home-announcement-list/home-announcement-list-item/home-announcement-list-item.component';
+import { HomeAnnouncementListComponent } from './home/home-announcement-list/home-announcement-list.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HomeAnnouncementListItemComponent } from './home/home-announcement-list
     ResourcesComponent,
     CourseDashboardComponent,
     CourseAnnouncementsComponent,
-    HomeAnnouncementListItemComponent
+    HomeAnnouncementListItemComponent,
+    HomeAnnouncementListComponent
   ],
   imports: [
     BrowserModule,

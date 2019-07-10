@@ -4,12 +4,13 @@
         <h1>Home Page</h1>
 
         <div class="container-fluid">
-          <div class="row flex-nowrap" style="overflow-x: auto;white-space: nowrap;">
+          <div class="row flex-nowrap card-deck" style="overflow-x: auto;white-space: nowrap;">
             <div class="d-flex flex-nowrap">
               <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
+              <!-- <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
@@ -32,20 +33,20 @@
               <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
               <div class="card card-body">Card</div>
-              <div class="card card-body">Card</div>
-              <div class="card card-body">Card</div>
+              <div class="card card-body">Card</div> -->
             </div>
           </div>
         </div>
 
-        <div class="row mt-4">
+        <div class="row mt-2">
           <!-- Announcements Container -->
           <div class="col-md-6">
             <div class="row no-gutters border rounded overflow-hidden flex-md-row
-              mb-4 shadow-sm h-md-250 position-relative p-3">
-              <h3 class="mt-4">Announcements</h3>
+              mb-4 shadow-sm h-md-250 position-relative p-2">
+              <h3 class="mt-2">Announcements</h3>
               <hr>
-              <app-home-announcement-list-item *ngFor="let announcement of myAnnouncements; let i = index" [announcement]="announcement"></app-home-announcement-list-item>
+              <app-home-announcement-list [announcements]="myAnnouncements"></app-home-announcement-list>
+              <!-- <app-home-announcement-list-item *ngFor="let announcement of myAnnouncements; let i = index" [announcement]="announcement"></app-home-announcement-list-item> -->
             </div>
           </div>
 

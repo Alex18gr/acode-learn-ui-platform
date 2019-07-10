@@ -9,7 +9,7 @@ import { CoursesService } from 'src/app/course/courses.service';
 })
 export class HomeAnnouncementListItemComponent implements OnInit {
   @Input() announcement: Announcement;
-  private courseTitle;
+  courseTitle;
 
   constructor(private coursesService: CoursesService) { }
 
