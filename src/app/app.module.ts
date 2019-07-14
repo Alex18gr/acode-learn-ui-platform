@@ -15,6 +15,9 @@ import { CourseDashboardComponent } from './course/course/course-dashboard/cours
 import { CourseAnnouncementsComponent } from './course/course-announcements/course-announcements.component';
 import { HomeAnnouncementListItemComponent } from './home/home-announcement-list/home-announcement-list-item/home-announcement-list-item.component';
 import { HomeAnnouncementListComponent } from './home/home-announcement-list/home-announcement-list.component';
+import { LoginComponent } from './auth/login/login.component';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -29,11 +32,14 @@ import { HomeAnnouncementListComponent } from './home/home-announcement-list/hom
     CourseDashboardComponent,
     CourseAnnouncementsComponent,
     HomeAnnouncementListItemComponent,
-    HomeAnnouncementListComponent
+    HomeAnnouncementListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     CoursesService

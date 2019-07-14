@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, ParamMap, Params} from '@angular/router';
 import {CoursesService} from "../courses.service";
 import {Course} from "../course.model";
-import {switchMap} from "rxjs/operators";
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-course',
@@ -15,7 +15,8 @@ export class CourseComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private coursesService: CoursesService) { }
+              private coursesService: CoursesService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     // this.route.paramMap.pipe(
@@ -28,6 +29,10 @@ export class CourseComponent implements OnInit {
       this.currentCourseId = +params.id;
       this.currentCourse = this.coursesService.getCourseById(this.currentCourseId);
     });
+  }
+
+  isActivated(): boolean {
+    return this.authService.isAuthenticated;
   }
 
 }

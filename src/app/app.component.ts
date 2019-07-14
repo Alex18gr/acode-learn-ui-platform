@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event } from '@angular/router';
+import {AuthService} from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,8 @@ export class AppComponent {
   loading = false;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private authService: AuthService) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
@@ -29,6 +31,10 @@ export class AppComponent {
           break;
         }
       }
-    })
+    });
+  }
+  
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated;
   }
 }
