@@ -7,9 +7,14 @@ export class AuthUserModel {
     // tslint:disable-next-line:variable-name
     private _refreshToken: string,
     // tslint:disable-next-line:variable-name
-    private _expiresIn: number
+    private _expiresIn: number,
+    tokenExpirationDate?: Date
   ) {
-    this.tokenExpirationDate = new Date(+new Date() + (_expiresIn * 1000));
+    if (tokenExpirationDate) {
+      this.tokenExpirationDate = tokenExpirationDate;
+    } else {
+      this.tokenExpirationDate = new Date(+new Date() + (_expiresIn * 1000));
+    }
   }
 
   get refreshToken() {

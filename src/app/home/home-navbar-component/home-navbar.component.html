@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" routerLink="/"><i class="fa fa-book"  style="color: white;"></i> Platform Name</a>
+  <a class="navbar-brand" routerLink="/"><i class="fa fa-book"  style="color: white;"></i> {{platformName}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,20 +23,23 @@
           <a class="dropdown-item" routerLink="/">Something else here</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" routerLink="/" tabindex="-1" aria-disabled="true">Disabled</a>
-      </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="btn btn-outline-light my-2 my-sm-0" routerLink="/courses">Login</a>
+        <a routerLink="/" class=" nav-link" style="color: white;"><i class="fa fa-bell"><sup class="badge badge-danger badge-counter" style="font-size: 10px">3+</sup></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{this.authSerice.currentUser.username}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdown">
+          <a class="dropdown-item" routerLink="/">Action</a>
+          <a class="dropdown-item" routerLink="/">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="onLogout()">Logout</a>
+        </div>
       </li>
     </ul>
-      <a routerLink="/" class=" nav-link" style="color: white;"><i class="fa fa-bell"><sup class="badge badge-danger badge-counter" style="font-size: 10px">3+</sup></i></a>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-    </form>
   </div>
 </nav>

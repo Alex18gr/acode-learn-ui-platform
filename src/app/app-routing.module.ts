@@ -4,12 +4,12 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home-component/home.component';
 import { CourseComponent } from './course/course/course.component';
 import { CourseListComponent } from './course/course-list/course-list.component';
-import {ResourcesComponent} from "./course/course/resources/resources.component";
-import {CourseDashboardComponent} from "./course/course/course-dashboard/course-dashboard.component";
+import {ResourcesComponent} from './course/course/resources/resources.component';
+import {CourseDashboardComponent} from './course/course/course-dashboard/course-dashboard.component';
 import { CourseAnnouncementsComponent } from './course/course-announcements/course-announcements.component';
-import {LoginComponent} from "./auth/login/login.component";
-import {AuthGuardService} from "./auth/auth-guard.service";
-import {AuthGuardAuthenticatedService} from "./auth/auth-guard-authenticated.service";
+import {LoginComponent} from './auth/login/login.component';
+import {AuthGuardService} from './auth/auth-guard.service';
+import {AuthGuardAuthenticatedService} from './auth/auth-guard-authenticated.service';
 
 const routes: Routes = [
   {path: '', canActivate: [AuthGuardService], children: [

@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
         console.log(data);
         const user: AuthUserModel = new AuthUserModel(data.username, data.access_token, data.refresh_token, 3500);
         console.log(user);
-        this.authService.currentUser = user;
+        this.authService.setUser(user);
         this.router.navigate(['/']);
       });
   }

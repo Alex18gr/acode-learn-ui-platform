@@ -16,8 +16,8 @@ import { CourseAnnouncementsComponent } from './course/course-announcements/cour
 import { HomeAnnouncementListItemComponent } from './home/home-announcement-list/home-announcement-list-item/home-announcement-list-item.component';
 import { HomeAnnouncementListComponent } from './home/home-announcement-list/home-announcement-list.component';
 import { LoginComponent } from './auth/login/login.component';
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [

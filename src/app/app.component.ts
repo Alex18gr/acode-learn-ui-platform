@@ -32,6 +32,8 @@ export class AppComponent {
         }
       }
     });
+
+    this.authService.autoLogin();
   }
   
   isAuthenticated(): boolean {

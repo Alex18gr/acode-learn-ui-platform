@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Course} from "../course.model";
 import {CoursesService} from "../courses.service";
 import {Subscription} from "rxjs";
+import {CourseService} from "../course.service";
 
 @Component({
   selector: 'app-course-list',
@@ -22,13 +23,15 @@ export class CourseListComponent implements OnInit, OnDestroy {
   courses: Course[];
   courseSubscription: Subscription;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService,
+              private courseService: CourseService) { }
 
   ngOnInit() {
     this.courses = this.coursesService.getCourses();
     this.courseSubscription = this.coursesService.coursesChanged.subscribe((courses: Course[]) => {
       this.courses = courses;
     });
+    this.courseService.getUserCourses();
   }
 
   ngOnDestroy(): void {
