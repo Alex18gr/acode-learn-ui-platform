@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, OnDestroy} from '@angular/core';
-import {Course} from "../course.model";
+import {Course} from '../course.model';
 import { CoursesService } from '../courses.service';
 import { Subscription } from 'rxjs';
 
@@ -9,19 +9,22 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./course-navbar.component.css']
 })
 export class CourseNavbarComponent implements OnInit, OnDestroy {
-  @Input() course: Course;
+  @Input() course: Course = new Course(-1, '', '', '', -1, []);
   @Input() courseIndex: any;
-  courses: Course[];
+  @Input() courses: Course[] = [];
+  @Input() dataLoaded: boolean;
 
   coursesChanged: Subscription;
 
   constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.getCourses();
+    this.courses = this.coursesService.userCourses;
     this.coursesChanged = this.coursesService.coursesChanged.subscribe((courses: Course[]) => {
       this.courses = courses;
     });
+    // this.courses = this.coursesService.userCourses;
+    // this.courses = this.coursesService.userCourses;
   }
 
   getCourses() {

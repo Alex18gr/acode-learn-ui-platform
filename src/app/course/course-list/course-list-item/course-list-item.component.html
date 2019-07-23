@@ -4,7 +4,7 @@
     {{course.description}}
       <div style="float: right; vertical-align:text-top">
           <table style="text-align: end">
-            <tr><span style="color: skyblue">{{course.professor}}</span></tr>
+            <tr><span *ngFor="let prof of course.instructors; index as i" style="color: skyblue">{{prof.firstName + ' ' + prof.lastName}}, </span></tr>
             <tr><span style="color: skyblue">Semester: {{course.semester}}</span></tr>
           </table>
       </div>

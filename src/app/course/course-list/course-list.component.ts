@@ -23,15 +23,16 @@ export class CourseListComponent implements OnInit, OnDestroy {
   courses: Course[];
   courseSubscription: Subscription;
 
-  constructor(private coursesService: CoursesService,
-              private courseService: CourseService) { }
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
-    this.courses = this.coursesService.getCourses();
+    // this.courses = this.coursesService.getCourses();
     this.courseSubscription = this.coursesService.coursesChanged.subscribe((courses: Course[]) => {
       this.courses = courses;
     });
-    this.courseService.getUserCourses();
+    this.coursesService.getUserCourses().subscribe((coursesData) => {
+      console.log(coursesData);
+    });
   }
 
   ngOnDestroy(): void {

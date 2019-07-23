@@ -14,6 +14,7 @@ export class CourseListItemComponent implements OnInit {
               private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.course);
   }
 
   onCourseClicked() {

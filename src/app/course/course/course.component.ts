@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute, ParamMap, Params} from '@angular/router';
-import {CoursesService} from "../courses.service";
+import {CoursesResponse, CoursesService} from "../courses.service";
 import {Course} from "../course.model";
 import {AuthService} from '../../auth/auth.service';
+import {of, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-course',
@@ -12,6 +13,10 @@ import {AuthService} from '../../auth/auth.service';
 export class CourseComponent implements OnInit {
   currentCourse: Course;
   currentCourseId: number;
+  courses: Course[];
+  dataLoaded = false;
+
+  coursesSubscription: Subscription;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -24,10 +29,28 @@ export class CourseComponent implements OnInit {
     //     this.coursesService.getCourseById(params.get('id'))
     //   )
     // );
-
+    this.coursesSubscription = this.coursesService.coursesChanged.subscribe(courses => this.courses = courses);
     this.route.params.subscribe((params: Params) => {
       this.currentCourseId = +params.id;
       this.currentCourse = this.coursesService.getCourseById(this.currentCourseId);
+      if (this.currentCourse == null) {
+        this.coursesService.getUserCoursesRest()
+          .subscribe(data => {
+            this.currentCourse = this.coursesService.getCourseById(this.currentCourseId);
+            this.courses = data;
+            this.dataLoaded = true;
+          });
+      // .subscribe((data) => {
+      //     for (const course of data) {
+      //       if (course.id === this.currentCourseId) {
+      //         this.currentCourse = course;
+      //       }
+      //       // TODO: if course not found then we view an error
+      //     }
+      //   });
+      } else {
+        this.dataLoaded = true;
+      }
     });
   }
 

@@ -4,12 +4,14 @@ export class Course {
   public description: string;
   public professor: string;
   public semester: number;
+  public instructors: any[];
 
-  constructor(id: number, name: string, desc: string, professor: string, semester: number) {
+  constructor(id: number, name: string, desc: string, professor: string, semester: number, instructors: any[]) {
     this.id = id;
     this.name = name;
     this.description = desc;
     this.professor = professor;
     this.semester = semester;
+    this.instructors = instructors;
   }
 }
