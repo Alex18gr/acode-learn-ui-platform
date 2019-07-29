@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Resource Id</th>
+    <th scope="col">Resource Name</th>
+    <th scope="col">Date Created</th>
+    <th scope="col">Resource Type</th>
+    <th *ngIf="resourceType === 'RESOURCE_FILE'" scope="col">File Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let resourceElement of resourcesList; let i = index">
+    <th scope="row">{{i}}</th>
+    <td>{{resourceElement.id}}</td>
+    <td>{{resourceElement.name}}</td>
+    <td>{{resourceElement.dateCreated | date}}</td>
+    <td>{{resourceElement.resourceType}}</td>
+    <td><button class="btn btn-outline-primary">Download <i class="fas fa-download"></i></button></td>
+  </tr>
+  </tbody>
+</table>

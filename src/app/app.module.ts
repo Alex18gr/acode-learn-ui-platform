@@ -18,6 +18,7 @@ import { HomeAnnouncementListComponent } from './home/home-announcement-list/hom
 import { LoginComponent } from './auth/login/login.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { ResourcesTableComponent } from './course/course/resources/resources-table/resources-table.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {FormsModule} from '@angular/forms';
     CourseAnnouncementsComponent,
     HomeAnnouncementListItemComponent,
     HomeAnnouncementListComponent,
-    LoginComponent
+    LoginComponent,
+    ResourcesTableComponent
   ],
   imports: [
     BrowserModule,

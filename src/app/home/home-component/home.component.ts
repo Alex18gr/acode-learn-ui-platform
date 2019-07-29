@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Announcement } from 'src/app/course/announcement.model';
 import {HttpClient} from "@angular/common/http";
-import {CourseService} from "../../course/course.service";
+import {CoursesService} from '../../course/courses.service';
 
 @Component({
   selector: 'app-home-component',
@@ -48,13 +48,13 @@ export class HomeComponent implements OnInit {
   ];
 
   constructor(private httpClient: HttpClient,
-              private courseService: CourseService) { }
+              private coursesService: CoursesService) { }
 
   ngOnInit() {
   }
 
   getFooResource() {
-    this.courseService.getAuthorizedResource('http://localhost:8082/spring-security-oauth-resource/foos/1')
+    this.coursesService.getAuthorizedResource('http://localhost:8082/spring-security-oauth-resource/foos/1')
       .subscribe((data) => {
         console.log(data);
       });

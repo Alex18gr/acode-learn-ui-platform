@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Course} from "../course.model";
-import {CoursesService} from "../courses.service";
-import {Subscription} from "rxjs";
-import {CourseService} from "../course.service";
+import {CoursesService} from '../courses.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-course-list',

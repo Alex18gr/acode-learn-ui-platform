@@ -16,6 +16,8 @@ export interface CoursesResponse {
 })
 export class CoursesService {
   coursesChanged = new Subject<Course[]>();
+  currentCourse = null;
+  currentCourseChanged = new Subject<Course>();
 
   private courses: Course[] = [
     new Course(1001, 'Introduction to Mathmatics', 'This is a course about mathematics...', 'John', 3, null),
@@ -46,6 +48,9 @@ export class CoursesService {
     if (this.userCourses === undefined) {
       return null;
     }
+
+    this.currentCourse = this.userCourses[id];
+    this.currentCourseChanged.next(this.currentCourse);
     return this.userCourses[id];
   }
 
@@ -93,5 +98,17 @@ export class CoursesService {
         }
         return this.userCourses;
       }));
+  }
+
+  getAuthorizedResource(resourceUrl: string) {
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+          Authorization: 'Bearer ' + this.authService.currentUser.token
+        })
+    };
+
+    return this.httpClient.get(resourceUrl, httpOptions);
   }
 }
