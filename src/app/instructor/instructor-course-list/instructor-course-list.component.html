@@ -1,0 +1,12 @@
+<div class="container my-container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Owned Courses</h1>
+      <hr>
+      <div class="card-decks" *ngIf="courses">
+        <app-instructor-course-list-item *ngFor="let course of courses; let i = index" [course]="course" [courseItemIndex]="i"></app-instructor-course-list-item>
+      </div>
+    </div>
+  </div>
+</div>
+

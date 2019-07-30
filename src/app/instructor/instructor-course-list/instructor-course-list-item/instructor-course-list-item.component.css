@@ -1,0 +1,5 @@
+div.card {
+  margin-bottom: 20px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}

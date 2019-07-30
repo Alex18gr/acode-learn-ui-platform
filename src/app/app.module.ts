@@ -19,6 +19,16 @@ import { LoginComponent } from './auth/login/login.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { ResourcesTableComponent } from './course/course/resources/resources-table/resources-table.component';
+import { InstructorComponent } from './instructor/instructor/instructor.component';
+import { InstructorNavbarComponent } from './instructor/instructor-navbar/instructor-navbar.component';
+import { StudentHomeComponent } from './student-home/student-home.component';
+import { NotAuthorizedComponent } from './auth/auth-errors/not-authorized/not-authorized.component';
+import { InstructorDashboardComponent } from './instructor/instructor-dashboard/instructor-dashboard.component';
+import { InstructorCourseListComponent } from './instructor/instructor-course-list/instructor-course-list.component';
+import { InstructorCourseListItemComponent } from './instructor/instructor-course-list/instructor-course-list-item/instructor-course-list-item.component';
+import { InstructorProfileComponent } from './instructor/instructor-profile/instructor-profile.component';
+import { InstructorAnnouncementsComponent } from './instructor/instructor-announcements/instructor-announcements.component';
+import { InstructorCoursesComponent } from './instructor/instructor-courses/instructor-courses.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +45,17 @@ import { ResourcesTableComponent } from './course/course/resources/resources-tab
     HomeAnnouncementListItemComponent,
     HomeAnnouncementListComponent,
     LoginComponent,
-    ResourcesTableComponent
+    ResourcesTableComponent,
+    InstructorComponent,
+    InstructorNavbarComponent,
+    StudentHomeComponent,
+    NotAuthorizedComponent,
+    InstructorDashboardComponent,
+    InstructorCourseListComponent,
+    InstructorCourseListItemComponent,
+    InstructorProfileComponent,
+    InstructorAnnouncementsComponent,
+    InstructorCoursesComponent
   ],
   imports: [
     BrowserModule,

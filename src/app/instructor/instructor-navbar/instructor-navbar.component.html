@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" routerLink="./">{{instructorPlatformTitle}}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="./" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="courses" routerLinkActive="active">My Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="profile" routerLinkActive="active">Profile</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a routerLink="/" class=" nav-link" style="color: white;"><i class="fa fa-bell"><sup class="badge badge-danger badge-counter" style="font-size: 10px">3+</sup></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarUserDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{this.authSerice.currentUser.username}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarUserDropdown">
+          <a class="dropdown-item" routerLink="/">Action</a>
+          <a class="dropdown-item" routerLink="/">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="onLogout()" routerLink="">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
