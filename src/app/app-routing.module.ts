@@ -19,6 +19,12 @@ import {InstructorDashboardComponent} from './instructor/instructor-dashboard/in
 import {InstructorCourseListComponent} from './instructor/instructor-course-list/instructor-course-list.component';
 import {InstructorProfileComponent} from './instructor/instructor-profile/instructor-profile.component';
 import {InstructorCoursesComponent} from './instructor/instructor-courses/instructor-courses.component';
+import {InstructorCourseDashboardComponent} from './instructor/instructor-courses/instructor-course-dashboard/instructor-course-dashboard.component';
+import {InstructorCourseHomeComponent} from './instructor/instructor-courses/instructor-course-home/instructor-course-home.component';
+import {InstructorAnnouncementsComponent} from './instructor/instructor-announcements/instructor-announcements.component';
+import {InstructorCourseSectionsComponent} from './instructor/instructor-courses/instructor-course-sections/instructor-course-sections.component';
+import {InstructorCourseResourcesComponent} from './instructor/instructor-courses/instructor-course-resources/instructor-course-resources.component';
+import {InstructorCourseSettingsComponent} from './instructor/instructor-courses/instructor-course-settings/instructor-course-settings.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent, canActivate: [AuthGuardHomeService]},
@@ -36,7 +42,14 @@ const routes: Routes = [
   {path: 'instructor', component: InstructorComponent, canActivate: [AuthGuardInstructorService], children: [
       {path: '', component: InstructorDashboardComponent},
       {path: 'courses', component: InstructorCoursesComponent, children: [
-          {path: '', component: InstructorCourseListComponent}
+          {path: '', component: InstructorCourseListComponent},
+          {path: ':id', component: InstructorCourseDashboardComponent, children: [
+              {path: '', component: InstructorCourseHomeComponent},
+              {path: 'announcements', component: InstructorAnnouncementsComponent},
+              {path: 'sections', component: InstructorCourseSectionsComponent},
+              {path: 'resources', component: InstructorCourseResourcesComponent},
+              {path: 'settings', component: InstructorCourseSettingsComponent}
+            ]}
         ]},
       {path: 'profile', component: InstructorProfileComponent}
     ]},

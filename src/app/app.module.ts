@@ -29,6 +29,13 @@ import { InstructorCourseListItemComponent } from './instructor/instructor-cours
 import { InstructorProfileComponent } from './instructor/instructor-profile/instructor-profile.component';
 import { InstructorAnnouncementsComponent } from './instructor/instructor-announcements/instructor-announcements.component';
 import { InstructorCoursesComponent } from './instructor/instructor-courses/instructor-courses.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { InstructorCourseDashboardComponent } from './instructor/instructor-courses/instructor-course-dashboard/instructor-course-dashboard.component';
+import { InstructorCourseHomeComponent } from './instructor/instructor-courses/instructor-course-home/instructor-course-home.component';
+import { InstructorCourseAnnouncementsComponent } from './instructor/instructor-courses/instructor-course-announcements/instructor-course-announcements.component';
+import { InstructorCourseSectionsComponent } from './instructor/instructor-courses/instructor-course-sections/instructor-course-sections.component';
+import { InstructorCourseResourcesComponent } from './instructor/instructor-courses/instructor-course-resources/instructor-course-resources.component';
+import { InstructorCourseSettingsComponent } from './instructor/instructor-courses/instructor-course-settings/instructor-course-settings.component';
 
 @NgModule({
   declarations: [
@@ -55,13 +62,20 @@ import { InstructorCoursesComponent } from './instructor/instructor-courses/inst
     InstructorCourseListItemComponent,
     InstructorProfileComponent,
     InstructorAnnouncementsComponent,
-    InstructorCoursesComponent
+    InstructorCoursesComponent,
+    InstructorCourseDashboardComponent,
+    InstructorCourseHomeComponent,
+    InstructorCourseAnnouncementsComponent,
+    InstructorCourseSectionsComponent,
+    InstructorCourseResourcesComponent,
+    InstructorCourseSettingsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     CoursesService

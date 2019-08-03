@@ -5,6 +5,13 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {map} from 'rxjs/operators';
 
+export enum CourseLoadingStatus {
+  pending,
+  loading,
+  loaded,
+  failed
+}
+
 export interface CoursesResponse {
   timestamp: string;
   courseList: any[];
@@ -16,6 +23,7 @@ export interface CoursesResponse {
 export class InstructorCoursesService {
   coursesChanged = new Subject<Course[]>();
   currentCourse = null;
+  currentCourseLoadStatus = CourseLoadingStatus.pending;
   currentCourseChanged = new Subject<Course>();
   instructorCourses: Course[] = undefined;
   coursesLoaded = false;
@@ -46,6 +54,26 @@ export class InstructorCoursesService {
       }
     });
     return courseName;
+  }
+
+  setCurrentCourse(course: Course) {
+    this.currentCourse = course;
+    this.currentCourseLoadStatus = CourseLoadingStatus.loaded;
+  }
+
+  getInstructorCourse(courseId: number) {
+    this.currentCourseLoadStatus = CourseLoadingStatus.loading;
+    this.receiveInstructorCourses().subscribe((courses: Course[]) => {
+      for (const course of courses) {
+        if (course.id === courseId) {
+          this.currentCourse = course;
+          this.currentCourseLoadStatus = CourseLoadingStatus.loaded;
+          this.currentCourseChanged.next(course);
+        }
+      }
+      this.currentCourseLoadStatus = CourseLoadingStatus.failed;
+    });
+
   }
 
   receiveInstructorCourses() {
