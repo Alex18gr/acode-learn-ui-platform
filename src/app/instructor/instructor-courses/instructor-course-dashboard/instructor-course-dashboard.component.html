@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12" *ngIf="currentCourse">
+      <div class="border-info rounded shadow-sm border p-4">-
+        <h1>{{this.currentCourse.name}}</h1>
+        <hr>
+        <p>{{this.currentCourse.description}}</p>
+        <div class="my-edit-btn">
+          <button class="btn btn-secondary btn-sm">
+            <i class="fas fa-edit"></i>
+          </button>
+        </div>
+      </div>
+      <hr>
+      <div class="shadow-sm rounded py-3">
+        <div class="bg-light">
+          <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="./" [routerLinkActiveOptions]="{exact: true}">Home <i class="fas fa-columns"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="announcements">Announcements <i class="fas fa-bullhorn"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="sections">Sections <i class="fas fa-book-reader"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="resources">Resources <i class="fas fa-folder-open"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" routerLink="settings">Settings <i class="fas fa-users-cog"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="p-2">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

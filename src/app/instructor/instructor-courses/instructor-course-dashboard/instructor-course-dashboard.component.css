@@ -1,0 +1,13 @@
+.my-edit-btn {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+}
+
+a.nav-link.active {
+  border-top: orange solid 2px;
+}
+
+a.nav-link {
+  color: darkslategrey;
+}
