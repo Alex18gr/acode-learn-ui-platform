@@ -81,7 +81,7 @@ export class ResourceService {
     this.resourcesLoaded = false;
     this.currentCourseChangedSubscription = this.coursesService.currentCourseChanged.subscribe(currentCourse => {
         this.getCourseResources(currentCourse);
-      })
+      });
     this.getCourseResources(this.coursesService.currentCourse);
   }
 }
