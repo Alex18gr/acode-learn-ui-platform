@@ -11,7 +11,7 @@ export interface CourseResources {
   fileResources: Resource[];
   repositoryResources: Resource[];
   codeSnippetResources: Resource[];
-  markdownDocumentsResources: Resource[];
+  markdownDocumentResources: Resource[];
   guideResources: Resource[];
 }
 
@@ -62,9 +62,9 @@ export class ResourceService implements OnDestroy {
       + course.id + '/resources-all';
     this.getAuthorizedResource(courseResourcesUrl).subscribe((data: any) => {
       // console.log(data);
-      const resources = this.getResourceStoreFromData(data);
+      // const resources = this.getResourceStoreFromData(data);
       this.resourcesLoadingStatus = ResourceLoadingStatus.loaded;
-      this.courseResources = resources;
+      this.courseResources = data.resources;
       this.courseResourcesChanged.next(this.courseResources);
     });
   }
@@ -88,7 +88,7 @@ export class ResourceService implements OnDestroy {
       fileResources: Resource[];
       repositoryResources: Resource[];
       codeSnippetResources: Resource[];
-      markdownDocumentsResources: Resource[];
+      markdownDocumentResources: Resource[];
       guideResources: Resource[];
     };
 
@@ -102,7 +102,7 @@ export class ResourceService implements OnDestroy {
       } else if (resourceDataCatList.resourcesType === 'RESOURCE_CODE_SNIPPET') {
         resourceStore.codeSnippetResources = resourceDataCatList.resources;
       } else if (resourceDataCatList.resourcesType === 'RESOURCE_MARKDOWN') {
-        resourceStore.markdownDocumentsResources = resourceDataCatList.resources;
+        resourceStore.markdownDocumentResources = resourceDataCatList.resources;
       } else if (resourceDataCatList.resourcesType === 'RESOURCE_GUIDE') {
         resourceStore.guideResources = resourceDataCatList.resources;
       }

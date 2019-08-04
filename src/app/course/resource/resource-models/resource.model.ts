@@ -3,12 +3,20 @@ export class Resource {
   public name: string;
   public dateCreated: Date;
   public resourceType: string;
+  public courseName: string;
 
 
-  constructor(id: number, name: string, dateCreated: Date, resourceType: string) {
-    this.id = id;
-    this.name = name;
-    this.dateCreated = dateCreated;
-    this.resourceType = resourceType;
+  constructor(options: {
+    id?: number,
+    name?: string,
+    dateCreated?: Date,
+    resourceType?: string,
+    courseName?: string
+  } = {}) {
+    this.id = options.id;
+    this.name = options.name || '';
+    this.dateCreated = options.dateCreated || undefined;
+    this.resourceType = options.resourceType || '';
+    this.courseName = options.courseName || '';
   }
 }
