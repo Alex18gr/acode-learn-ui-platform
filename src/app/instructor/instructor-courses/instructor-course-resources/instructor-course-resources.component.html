@@ -1,1 +1,30 @@
-<p>instructor-course-resources works!</p>
+<div>
+  <h4>Resource Type</h4>
+  <div class="input-group mb-3">
+    <select class="custom-select" (change)="resourceTypeChanged($event)" [value]="currentResourceType">
+      <option value="RESOURCES_ALL">All Resources</option>
+      <option *ngFor="let opt of resourceTypesListSelect" [value]="opt.value">{{opt.name}}</option>
+    </select>
+  </div>
+</div>
+<div>
+  <app-resource-table [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="course"
+    (editResource)="onResourceEdit($event)"
+  >
+
+  </app-resource-table>
+</div>
+<div>
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <button type="button" class="btn btn-secondary" (click)="openModal()"
+    >
+      <i appTooltip
+         [placement]="'top'"
+         [tooltipText]="'Hello world!'" class="fas fa-plus-circle"></i>
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="openModal()">2</button>
+    <button type="button" class="btn btn-secondary">3</button>
+    <button type="button" class="btn btn-secondary">4</button>
+  </div>
+</div>
+<app-edit-resource #editResourceComponent></app-edit-resource>

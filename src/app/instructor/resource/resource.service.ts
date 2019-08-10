@@ -5,14 +5,20 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {Subject, Subscription} from 'rxjs';
 import {Course} from '../../course/course.model';
+import {ResourceLink} from '../../course/resource/resource-models/resource-link.model';
+import {ResourceFile} from '../../course/resource/resource-models/resource-file.model';
+import {ResourceRepository} from '../../course/resource/resource-models/resource-repository.model';
+import {ResourceCodeSnippet} from '../../course/resource/resource-models/resource-code-snippet.model';
+import {ResourceMarkdown} from '../../course/resource/resource-models/resource-markdown.model';
+import {ResourceGuide} from '../../course/resource/resource-models/resource-guide.model';
 
 export interface CourseResources {
-  linkResources: Resource[];
-  fileResources: Resource[];
-  repositoryResources: Resource[];
-  codeSnippetResources: Resource[];
-  markdownDocumentResources: Resource[];
-  guideResources: Resource[];
+  linkResources: ResourceLink[];
+  fileResources: ResourceFile[];
+  repositoryResources: ResourceRepository[];
+  codeSnippetResources: ResourceCodeSnippet[];
+  markdownDocumentResources: ResourceMarkdown[];
+  guideResources: ResourceGuide[];
 }
 
 export enum ResourceLoadingStatus {
@@ -49,6 +55,9 @@ export class ResourceService implements OnDestroy {
         this.resourcesLoadingStatus = ResourceLoadingStatus.loading;
         this.getCourseResources(course);
       });
+    if (this.instructorCoursesService.currentCourse) {
+      this.getCourseResources(this.instructorCoursesService.currentCourse);
+    }
   }
 
   ngOnDestroy(): void {
@@ -84,12 +93,12 @@ export class ResourceService implements OnDestroy {
   private getResourceStoreFromData(resourceData: any) {
     // tslint:disable-next-line:new-parens
     const resourceStore: CourseResources = new class implements CourseResources {
-      linkResources: Resource[];
-      fileResources: Resource[];
-      repositoryResources: Resource[];
-      codeSnippetResources: Resource[];
-      markdownDocumentResources: Resource[];
-      guideResources: Resource[];
+      linkResources: ResourceLink[];
+      fileResources: ResourceFile[];
+      repositoryResources: ResourceRepository[];
+      codeSnippetResources: ResourceCodeSnippet[];
+      markdownDocumentResources: ResourceMarkdown[];
+      guideResources: ResourceGuide[];
     };
 
     for (const resourceDataCatList of resourceData.resources) {
@@ -108,5 +117,27 @@ export class ResourceService implements OnDestroy {
       }
     }
     return resourceStore;
+  }
+
+  downloadFile(fileResource: ResourceFile) {
+    const fileUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      this.instructorCoursesService.currentCourse.id + '/resource/' + fileResource.resourceId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    this.httpClient.get(fileUrl, {
+      headers,
+      responseType: 'arraybuffer'
+    }).subscribe((res: any) => {
+      // console.log(res);
+      // console.log(btoa(res));
+      const blobData = new Blob([res], {type: fileResource.fileType});
+      const fileData = new File([blobData], fileResource.fileName, {type: fileResource.fileType});
+      console.log(fileData);
+      const url = window.URL.createObjectURL(fileData);
+      console.log(url);
+      const pwa = window.open(url);
+      if (!pwa || pwa.closed || typeof pwa.closed === 'undefined') {
+        alert( 'Please disable your Pop-up blocker and try again.');
+      }
+    });
   }
 }

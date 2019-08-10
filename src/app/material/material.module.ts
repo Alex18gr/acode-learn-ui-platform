@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule, MatTooltipModule} from '@angular/material';
 
 @NgModule({
   declarations: [],
   imports: [
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ],
   exports: [
-    MatDialogModule
+    MatDialogModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule { }

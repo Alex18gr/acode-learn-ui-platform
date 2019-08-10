@@ -36,6 +36,11 @@ import { InstructorCourseAnnouncementsComponent } from './instructor/instructor-
 import { InstructorCourseSectionsComponent } from './instructor/instructor-courses/instructor-course-sections/instructor-course-sections.component';
 import { InstructorCourseResourcesComponent } from './instructor/instructor-courses/instructor-course-resources/instructor-course-resources.component';
 import { InstructorCourseSettingsComponent } from './instructor/instructor-courses/instructor-course-settings/instructor-course-settings.component';
+import {MaterialModule} from './material/material.module';
+import { TooltipDirective } from './shared/tooltip.directive';
+import { EditResourceComponent } from './instructor/edit-resource/edit-resource.component';
+import { ResourceTableComponent } from './instructor/resource-table/resource-table.component';
+import { ResourceEditFormComponent } from './instructor/edit-resource/resource-edit-form/resource-edit-form.component';
 
 @NgModule({
   declarations: [
@@ -68,14 +73,19 @@ import { InstructorCourseSettingsComponent } from './instructor/instructor-cours
     InstructorCourseAnnouncementsComponent,
     InstructorCourseSectionsComponent,
     InstructorCourseResourcesComponent,
-    InstructorCourseSettingsComponent
+    InstructorCourseSettingsComponent,
+    TooltipDirective,
+    EditResourceComponent,
+    ResourceTableComponent,
+    ResourceEditFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [
     CoursesService

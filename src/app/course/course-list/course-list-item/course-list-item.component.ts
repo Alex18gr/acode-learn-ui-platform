@@ -18,6 +18,6 @@ export class CourseListItemComponent implements OnInit {
   }
 
   onCourseClicked() {
-    this.router.navigate(['/course', this.courseItemIndex], {relativeTo: this.activatedRoute.parent});
+    this.router.navigate(['course', this.courseItemIndex], {relativeTo: this.activatedRoute.parent});
   }
 }

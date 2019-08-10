@@ -6,7 +6,7 @@
   <div *ngIf="courses" class="dropdown-menu" aria-labelledby="navbarDropdown">
     <span class="dropdown-item-text">Enrolled Courses</span>
     <div class="dropdown-divider"></div>
-    <a *ngFor="let course of courses; let i = index" class="dropdown-item" [routerLink]="['/course', i]">{{course.name}}</a>
+    <a *ngFor="let course of courses; let i = index" class="dropdown-item" [routerLink]="['/student/course', i]">{{course.name}}</a>
   </div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

@@ -13,6 +13,4 @@ export class ResourceCodeSnippet extends Resource {
     this.snippetDocumentData = (options as any).snippetDocumentData || '';
     this.snippetLanguage = (options as any).snippetLanguage || '';
   }
-
-
 }

@@ -1,5 +1,5 @@
 <div class="card shadow-sm" (click)="this.onCourseClicked()">
-  <div class="card-header"><a [routerLink]="['/course', courseItemIndex]">{{course.name}}</a></div>
+  <div class="card-header"><a [routerLink]="['../course', courseItemIndex]">{{course.name}}</a></div>
   <div class="card-body">
     {{course.description}}
       <div style="float: right; vertical-align:text-top">
