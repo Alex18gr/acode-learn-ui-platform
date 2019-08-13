@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {InstructorCoursesService} from '../courses/instructor-courses.service';
 import {Resource} from '../../course/resource/resource-models/resource.model';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {Subject, Subscription} from 'rxjs';
 import {Course} from '../../course/course.model';
@@ -66,7 +66,10 @@ export class ResourceService implements OnDestroy {
     }
   }
 
-  private getCourseResources(course: Course) {
+  getCourseResources(course?: Course) {
+    if (!course) {
+      course = this.instructorCoursesService.currentCourse;
+    }
     const courseResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/'
       + course.id + '/resources-all';
     this.getAuthorizedResource(courseResourcesUrl).subscribe((data: any) => {
@@ -126,9 +129,9 @@ export class ResourceService implements OnDestroy {
     const formData = new FormData();
     formData.append('file', fileData);
     formData.append('resource', JSON.stringify(resource));
-    this.httpClient.post(fileUploadUrl, formData, {headers}).subscribe((response) => {
-      console.log(response);
-    });
+    // return this.httpClient.post(fileUploadUrl, formData, {headers, reportProgress: true});
+    const req =  new HttpRequest('POST', fileUploadUrl, formData, {headers, reportProgress: true});
+    return this.httpClient.request(req);
   }
 
   downloadFile(fileResource: ResourceFile) {

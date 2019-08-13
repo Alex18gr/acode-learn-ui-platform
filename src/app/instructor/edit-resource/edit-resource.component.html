@@ -18,7 +18,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onSaveChanges()">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="onSaveChanges()" [disabled]="modalLoading">
+          <ng-container *ngIf="modalLoading">
+            Saving Changes...<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </ng-container>
+          <ng-container *ngIf="!modalLoading">Save changes</ng-container>
+        </button>
       </div>
     </div>
   </div>

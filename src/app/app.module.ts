@@ -41,6 +41,8 @@ import { TooltipDirective } from './shared/tooltip.directive';
 import { EditResourceComponent } from './instructor/edit-resource/edit-resource.component';
 import { ResourceTableComponent } from './instructor/resource-table/resource-table.component';
 import { ResourceEditFormComponent } from './instructor/edit-resource/resource-edit-form/resource-edit-form.component';
+import { ToastContainerComponent } from './core/toast/toast-container/toast-container.component';
+import { ToastComponent } from './core/toast/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,9 @@ import { ResourceEditFormComponent } from './instructor/edit-resource/resource-e
     TooltipDirective,
     EditResourceComponent,
     ResourceTableComponent,
-    ResourceEditFormComponent
+    ResourceEditFormComponent,
+    ToastContainerComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

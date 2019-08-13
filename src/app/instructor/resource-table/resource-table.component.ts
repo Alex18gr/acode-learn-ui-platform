@@ -48,6 +48,8 @@ export class ResourceTableComponent implements OnInit {
         return ['fas fa-file-word'];
       case 'application/pdf':
         return ['fas fa-file-pdf'];
+      case 'image/jpeg':
+        return ['fas fa-file-image'];
       default:
         return ['fas fa-file'];
     }

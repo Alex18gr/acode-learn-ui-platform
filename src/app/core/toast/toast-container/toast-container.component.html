@@ -1,0 +1,4 @@
+<div class="toast-container">
+  <app-toast *ngFor="let toast of toasts; let i = index" [toastData]="toast" [toastIndex]="i"
+  (toastDisposed)="toastDisposed($event)"></app-toast>
+</div>
