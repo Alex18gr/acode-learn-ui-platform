@@ -28,7 +28,7 @@ export class ToastComponent implements OnInit, AfterViewInit {
     // attach the options to the toast element
     $(this.toast.nativeElement).toast({
       delay: this.toastData.delay,
-      autohide: false
+      // autohide: false
     });
 
     // show the toast element to the dom

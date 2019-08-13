@@ -27,4 +27,4 @@
     <button type="button" class="btn btn-secondary">4</button>
   </div>
 </div>
-<app-edit-resource #editResourceComponent></app-edit-resource>
+<app-edit-resource #editResourceComponent (modalFormSubmittedSuccess)="resourceEditFomSubmittedSuccess($event)"></app-edit-resource>

@@ -16,7 +16,8 @@ declare var $: any;
 export class EditResourceComponent implements OnInit {
   @ViewChild('editModal', {static: false}) editModal: ElementRef;
   @ViewChild('editFormComponent', {static: false}) editFormComponent: ResourceEditFormComponent;
-  @Output() modalFormSubmittedSuccess: EventEmitter<Resource> = new EventEmitter<Resource>();
+  @Output() modalFormSubmittedSuccess: EventEmitter<{resource: Resource, eventType: string}>
+    = new EventEmitter<{resource: Resource, eventType: string}>();
   modalLoading = false;
   editResourceType: string;
   private editResource: Resource;
@@ -80,6 +81,12 @@ export class EditResourceComponent implements OnInit {
         },
         () => {
           console.log('upload completed');
+          this.modalLoading = false;
+          this.hideModal();
+          this.modalFormSubmittedSuccess.emit({
+            eventType: (this.editMode) ? 'update' : 'create',
+            resource: submitData
+          });
         },
         );
       };

@@ -6,6 +6,8 @@ import {EditResourceComponent} from '../../edit-resource/edit-resource.component
 import {ResourceTypes} from '../../../course/resource/resource-models/resource-types';
 import {Course} from '../../../course/course.model';
 import {InstructorCoursesService} from '../../courses/instructor-courses.service';
+import {ToastService} from '../../../core/toast/toast.service';
+import {NotificationTypes, ToastActions} from '../../../core/toast/toast.model';
 
 declare var $: any;
 
@@ -23,7 +25,8 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
   @ViewChild('editResourceComponent', {static: false}) editResourcesComponent: EditResourceComponent;
 
   constructor(private resourceService: ResourceService,
-              private instructorCoursesService: InstructorCoursesService) { }
+              private instructorCoursesService: InstructorCoursesService,
+              private toastService: ToastService) { }
 
   ngOnInit() {
     this.resourcesChanged = this.resourceService.courseResourcesChangedSubject
@@ -55,5 +58,37 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
 
   resourceTypeChanged(event: Event) {
     this.currentResourceType = (event.target as HTMLSelectElement).value;
+  }
+
+  resourceEditFomSubmittedSuccess(evt: { resource: Resource; eventType: string }) {
+    switch (evt.eventType) {
+      case 'create':
+        this.toastService.addToast({
+          action: ToastActions.created,
+          notificationType: NotificationTypes.info,
+          title: 'Resource Added',
+          message: 'Resource ' + evt.resource.name + ' added to course ' + this.course.name + '.',
+          delay: 3500
+        });
+        break;
+      case 'update':
+        this.toastService.addToast({
+          action: ToastActions.updated,
+          notificationType: NotificationTypes.info,
+          title: 'Resource Updated',
+          message: 'Resource ' + evt.resource.name + ' updated.',
+          delay: 3500
+        });
+        break;
+      case 'delete':
+        this.toastService.addToast({
+          action: ToastActions.deleted,
+          notificationType: NotificationTypes.info,
+          title: 'Resource Delete',
+          message: 'Resource ' + evt.resource.name + ' deleted.',
+          delay: 3500
+        });
+        break;
+    }
   }
 }
