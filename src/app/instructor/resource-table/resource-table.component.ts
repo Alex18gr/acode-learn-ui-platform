@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ResourceTypes} from '../../course/resource/resource-models/resource-types';
-import {CourseResources, ResourceService} from '../resource/resource.service';
+import {CourseResources, InstructorResourceService} from '../resource/instructor-resource.service';
 import {Course} from '../../course/course.model';
 import {retry} from 'rxjs/operators';
 import {ResourceFile} from '../../course/resource/resource-models/resource-file.model';
@@ -33,7 +33,7 @@ export class ResourceTableComponent implements OnInit {
     return res.length <= 0;
   }
 
-  constructor(private instructorResourceService: ResourceService) { }
+  constructor(private instructorResourceService: InstructorResourceService) { }
 
   ngOnInit() {
   }

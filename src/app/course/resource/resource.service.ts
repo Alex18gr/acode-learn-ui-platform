@@ -84,6 +84,10 @@ export class ResourceService {
       });
     this.getCourseResources(this.coursesService.currentCourse);
   }
+
+  saveResource(submitData: any) {
+
+  }
 }
 
 export interface ResourceStore {

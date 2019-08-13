@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ResourceService } from './resource.service';
+import { InstructorResourceService } from './instructor-resource.service';
 
 describe('ResourceService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: ResourceService = TestBed.get(ResourceService);
+    const service: InstructorResourceService = TestBed.get(InstructorResourceService);
     expect(service).toBeTruthy();
   });
 });

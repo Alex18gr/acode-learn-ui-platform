@@ -31,7 +31,7 @@ export enum ResourceLoadingStatus {
 @Injectable({
   providedIn: 'root'
 })
-export class ResourceService implements OnDestroy {
+export class InstructorResourceService implements OnDestroy {
   courseResources: CourseResources;
   resourcesLoadingStatus = ResourceLoadingStatus.pending;
   currentCourseUpdatedSubscription: Subscription;
@@ -154,5 +154,19 @@ export class ResourceService implements OnDestroy {
         alert( 'Please disable your Pop-up blocker and try again.');
       }
     });
+  }
+
+  saveResource(submitData: any) {
+    const saveResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      this.instructorCoursesService.currentCourse.id + '/resource';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.post(saveResourceUrl, submitData, {headers});
+  }
+
+  updateResource(submitData: any) {
+    const saveResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      this.instructorCoursesService.currentCourse.id + '/resource/' + submitData.resourceId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.put(saveResourceUrl, submitData, {headers});
   }
 }

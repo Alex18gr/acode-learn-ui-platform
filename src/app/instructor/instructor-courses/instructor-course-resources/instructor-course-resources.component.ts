@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {CourseResources, ResourceService} from '../../resource/resource.service';
+import {CourseResources, InstructorResourceService} from '../../resource/instructor-resource.service';
 import {Resource} from '../../../course/resource/resource-models/resource.model';
 import {Subscription} from 'rxjs';
 import {EditResourceComponent} from '../../edit-resource/edit-resource.component';
@@ -24,7 +24,7 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
   resourceTypesListSelect = ResourceTypes.ResourceTypesListSelect;
   @ViewChild('editResourceComponent', {static: false}) editResourcesComponent: EditResourceComponent;
 
-  constructor(private resourceService: ResourceService,
+  constructor(private resourceService: InstructorResourceService,
               private instructorCoursesService: InstructorCoursesService,
               private toastService: ToastService) { }
 
@@ -68,7 +68,7 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
           notificationType: NotificationTypes.info,
           title: 'Resource Added',
           message: 'Resource ' + evt.resource.name + ' added to course ' + this.course.name + '.',
-          delay: 3500
+          delay: 5000
         });
         break;
       case 'update':
@@ -77,7 +77,7 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
           notificationType: NotificationTypes.info,
           title: 'Resource Updated',
           message: 'Resource ' + evt.resource.name + ' updated.',
-          delay: 3500
+          delay: 5000
         });
         break;
       case 'delete':
@@ -86,7 +86,7 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
           notificationType: NotificationTypes.info,
           title: 'Resource Delete',
           message: 'Resource ' + evt.resource.name + ' deleted.',
-          delay: 3500
+          delay: 5000
         });
         break;
     }

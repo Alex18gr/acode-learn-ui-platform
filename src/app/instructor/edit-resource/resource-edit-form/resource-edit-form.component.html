@@ -120,35 +120,121 @@
   </div>
 </form>
 
-<form *ngIf="resourceType === ResTypes.RESOURCE_MARKDOWN && form" [formGroup]="form">
+<form *ngIf="resourceType === ResTypes.RESOURCE_CODE_SNIPPET && form" [formGroup]="form">
   <div class="form-group">
-    <label for="resMdName">Resource Name</label>
+    <label for="csName">Resource Name</label>
     <input
       type="text"
       class="form-control"
-      id="resMdName"
+      id="csName"
       placeholder="Resource name"
-      formControlName="resMdName"
+      formControlName="csName"
     >
   </div>
   <div class="form-group">
-    <label for="resMdDocTitle">Document Title</label>
+    <label for="csTitle">Title</label>
     <input
       type="text"
       class="form-control"
-      id="resMdDocTitle"
-      placeholder="Document Title"
-      formControlName="resMdDocTitle"
+      id="csTitle"
+      placeholder="Title"
+      formControlName="csTitle"
     >
   </div>
   <div class="form-group">
-    <label for="resMdDocData">Markdown Data</label>
+    <label for="csDescription">Description</label>
     <textarea
       type="text"
       class="form-control"
-      id="resMdDocData"
+      id="csDescription"
+      placeholder="Description"
+      formControlName="csDescription"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="csData">Code Snippet</label>
+    <textarea
+      type="text"
+      class="form-control"
+      id="csData"
+      placeholder="Code Snippet"
+      formControlName="csData"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="csLang">Language</label>
+    <input
+      type="text"
+      class="form-control"
+      id="csLang"
+      placeholder="Language"
+      formControlName="csLang"
+    >
+  </div>
+</form>
+
+<form *ngIf="resourceType === ResTypes.RESOURCE_MARKDOWN && form" [formGroup]="form">
+  <div class="form-group">
+    <label for="mdName">Resource Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="mdName"
+      placeholder="Resource name"
+      formControlName="mdName"
+    >
+  </div>
+  <div class="form-group">
+    <label for="mdTitle">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="mdTitle"
+      placeholder="Title"
+      formControlName="mdTitle"
+    >
+  </div>
+  <div class="form-group">
+    <label for="mdDescription">Description</label>
+    <textarea
+      type="text"
+      class="form-control"
+      id="mdDescription"
+      placeholder="Description"
+      formControlName="mdDescription"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="mdData">Markdown</label>
+    <textarea
+      type="text"
+      class="form-control"
+      id="mdData"
       placeholder="Markdown Data"
-      formControlName="resMdDocData"
+      formControlName="mdData"
+    ></textarea>
+  </div>
+</form>
+
+<form *ngIf="resourceType === ResTypes.RESOURCE_GUIDE && form" [formGroup]="form">
+  <div class="form-group">
+    <label for="gdName">Resource Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="gdName"
+      placeholder="Resource name"
+      formControlName="gdName"
+    >
+  </div>
+  <div class="form-group">
+    <label for="gDescription">Description</label>
+    <textarea
+      type="text"
+      class="form-control"
+      id="gDescription"
+      placeholder="Markdown Data"
+      formControlName="gDescription"
     ></textarea>
   </div>
 </form>

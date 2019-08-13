@@ -46,4 +46,14 @@ export class ToastService {
   addToast(toast: Toast) {
     this.toasts.push(toast);
   }
+
+  addErrorToast(title: string, message: string, delay?: number) {
+    this.toasts.push({
+      action: ToastActions.failed,
+      notificationType: NotificationTypes.danger,
+      title,
+      message,
+      delay: delay ? delay : 5000
+    });
+  }
 }
