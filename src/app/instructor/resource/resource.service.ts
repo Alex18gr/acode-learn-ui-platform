@@ -1,7 +1,7 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {InstructorCoursesService} from '../courses/instructor-courses.service';
 import {Resource} from '../../course/resource/resource-models/resource.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {Subject, Subscription} from 'rxjs';
 import {Course} from '../../course/course.model';
@@ -117,6 +117,18 @@ export class ResourceService implements OnDestroy {
       }
     }
     return resourceStore;
+  }
+
+  createFileResourceRequest(resource: ResourceFile, fileData: Blob) {
+    const fileUploadUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      this.instructorCoursesService.currentCourse.id + '/resource/file';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const formData = new FormData();
+    formData.append('file', fileData);
+    formData.append('resource', JSON.stringify(resource));
+    this.httpClient.post(fileUploadUrl, formData, {headers}).subscribe((response) => {
+      console.log(response);
+    });
   }
 
   downloadFile(fileResource: ResourceFile) {

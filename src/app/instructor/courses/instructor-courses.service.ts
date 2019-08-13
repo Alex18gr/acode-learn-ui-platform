@@ -22,7 +22,7 @@ export interface CoursesResponse {
 })
 export class InstructorCoursesService {
   coursesChanged = new Subject<Course[]>();
-  currentCourse = null;
+  currentCourse: Course = null;
   currentCourseLoadStatus = CourseLoadingStatus.pending;
   currentCourseChanged = new Subject<Course>();
   instructorCourses: Course[] = undefined;

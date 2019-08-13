@@ -1,1 +1,154 @@
-<p>resource-edit-form works!</p>
+<form *ngIf="resourceType === ResTypes.RESOURCE_LINK && form" [formGroup]="form">
+  <div class="form-group">
+    <label for="resLinkName">Resource Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resLinkName"
+      placeholder="Resource name"
+      formControlName="resLinkName"
+    >
+  </div>
+  <div class="form-group">
+    <label for="resLinkUrl">Link URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resLinkUrl"
+      placeholder="Link URL"
+      formControlName="resLinkUrl"
+    >
+  </div>
+  <div class="form-group">
+    <label for="resLinkDescription">Description</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resLinkDescription"
+      placeholder="Description"
+      formControlName="resLinkDescription"
+    >
+  </div>
+</form>
+
+<form *ngIf="resourceType === ResTypes.RESOURCE_REPOSITORY && form" [formGroup]="form">
+  <div class="form-group">
+    <label for="resRepoName">Resource Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resRepoName"
+      placeholder="Resource name"
+      formControlName="resRepoName"
+    >
+  </div>
+  <div class="form-group">
+    <label for="resRepositoryName">Repository Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resRepositoryName"
+      placeholder="Repository Name"
+      formControlName="resRepositoryName"
+    >
+  </div>
+  <div class="form-group">
+    <label for="resRepoUrl">Repository URL</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resRepoUrl"
+      placeholder="Repository URL"
+      formControlName="resRepoUrl"
+    >
+  </div>
+  <div class="form-group">
+    <label for="repoNameRepo">Repository / Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="repoNameRepo"
+      placeholder="Repository / Name"
+      formControlName="repoNameRepo"
+      [ngModel]="getRepositoryName()"
+    >
+  </div>
+</form>
+
+<form *ngIf="resourceType === ResTypes.RESOURCE_FILE && form" [formGroup]="form">
+  <div class="form-group">
+    <label for="resFileName">Resource Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resFileName"
+      placeholder="Resource name"
+      formControlName="resFileName"
+    >
+  </div>
+  <div class="input-group mb-3">
+    <label class="custom-file-label" for="resFileData">Choose file</label>
+    <div class="custom-file">
+      <input
+        type="file"
+        class="custom-file-input"
+        id="resFileData"
+        formControlName="resFileData"
+        (change)="handleFileInput($event.target.files)"
+      >
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="resFileFileName">File Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resFileFileName"
+      placeholder="File Name"
+      formControlName="resFileFileName"
+    >
+  </div>
+  <div class="form-group">
+    <label for="resFileSummary">Summary</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resFileSummary"
+      placeholder="Summary"
+      formControlName="resFileSummary"
+    >
+  </div>
+</form>
+
+<form *ngIf="resourceType === ResTypes.RESOURCE_MARKDOWN && form" [formGroup]="form">
+  <div class="form-group">
+    <label for="resMdName">Resource Name</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resMdName"
+      placeholder="Resource name"
+      formControlName="resMdName"
+    >
+  </div>
+  <div class="form-group">
+    <label for="resMdDocTitle">Document Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="resMdDocTitle"
+      placeholder="Document Title"
+      formControlName="resMdDocTitle"
+    >
+  </div>
+  <div class="form-group">
+    <label for="resMdDocData">Markdown Data</label>
+    <textarea
+      type="text"
+      class="form-control"
+      id="resMdDocData"
+      placeholder="Markdown Data"
+      formControlName="resMdDocData"
+    ></textarea>
+  </div>
+</form>

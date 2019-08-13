@@ -17,7 +17,7 @@ import { HomeAnnouncementListItemComponent } from './home/home-announcement-list
 import { HomeAnnouncementListComponent } from './home/home-announcement-list/home-announcement-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ResourcesTableComponent } from './course/course/resources/resources-table/resources-table.component';
 import { InstructorComponent } from './instructor/instructor/instructor.component';
 import { InstructorNavbarComponent } from './instructor/instructor-navbar/instructor-navbar.component';
@@ -85,7 +85,8 @@ import { ResourceEditFormComponent } from './instructor/edit-resource/resource-e
     HttpClientModule,
     FormsModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     CoursesService

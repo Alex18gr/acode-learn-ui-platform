@@ -46,7 +46,11 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
   }
 
   openModal(resource?: Resource) {
-    this.editResourcesComponent.openModal(resource);
+    if (resource) {
+      this.editResourcesComponent.openModal(resource.resourceType, resource);
+    } else {
+      this.editResourcesComponent.openModal(this.currentResourceType);
+    }
   }
 
   resourceTypeChanged(event: Event) {
