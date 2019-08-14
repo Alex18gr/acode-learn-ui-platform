@@ -25,6 +25,9 @@ import {InstructorAnnouncementsComponent} from './instructor/instructor-announce
 import {InstructorCourseSectionsComponent} from './instructor/instructor-courses/instructor-course-sections/instructor-course-sections.component';
 import {InstructorCourseResourcesComponent} from './instructor/instructor-courses/instructor-course-resources/instructor-course-resources.component';
 import {InstructorCourseSettingsComponent} from './instructor/instructor-courses/instructor-course-settings/instructor-course-settings.component';
+import {EditorCodeComponent} from './instructor/editor-code/editor-code.component';
+import {EditorMarkdownComponent} from './instructor/editor-markdown/editor-markdown.component';
+import {EditorGuideComponent} from './instructor/editor-guide/editor-guide.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent, canActivate: [AuthGuardHomeService]},
@@ -50,6 +53,11 @@ const routes: Routes = [
               {path: 'resources', component: InstructorCourseResourcesComponent},
               {path: 'settings', component: InstructorCourseSettingsComponent}
             ]}
+        ]},
+      {path: 'editor', children: [
+          {path: 'code', component: EditorCodeComponent},
+          {path: 'markdown', component: EditorMarkdownComponent},
+          {path: 'guide', component: EditorGuideComponent}
         ]},
       {path: 'profile', component: InstructorProfileComponent}
     ]},

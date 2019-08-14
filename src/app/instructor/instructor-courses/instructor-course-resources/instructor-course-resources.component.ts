@@ -1,4 +1,13 @@
-import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {CourseResources, InstructorResourceService} from '../../resource/instructor-resource.service';
 import {Resource} from '../../../core/models/resource-models/resource.model';
 import {Subscription} from 'rxjs';
@@ -8,6 +17,7 @@ import {Course} from '../../../course/course.model';
 import {InstructorCoursesService} from '../../courses/instructor-courses.service';
 import {ToastService} from '../../../core/toast/toast.service';
 import {NotificationTypes, ToastActions} from '../../../core/toast/toast.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 declare var $: any;
 
@@ -16,17 +26,41 @@ declare var $: any;
   templateUrl: './instructor-course-resources.component.html',
   styleUrls: ['./instructor-course-resources.component.css']
 })
-export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
+export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, AfterViewChecked, AfterContentChecked {
   @Input() course: Course;
   resources: CourseResources;
   resourcesChanged: Subscription;
   currentResourceType = 'RESOURCES_ALL';
   resourceTypesListSelect = ResourceTypes.ResourceTypesListSelect;
+  queryParamsSubscription: Subscription;
   @ViewChild('editResourceComponent', {static: false}) editResourcesComponent: EditResourceComponent;
+  @ViewChild('selectResourceType', {static: false}) selectResourceType: HTMLSelectElement;
 
   constructor(private resourceService: InstructorResourceService,
               private instructorCoursesService: InstructorCoursesService,
-              private toastService: ToastService) { }
+              private toastService: ToastService,
+              private router: Router,
+              private route: ActivatedRoute) { }
+
+  ngAfterViewChecked(): void {
+
+  }
+
+  ngAfterContentChecked(): void {
+    this.queryParamsSubscription = this.route.queryParamMap.subscribe(params => {
+      if (params.get('resType') && ResourceTypes.ResourceTypeExists(params.get('resType'))) {
+        // this.selectResourceType.selectedIndex = this.findSelectedIndex(params.get('resType'));
+        this.currentResourceType = params.get('resType');
+      }
+    });
+  }
+
+  private findSelectedIndex(resType: string) {
+    for (const t of ResourceTypes.ResourceTypesListSelect) {
+      if (t.value === resType) { return ResourceTypes.ResourceTypesListSelect.indexOf(t); }
+    }
+    return -1;
+  }
 
   ngOnInit() {
     this.resourcesChanged = this.resourceService.courseResourcesChangedSubject
@@ -41,6 +75,9 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.resourcesChanged) {
       this.resourcesChanged.unsubscribe();
+    }
+    if (this.queryParamsSubscription) {
+      this.queryParamsSubscription.unsubscribe();
     }
   }
 
@@ -58,6 +95,12 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy {
 
   resourceTypeChanged(event: Event) {
     this.currentResourceType = (event.target as HTMLSelectElement).value;
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        resType: this.currentResourceType
+      }
+    });
   }
 
   resourceEditFomSubmittedSuccess(evt: { resource: Resource; eventType: string }) {

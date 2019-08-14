@@ -21,4 +21,12 @@ export class ResourceTypes {
     {name: 'Markdown Document', value: ResourceTypes.RESOURCE_MARKDOWN},
     {name: 'Guide', value: ResourceTypes.RESOURCE_GUIDE}
   ];
+  public static ResourceTypeExists(resType: string) {
+    for (const value of ResourceTypes.ResourceTypesList) {
+      if (resType === value) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

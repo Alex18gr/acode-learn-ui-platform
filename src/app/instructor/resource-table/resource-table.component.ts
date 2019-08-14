@@ -5,6 +5,7 @@ import {Course} from '../../course/course.model';
 import {retry} from 'rxjs/operators';
 import {ResourceFile} from '../../core/models/resource-models/resource-file.model';
 import {Resource} from '../../core/models/resource-models/resource.model';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-resource-table',
@@ -33,13 +34,23 @@ export class ResourceTableComponent implements OnInit {
     return res.length <= 0;
   }
 
-  constructor(private instructorResourceService: InstructorResourceService) { }
+  constructor(private instructorResourceService: InstructorResourceService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
   }
 
   downloadFile(fileResource: ResourceFile) {
     this.instructorResourceService.downloadFile(fileResource);
+  }
+
+  navigateToCodeEditor(resourceId: number) {
+    this.router.navigate(['/instructor/editor/code'], {
+      queryParams: {
+        res: resourceId
+      }
+    });
   }
 
   getFileTypeClass(fileType: string) {

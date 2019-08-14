@@ -1,14 +1,14 @@
 <div>
   <h4>Resource Type</h4>
   <div class="input-group mb-3">
-    <select class="custom-select" (change)="resourceTypeChanged($event)" [value]="currentResourceType">
+    <select class="custom-select" (change)="resourceTypeChanged($event)" [value]="currentResourceType" #selectResourceType>
       <option value="RESOURCES_ALL">All Resources</option>
       <option *ngFor="let opt of resourceTypesListSelect" [value]="opt.value">{{opt.name}}</option>
     </select>
   </div>
 </div>
 <div>
-  <app-resource-table [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="course"
+  <app-resource-table *ngIf="resources" [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="course"
     (editResource)="onResourceEdit($event)"
   >
 
