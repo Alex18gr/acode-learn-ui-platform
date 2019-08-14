@@ -1,17 +1,17 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Resource} from '../../../course/resource/resource-models/resource.model';
-import {ResourceTypes} from '../../../course/resource/resource-models/resource-types';
+import {Resource} from '../../../core/models/resource-models/resource.model';
+import {ResourceTypes} from '../../../core/models/resource-models/resource-types';
 import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {ResourceLink} from '../../../course/resource/resource-models/resource-link.model';
+import {ResourceLink} from '../../../core/models/resource-models/resource-link.model';
 import {InstructorCoursesService} from '../../courses/instructor-courses.service';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {ResourceFile} from '../../../course/resource/resource-models/resource-file.model';
-import {ResourceRepository} from '../../../course/resource/resource-models/resource-repository.model';
-import {ResourceCodeSnippet} from '../../../course/resource/resource-models/resource-code-snippet.model';
-import {ResourceMarkdown} from '../../../course/resource/resource-models/resource-markdown.model';
-import {ResourceGuide} from '../../../course/resource/resource-models/resource-guide.model';
+import {ResourceFile} from '../../../core/models/resource-models/resource-file.model';
+import {ResourceRepository} from '../../../core/models/resource-models/resource-repository.model';
+import {ResourceCodeSnippet} from '../../../core/models/resource-models/resource-code-snippet.model';
+import {ResourceMarkdown} from '../../../core/models/resource-models/resource-markdown.model';
+import {ResourceGuide} from '../../../core/models/resource-models/resource-guide.model';
 
 @Component({
   selector: 'app-resource-edit-form',

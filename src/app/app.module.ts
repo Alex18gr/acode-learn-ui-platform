@@ -43,6 +43,9 @@ import { ResourceTableComponent } from './instructor/resource-table/resource-tab
 import { ResourceEditFormComponent } from './instructor/edit-resource/resource-edit-form/resource-edit-form.component';
 import { ToastContainerComponent } from './core/toast/toast-container/toast-container.component';
 import { ToastComponent } from './core/toast/toast/toast.component';
+import { EditorGuideComponent } from './instructor/editor-guide/editor-guide.component';
+import { EditorMarkdownComponent } from './instructor/editor-markdown/editor-markdown.component';
+import { EditorCodeComponent } from './instructor/editor-code/editor-code.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +84,10 @@ import { ToastComponent } from './core/toast/toast/toast.component';
     ResourceTableComponent,
     ResourceEditFormComponent,
     ToastContainerComponent,
-    ToastComponent
+    ToastComponent,
+    EditorGuideComponent,
+    EditorMarkdownComponent,
+    EditorCodeComponent
   ],
   imports: [
     BrowserModule,

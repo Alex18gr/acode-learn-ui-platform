@@ -1,16 +1,16 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {InstructorCoursesService} from '../courses/instructor-courses.service';
-import {Resource} from '../../course/resource/resource-models/resource.model';
+import {Resource} from '../../core/models/resource-models/resource.model';
 import {HttpClient, HttpHeaders, HttpParams, HttpRequest} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {Subject, Subscription} from 'rxjs';
 import {Course} from '../../course/course.model';
-import {ResourceLink} from '../../course/resource/resource-models/resource-link.model';
-import {ResourceFile} from '../../course/resource/resource-models/resource-file.model';
-import {ResourceRepository} from '../../course/resource/resource-models/resource-repository.model';
-import {ResourceCodeSnippet} from '../../course/resource/resource-models/resource-code-snippet.model';
-import {ResourceMarkdown} from '../../course/resource/resource-models/resource-markdown.model';
-import {ResourceGuide} from '../../course/resource/resource-models/resource-guide.model';
+import {ResourceLink} from '../../core/models/resource-models/resource-link.model';
+import {ResourceFile} from '../../core/models/resource-models/resource-file.model';
+import {ResourceRepository} from '../../core/models/resource-models/resource-repository.model';
+import {ResourceCodeSnippet} from '../../core/models/resource-models/resource-code-snippet.model';
+import {ResourceMarkdown} from '../../core/models/resource-models/resource-markdown.model';
+import {ResourceGuide} from '../../core/models/resource-models/resource-guide.model';
 
 export interface CourseResources {
   linkResources: ResourceLink[];

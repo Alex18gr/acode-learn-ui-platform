@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {CourseResources, InstructorResourceService} from '../../resource/instructor-resource.service';
-import {Resource} from '../../../course/resource/resource-models/resource.model';
+import {Resource} from '../../../core/models/resource-models/resource.model';
 import {Subscription} from 'rxjs';
 import {EditResourceComponent} from '../../edit-resource/edit-resource.component';
-import {ResourceTypes} from '../../../course/resource/resource-models/resource-types';
+import {ResourceTypes} from '../../../core/models/resource-models/resource-types';
 import {Course} from '../../../course/course.model';
 import {InstructorCoursesService} from '../../courses/instructor-courses.service';
 import {ToastService} from '../../../core/toast/toast.service';

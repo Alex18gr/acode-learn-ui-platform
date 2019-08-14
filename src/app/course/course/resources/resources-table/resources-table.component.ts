@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Resource} from '../../../resource/resource-models/resource.model';
+import {Resource} from '../../../../core/models/resource-models/resource.model';
 
 @Component({
   selector: 'app-resources-table',

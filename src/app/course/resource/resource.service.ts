@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Resource} from './resource-models/resource.model';
+import {Resource} from '../../core/models/resource-models/resource.model';
 import {CoursesService} from '../courses.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Course} from '../course.model';

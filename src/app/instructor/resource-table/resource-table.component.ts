@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ResourceTypes} from '../../course/resource/resource-models/resource-types';
+import {ResourceTypes} from '../../core/models/resource-models/resource-types';
 import {CourseResources, InstructorResourceService} from '../resource/instructor-resource.service';
 import {Course} from '../../course/course.model';
 import {retry} from 'rxjs/operators';
-import {ResourceFile} from '../../course/resource/resource-models/resource-file.model';
-import {Resource} from '../../course/resource/resource-models/resource.model';
+import {ResourceFile} from '../../core/models/resource-models/resource-file.model';
+import {Resource} from '../../core/models/resource-models/resource.model';
 
 @Component({
   selector: 'app-resource-table',

@@ -1,7 +1,7 @@
 import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Resource} from '../../course/resource/resource-models/resource.model';
+import {Resource} from '../../core/models/resource-models/resource.model';
 import {ResourceEditFormComponent} from './resource-edit-form/resource-edit-form.component';
-import {ResourceTypes} from '../../course/resource/resource-models/resource-types';
+import {ResourceTypes} from '../../core/models/resource-models/resource-types';
 import {tap} from 'rxjs/operators';
 import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
 import {InstructorResourceService} from '../resource/instructor-resource.service';
