@@ -27,4 +27,8 @@ export class ToastContainerComponent implements OnInit {
   toastDisposed(index: number) {
     this.toasts.splice(index, 1);
   }
+
+  isToastListEmpty() {
+    return !(this.toasts.length > 0);
+  }
 }
