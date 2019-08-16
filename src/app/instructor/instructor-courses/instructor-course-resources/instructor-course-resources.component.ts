@@ -65,7 +65,7 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, Af
 
   ngOnInit() {
     this.isLoading = true;
-    this.resourcesChanged = this.resourceService.courseResourcesChangedSubject
+    this.resourcesChanged = this.resourceService.getCourseResources()
       .subscribe((resources: CourseResources) => {
         this.resources = resources;
         this.isLoading = false;
@@ -75,7 +75,7 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, Af
 error => {
         this.isLoading = false;
       });
-    // this.resources = this.resourceService.courseResources;
+    this.resources = this.resourceService.courseResources;
   }
 
   ngOnDestroy(): void {

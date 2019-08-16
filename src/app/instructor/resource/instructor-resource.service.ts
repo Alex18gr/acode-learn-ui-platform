@@ -11,6 +11,7 @@ import {ResourceRepository} from '../../core/models/resource-models/resource-rep
 import {ResourceCodeSnippet} from '../../core/models/resource-models/resource-code-snippet.model';
 import {ResourceMarkdown} from '../../core/models/resource-models/resource-markdown.model';
 import {ResourceGuide} from '../../core/models/resource-models/resource-guide.model';
+import {map} from 'rxjs/operators';
 
 export interface CourseResources {
   linkResources: ResourceLink[];
@@ -45,11 +46,8 @@ export class InstructorResourceService implements OnDestroy {
     {value: 'htmlmixed', key: 'HTML-mixed'},
     {value: 'markdown', key: 'Markdown'}
   ];
-  private courseResourcesChanged: Subject<CourseResources>;
+  private courseResourcesChanged: Subject<CourseResources> = new Subject<CourseResources>();
   get courseResourcesChangedSubject() {
-    if (!this.courseResourcesChanged) {
-      this.courseResourcesChanged = new Subject<CourseResources>();
-    }
     return this.courseResourcesChanged;
   }
 
@@ -82,13 +80,14 @@ export class InstructorResourceService implements OnDestroy {
     }
     const courseResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/'
       + course.id + '/resources-all';
-    this.getAuthorizedResource(courseResourcesUrl).subscribe((data: any) => {
+    return this.getAuthorizedResource(courseResourcesUrl).pipe(map((data: any) => {
       // console.log(data);
       // const resources = this.getResourceStoreFromData(data);
       this.resourcesLoadingStatus = ResourceLoadingStatus.loaded;
       this.courseResources = data.resources;
       this.courseResourcesChanged.next(this.courseResources);
-    });
+      return this.courseResources;
+    }));
   }
 
   getAuthorizedResource(resourceUrl: string) {
