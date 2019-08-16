@@ -32,4 +32,12 @@ export class DynamicGuideComponent implements OnInit, OnChanges {
         console.log(data);
       });
   }
+
+  onSaveGuide() {
+
+  }
+
+  onEditResources() {
+
+  }
 }

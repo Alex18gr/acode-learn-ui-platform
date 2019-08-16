@@ -1,1 +1,21 @@
-<p>dynamic-guide-element works!</p>
+<div class="spinner-border" role="status" *ngIf="!resource">
+  <span class="sr-only">Loading...</span>
+</div>
+<table *ngIf="resource">
+  <tr>
+    <td>Resource Name</td>
+    <td>{{resource.resourceData.name}}</td>
+  </tr>
+  <tr>
+    <td>Resource Id</td>
+    <td>{{resource.resourceId}}</td>
+  </tr>
+  <tr>
+    <td>Resource Type</td>
+    <td>{{resource.type}}</td>
+  </tr>
+  <tr>
+    <td>Order</td>
+    <td>{{resource.order}}</td>
+  </tr>
+</table>
