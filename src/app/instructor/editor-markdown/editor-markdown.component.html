@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12" *ngIf="editingResource">
+      <div class="card shadow-sm border p-2">
+        <h1>{{editingResource.name}} / {{editingResource.documentTitle}}</h1>
+        <p>{{editingResource.description}}</p>
+      </div>
+    </div>
+    <hr>
+    <div class="col-md-12 mt-2">
+      <div class="card border shadow-sm rounded p-2 m-buttons">
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-outline-secondary" (click)="onSaveCodeDocument()">
+            <i class="fas fa-save"></i>
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="codeMirrorAction('undo')">
+            <i class="fas fa-undo-alt"></i>
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="codeMirrorAction('redo')">
+            <i class="fas fa-redo-alt"></i>
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="toggleCodeEditMode()">
+            <i *ngIf="codeEditMode" class="fas fa-eye"></i>
+            <i *ngIf="!codeEditMode" class="fas fa-eye-slash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div [hidden]="!codeEditMode" class="col-md-12 mt-2">
+      <div class="card border shadow-sm rounded p-2">
+        <textarea class="code-editor" #editor></textarea>
+      </div>
+    </div>
+    <div *ngIf="!codeEditMode" [hidden]="codeEditMode" class="col-md-12 mt-2">
+      <div class="card border shadow-sm rounded p-2">
+        <div [innerHTML]="markdownHTML"></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,6 +33,7 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, Af
   currentResourceType = 'RESOURCES_ALL';
   resourceTypesListSelect = ResourceTypes.ResourceTypesListSelect;
   queryParamsSubscription: Subscription;
+  isLoading = false;
   @ViewChild('editResourceComponent', {static: false}) editResourcesComponent: EditResourceComponent;
   @ViewChild('selectResourceType', {static: false}) selectResourceType: HTMLSelectElement;
 
@@ -63,13 +64,18 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, Af
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.resourcesChanged = this.resourceService.courseResourcesChangedSubject
       .subscribe((resources: CourseResources) => {
         this.resources = resources;
+        this.isLoading = false;
         this.course = this.instructorCoursesService.currentCourse;
         console.log(resources);
+      },
+error => {
+        this.isLoading = false;
       });
-    this.resources = this.resourceService.courseResources;
+    // this.resources = this.resourceService.courseResources;
   }
 
   ngOnDestroy(): void {

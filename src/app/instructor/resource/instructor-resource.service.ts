@@ -35,6 +35,16 @@ export class InstructorResourceService implements OnDestroy {
   courseResources: CourseResources;
   resourcesLoadingStatus = ResourceLoadingStatus.pending;
   currentCourseUpdatedSubscription: Subscription;
+  codeSnippetLanguageOptions = [
+    {value: '', key: ''},
+    {value: 'text/x-java', key: 'Java'},
+    {value: 'javascript', key: 'Javascript'},
+    {value: 'clike', key: 'C/C++'},
+    {value: 'python', key: 'Python'},
+    {value: 'php', key: 'PHP'},
+    {value: 'htmlmixed', key: 'HTML-mixed'},
+    {value: 'markdown', key: 'Markdown'}
+  ];
   private courseResourcesChanged: Subject<CourseResources>;
   get courseResourcesChangedSubject() {
     if (!this.courseResourcesChanged) {
@@ -136,7 +146,7 @@ export class InstructorResourceService implements OnDestroy {
 
   downloadFile(fileResource: ResourceFile) {
     const fileUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      this.instructorCoursesService.currentCourse.id + '/resource/' + fileResource.resourceId;
+      this.instructorCoursesService.currentCourse.id + '/resource/' + fileResource.resourceId + '/file';
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
     this.httpClient.get(fileUrl, {
       headers,
@@ -146,9 +156,9 @@ export class InstructorResourceService implements OnDestroy {
       // console.log(btoa(res));
       const blobData = new Blob([res], {type: fileResource.fileType});
       const fileData = new File([blobData], fileResource.fileName, {type: fileResource.fileType});
-      console.log(fileData);
+      // console.log(fileData);
       const url = window.URL.createObjectURL(fileData);
-      console.log(url);
+      // console.log(url);
       const pwa = window.open(url);
       if (!pwa || pwa.closed || typeof pwa.closed === 'undefined') {
         alert( 'Please disable your Pop-up blocker and try again.');
@@ -156,17 +166,28 @@ export class InstructorResourceService implements OnDestroy {
     });
   }
 
-  saveResource(submitData: any) {
+  saveResource(submitData: any, courseId?: number) {
+    let cid;
+    if (courseId) {cid = courseId; } else {cid = this.instructorCoursesService.currentCourse.id; }
     const saveResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      this.instructorCoursesService.currentCourse.id + '/resource';
+      cid + '/resource';
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
     return this.httpClient.post(saveResourceUrl, submitData, {headers});
   }
 
-  updateResource(submitData: any) {
+  updateResource(submitData: any, courseId?: number) {
+    let cid;
+    if (courseId) {cid = courseId; } else {cid = this.instructorCoursesService.currentCourse.id; }
     const saveResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      this.instructorCoursesService.currentCourse.id + '/resource/' + submitData.resourceId;
+      cid + '/resource/' + submitData.resourceId;
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
     return this.httpClient.put(saveResourceUrl, submitData, {headers});
+  }
+
+  getResource(resourceId: number, courseId: number) {
+    const getResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      courseId + '/resource/' + resourceId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.get(getResourceUrl, {headers});
   }
 }

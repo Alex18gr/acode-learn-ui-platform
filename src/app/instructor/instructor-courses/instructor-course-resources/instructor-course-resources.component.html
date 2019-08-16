@@ -8,11 +8,14 @@
   </div>
 </div>
 <div>
-  <app-resource-table *ngIf="resources" [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="course"
+  <app-resource-table *ngIf="resources && !isLoading" [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="course"
     (editResource)="onResourceEdit($event)"
   >
 
   </app-resource-table>
+  <div *ngIf="isLoading" class="spinner-border loading" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
 </div>
 <div>
   <div class="btn-group mr-2" role="group" aria-label="First group">

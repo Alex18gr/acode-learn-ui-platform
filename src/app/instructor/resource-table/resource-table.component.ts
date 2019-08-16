@@ -48,19 +48,52 @@ export class ResourceTableComponent implements OnInit {
   navigateToCodeEditor(resourceId: number) {
     this.router.navigate(['/instructor/editor/code'], {
       queryParams: {
-        res: resourceId
+        res: resourceId,
+        cid: this.currentCourse.id
+      }
+    });
+  }
+
+  navigateToMarkdownEditor(resourceId: number) {
+    this.router.navigate(['/instructor/editor/markdown'], {
+      queryParams: {
+        res: resourceId,
+        cid: this.currentCourse.id
+      }
+    });
+  }
+
+  navigateToGuideEditor(resourceId: number) {
+    this.router.navigate(['/instructor/editor/guide'], {
+      queryParams: {
+        res: resourceId,
+        cid: this.currentCourse.id
       }
     });
   }
 
   getFileTypeClass(fileType: string) {
     switch (fileType) {
+      case 'application/msword':
       case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
         return ['fas fa-file-word'];
       case 'application/pdf':
         return ['fas fa-file-pdf'];
       case 'image/jpeg':
+      case 'image/gif':
+      case 'image/vnd.microsoft.icon':
         return ['fas fa-file-image'];
+      case 'application/vnd.ms-excel':
+      case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+        return ['fas fa=file-excel'];
+      case 'application/vnd.ms-powerpoint':
+      case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
+        return ['fas fa-file-powerpoint'];
+      case 'application/x-rar-compressed':
+      case 'application/zip':
+      case 'application/x-zip-compressed':
+      case 'application/x-7z-compressed':
+        return ['fas fa-file-archive'];
       default:
         return ['fas fa-file'];
     }

@@ -56,4 +56,14 @@ export class ToastService {
       delay: delay ? delay : 5000
     });
   }
+
+  addSaveToast(title: string, message: string, delay?: number) {
+    this.toasts.push({
+      action: ToastActions.updated,
+      notificationType: NotificationTypes.info,
+      title,
+      message,
+      delay: delay ? delay : 5000
+    });
+  }
 }

@@ -133,7 +133,7 @@
       <td>{{res.documentTitle}}</td>
       <td>{{res.description}}</td>
       <td>
-        <button class="btn btn-outline-primary">
+        <button class="btn btn-outline-primary" (click)="navigateToMarkdownEditor(res.resourceId)">
           <i class="fas fa-external-link-alt"></i>
         </button>
       </td>
@@ -221,7 +221,7 @@
       <td>{{res.guideTitle}}</td>
       <td>{{res.guideDescription}}</td>
       <td>
-        <button class="btn btn-outline-primary">
+        <button class="btn btn-outline-primary" (click)="navigateToGuideEditor(res.resourceId)">
           <i class="fas fa-external-link-alt"></i>
         </button>
       </td>
