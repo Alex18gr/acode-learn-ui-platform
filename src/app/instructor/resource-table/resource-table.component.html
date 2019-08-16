@@ -25,7 +25,7 @@
             <button class="btn btn-outline-info" (click)="editResource.emit(res)">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="btn btn-outline-danger">
+            <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
               <i class="fas fa-trash-alt"></i>
             </button>
           </div>
@@ -71,7 +71,7 @@
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-outline-danger">
+          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -93,6 +93,7 @@
       <th scope="col">Repository URL</th>
       <th scope="col">Repository Name</th>
       <th scope="col">Repository Name Repo</th>
+      <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -104,6 +105,16 @@
       <td>{{res.repoUrl}}</td>
       <td>{{res.repoName}}</td>
       <td>{{res.repoNameRepo}}</td>
+      <td>
+        <div class="btn-group mr-2" role="group" aria-label="First group">
+          <button class="btn btn-outline-info" (click)="editResource.emit(res)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
+            <i class="fas fa-trash-alt"></i>
+          </button>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -142,7 +153,7 @@
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-outline-danger">
+          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -187,7 +198,7 @@
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-outline-danger">
+          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -230,7 +241,7 @@
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-outline-danger">
+          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>

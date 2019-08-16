@@ -18,6 +18,7 @@ import {InstructorCoursesService} from '../../courses/instructor-courses.service
 import {ToastService} from '../../../core/toast/toast.service';
 import {NotificationTypes, ToastActions} from '../../../core/toast/toast.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {DeleteResourceComponent} from '../../delete-resource/delete-resource.component';
 
 declare var $: any;
 
@@ -29,12 +30,14 @@ declare var $: any;
 export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, AfterViewChecked, AfterContentChecked {
   @Input() course: Course;
   resources: CourseResources;
+  resourcesInitialized: Subscription;
   resourcesChanged: Subscription;
   currentResourceType = 'RESOURCES_ALL';
   resourceTypesListSelect = ResourceTypes.ResourceTypesListSelect;
   queryParamsSubscription: Subscription;
   isLoading = false;
   @ViewChild('editResourceComponent', {static: false}) editResourcesComponent: EditResourceComponent;
+  @ViewChild('deleteResourceComponent', {static: false}) deleteResourceComponent: DeleteResourceComponent;
   @ViewChild('selectResourceType', {static: false}) selectResourceType: HTMLSelectElement;
 
   constructor(private resourceService: InstructorResourceService,
@@ -63,16 +66,29 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, Af
     return -1;
   }
 
-  ngOnInit() {
+  getResources() {
+    if (this.resourcesInitialized) {
+      this.resourcesInitialized.unsubscribe();
+    }
     this.isLoading = true;
-    this.resourcesChanged = this.resourceService.getCourseResources()
+    this.resourcesInitialized = this.resourceService.getCourseResources()
+      .subscribe((resources: CourseResources) => {
+          this.resources = resources;
+          this.isLoading = false;
+          this.course = this.instructorCoursesService.currentCourse;
+          console.log(resources);
+        },
+        error => {
+          this.isLoading = false;
+        });
+
+  }
+
+  ngOnInit() {
+    this.getResources();
+    this.resourcesChanged = this.resourceService.courseResourcesChangedSubject
       .subscribe((resources: CourseResources) => {
         this.resources = resources;
-        this.isLoading = false;
-        this.course = this.instructorCoursesService.currentCourse;
-        console.log(resources);
-      },
-error => {
         this.isLoading = false;
       });
     this.resources = this.resourceService.courseResources;
@@ -82,16 +98,27 @@ error => {
     if (this.resourcesChanged) {
       this.resourcesChanged.unsubscribe();
     }
+    if (this.resourcesInitialized) {
+      this.resourcesInitialized.unsubscribe();
+    }
     if (this.queryParamsSubscription) {
       this.queryParamsSubscription.unsubscribe();
     }
   }
 
-  onResourceEdit(resource: Resource) {
-    this.openModal(resource);
+  onResourceDelete(resource: Resource) {
+    this.openDeleteModal(resource);
   }
 
-  openModal(resource?: Resource) {
+  openDeleteModal(resource: Resource) {
+    this.deleteResourceComponent.openModal(resource);
+  }
+
+  onResourceEdit(resource: Resource) {
+    this.openEditModal(resource);
+  }
+
+  openEditModal(resource?: Resource) {
     if (resource) {
       this.editResourcesComponent.openModal(resource.resourceType, resource);
     } else {
@@ -139,5 +166,10 @@ error => {
         });
         break;
     }
+    this.getResources();
+  }
+
+  resourceDeleteSuccess($event: Resource) {
+    this.getResources();
   }
 }

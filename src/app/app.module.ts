@@ -46,6 +46,9 @@ import { ToastComponent } from './core/toast/toast/toast.component';
 import { EditorGuideComponent } from './instructor/editor-guide/editor-guide.component';
 import { EditorMarkdownComponent } from './instructor/editor-markdown/editor-markdown.component';
 import { EditorCodeComponent } from './instructor/editor-code/editor-code.component';
+import { DeleteResourceComponent } from './instructor/delete-resource/delete-resource.component';
+import { DynamicGuideComponent } from './core/dynamic-guide/dynamic-guide.component';
+import { DynamicGuideElementComponent } from './core/dynamic-guide/dynamic-guide-element/dynamic-guide-element.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +90,10 @@ import { EditorCodeComponent } from './instructor/editor-code/editor-code.compon
     ToastComponent,
     EditorGuideComponent,
     EditorMarkdownComponent,
-    EditorCodeComponent
+    EditorCodeComponent,
+    DeleteResourceComponent,
+    DynamicGuideComponent,
+    DynamicGuideElementComponent
   ],
   imports: [
     BrowserModule,

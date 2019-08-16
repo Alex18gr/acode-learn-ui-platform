@@ -183,10 +183,27 @@ export class InstructorResourceService implements OnDestroy {
     return this.httpClient.put(saveResourceUrl, submitData, {headers});
   }
 
+  deleteResource(resourceId: any, courseId?: number) {
+    let cid;
+    if (courseId) {cid = courseId; } else {cid = this.instructorCoursesService.currentCourse.id; }
+    const deleteResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      cid + '/resource/' + resourceId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.delete(deleteResourceUrl, {headers});
+  }
+
   getResource(resourceId: number, courseId: number) {
     const getResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
       courseId + '/resource/' + resourceId;
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
     return this.httpClient.get(getResourceUrl, {headers});
+  }
+
+  getResourcesByResourceIds(resourcesIdsList: number[], courseId?: number) {
+    // let cid;
+    // if (courseId) {cid = courseId; } else {cid = this.instructorCoursesService.currentCourse.id; }
+    const getAllResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/instructor/get-resources-all';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.post(getAllResourcesUrl, resourcesIdsList, { headers });
   }
 }

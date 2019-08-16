@@ -66,4 +66,14 @@ export class ToastService {
       delay: delay ? delay : 5000
     });
   }
+
+  addDeleteToast(title: string, message: string, delay?: number) {
+    this.toasts.push({
+      action: ToastActions.deleted,
+      notificationType: NotificationTypes.info,
+      title,
+      message,
+      delay: delay ? delay : 5000
+    });
+  }
 }

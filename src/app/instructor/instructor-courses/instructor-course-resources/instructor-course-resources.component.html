@@ -9,7 +9,7 @@
 </div>
 <div>
   <app-resource-table *ngIf="resources && !isLoading" [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="course"
-    (editResource)="onResourceEdit($event)"
+    (editResource)="onResourceEdit($event)" (deleteResource)="onResourceDelete($event)"
   >
 
   </app-resource-table>
@@ -19,15 +19,16 @@
 </div>
 <div>
   <div class="btn-group mr-2" role="group" aria-label="First group">
-    <button type="button" class="btn btn-secondary" (click)="openModal()"
+    <button type="button" class="btn btn-secondary" (click)="openEditModal()"
     >
       <i appTooltip
          [placement]="'top'"
          [tooltipText]="'Hello world!'" class="fas fa-plus-circle"></i>
     </button>
-    <button type="button" class="btn btn-secondary" (click)="openModal()">2</button>
+    <button type="button" class="btn btn-secondary" (click)="openEditModal()">2</button>
     <button type="button" class="btn btn-secondary">3</button>
     <button type="button" class="btn btn-secondary">4</button>
   </div>
 </div>
 <app-edit-resource #editResourceComponent (modalFormSubmittedSuccess)="resourceEditFomSubmittedSuccess($event)"></app-edit-resource>
+<app-delete-resource #deleteResourceComponent (deleteSuccess)="resourceDeleteSuccess($event)"></app-delete-resource>
