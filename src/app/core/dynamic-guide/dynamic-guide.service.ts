@@ -4,6 +4,7 @@ import {ResourceGuide} from '../models/resource-models/resource-guide.model';
 import {CourseResources, InstructorResourceService} from '../../instructor/resource/instructor-resource.service';
 import {map} from 'rxjs/operators';
 import {ResourceTypes} from '../models/resource-models/resource-types';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,7 @@ export class DynamicGuideService {
     guideRes.type = resource.resourceType;
     guideRes.resourceId = resource.resourceId;
     guideRes.resourceData = resource;
+    guideRes.options = {};
     return guideRes;
   }
 
@@ -72,6 +74,7 @@ export class DynamicGuideService {
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
+            if (guideResData.options) { guideDataResource.options = guideResData.options; }
             guideDataResource.resourceData = receivedResources.linkResources[index];
             guideDataResources.push(guideDataResource);
           }
@@ -84,6 +87,7 @@ export class DynamicGuideService {
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
+            if (guideResData.options) { guideDataResource.options = guideResData.options; }
             guideDataResource.resourceData = receivedResources.markdownDocumentResources[index];
             guideDataResources.push(guideDataResource);
           }
@@ -96,6 +100,7 @@ export class DynamicGuideService {
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
+            if (guideResData.options) { guideDataResource.options = guideResData.options; }
             guideDataResource.resourceData = receivedResources.repositoryResources[index];
             guideDataResources.push(guideDataResource);
           }
@@ -108,6 +113,7 @@ export class DynamicGuideService {
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
+            if (guideResData.options) { guideDataResource.options = guideResData.options; }
             guideDataResource.resourceData = receivedResources.codeSnippetResources[index];
             guideDataResources.push(guideDataResource);
           }
@@ -120,6 +126,7 @@ export class DynamicGuideService {
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
+            if (guideResData.options) { guideDataResource.options = guideResData.options; }
             guideDataResource.resourceData = receivedResources.fileResources[index];
             guideDataResources.push(guideDataResource);
           }
@@ -146,6 +153,22 @@ export class DynamicGuideService {
     }
     return -1;
   }
+
+  saveGuideResource(guideDataToSave: GuideData, courseId: number) {
+    const guideData = _.cloneDeep(guideDataToSave) as GuideData;
+
+    const resourceToSave = guideDataToSave.guideResource;
+
+    for (const guideDataResource of guideData.resources) {
+      delete guideDataResource.resourceData;
+    }
+
+    resourceToSave.guideData = JSON.stringify(guideData.resources);
+
+    console.log(resourceToSave);
+
+    return this.instructorResourceService.updateResource(resourceToSave, courseId);
+  }
 }
 
 export interface GuideDataResource {
@@ -153,6 +176,7 @@ export interface GuideDataResource {
   order: number;
   type: string;
   resourceData: Resource;
+  options?: any;
 }
 
 export interface GuideData {

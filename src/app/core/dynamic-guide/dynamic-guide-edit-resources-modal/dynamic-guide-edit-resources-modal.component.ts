@@ -6,6 +6,7 @@ import {DynamicGuideService, GuideData, GuideDataResource} from '../dynamic-guid
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {ResourceTypes} from '../../models/resource-models/resource-types';
 import {ResourceStore} from '../../../course/resource/resource.service';
+import * as _ from 'lodash';
 
 declare var $: any;
 
@@ -20,9 +21,10 @@ export class DynamicGuideEditResourcesModalComponent implements OnInit {
   @ViewChild('addResourcesDragDrop', {static: false}) addResourcesDragDrop: any;
   @Output() editChangesSubmitted: EventEmitter<GuideData>
     = new EventEmitter<GuideData>();
-  @Input() guideResourceData: GuideData;
+  guideResourceData: GuideData;
   @Input() courseId;
   addResourcesList: GuideDataResource[];
+  addResources: any;
 
   modalLoading = false;
   title = 'Edit Guide Resources';
@@ -46,24 +48,24 @@ export class DynamicGuideEditResourcesModalComponent implements OnInit {
     $(this.editModal.nativeElement).modal('hide');
   }
 
-  public openModal() {
+  public openModal(guideData: GuideData) {
+    this.guideResourceData = _.cloneDeep(guideData);
     this.showModal();
   }
 
   onSaveChanges() {
+    this.calculateOrder();
     this.editChangesSubmitted.emit(this.guideResourceData);
     this.hideModal();
   }
 
-//  Drag and drop example
+  private calculateOrder() {
+    for (const res of this.guideResourceData.resources) {
+      res.order = this.guideResourceData.resources.indexOf(res) + 1;
+    }
+  }
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
-  addResources: any;
+//  Drag and drop example
 
   drop(event: CdkDragDrop<GuideDataResource[]>) {
     if (event.previousContainer === event.container) {

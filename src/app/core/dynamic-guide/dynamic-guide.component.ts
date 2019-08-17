@@ -2,6 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@an
 import {ResourceGuide} from '../models/resource-models/resource-guide.model';
 import {DynamicGuideService, GuideData} from './dynamic-guide.service';
 import {DynamicGuideEditResourcesModalComponent} from './dynamic-guide-edit-resources-modal/dynamic-guide-edit-resources-modal.component';
+import {ToastService} from '../toast/toast.service';
 
 @Component({
   selector: 'app-dynamic-guide',
@@ -15,7 +16,8 @@ export class DynamicGuideComponent implements OnInit, OnChanges {
   @ViewChild('editModal', {static: false}) editModal: DynamicGuideEditResourcesModalComponent;
   guideData: GuideData;
 
-  constructor(private dynamicGuideService: DynamicGuideService) { }
+  constructor(private dynamicGuideService: DynamicGuideService,
+              private toastService: ToastService) { }
 
   ngOnInit() {
   }
@@ -37,11 +39,17 @@ export class DynamicGuideComponent implements OnInit, OnChanges {
       });
   }
 
-  onSaveGuide() {
-
+  onSaveGuide(value: GuideData) {
+    this.guideData = value;
+    console.log(value);
+    this.dynamicGuideService.saveGuideResource(value, this.courseId)
+      .subscribe((data: any) => {
+        this.toastService.addSaveToast('Resource Saved',
+          'Rsource "' + data.name + '" saved successfully.');
+      });
   }
 
   onEditResources() {
-    this.editModal.openModal();
+    this.editModal.openModal(this.guideData);
   }
 }

@@ -31,6 +31,6 @@
 </div>
 
 <app-dynamic-guide-edit-resources-modal [courseId]="courseId"
-  [guideResourceData]="guideData" (editChangesSubmitted)="onSaveGuide()" #editModal>
+   (editChangesSubmitted)="onSaveGuide($event)" #editModal>
 
 </app-dynamic-guide-edit-resources-modal>
