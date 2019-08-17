@@ -3,6 +3,7 @@ import {ResourceCodeSnippet} from '../../../models/resource-models/resource-code
 import {ResourceFile} from '../../../models/resource-models/resource-file.model';
 import {GeneralService} from '../../../general.service';
 import {InstructorResourceService} from '../../../../instructor/resource/instructor-resource.service';
+import {ResourceTypes} from '../../../models/resource-models/resource-types';
 
 @Component({
   selector: 'app-file-view',
@@ -13,7 +14,10 @@ export class FileViewComponent implements OnInit, OnChanges {
   @Input() resource: ResourceFile;
   @Input() editMode: boolean;
   @Input() courseId;
+  @Input() options;
   fileTypeClass: string[];
+  readonly pdfFileType = 'application/pdf';
+
 
   constructor(private generalService: GeneralService,
               private instructorResourceService: InstructorResourceService) { }

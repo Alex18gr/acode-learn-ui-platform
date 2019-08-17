@@ -1,6 +1,10 @@
-<!--<ng-container [ngSwitch]="resource.fileType">-->
+<ng-container [ngSwitch]="resource.fileType">
 
-  <div class="card-body">
+  <app-pdf-viewer *ngSwitchCase="pdfFileType" [resource]="resource"
+    [courseId]="courseId" [editMode]="editMode" [options]="options"
+  ></app-pdf-viewer>
+
+  <div class="card-body" *ngSwitchDefault>
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-6">
@@ -26,4 +30,4 @@
     </div>
   </div>
 
-<!--</ng-container>-->
+</ng-container>
