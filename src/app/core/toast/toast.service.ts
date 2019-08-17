@@ -82,4 +82,10 @@ export class ToastService {
     this.addSaveToast('Resource Saved',
       'Resource "' + resource.name + '" saved successfully.');
   }
+
+  addResourceSaveErrorSuccessfully(resource: Resource) {
+    this.addErrorToast('Resource Save Error',
+      'An error occurred while trying to save resource "'
+      + resource.name + '".');
+  }
 }

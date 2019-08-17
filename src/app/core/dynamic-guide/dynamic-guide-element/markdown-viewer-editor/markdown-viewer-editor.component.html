@@ -1,1 +1,30 @@
-<p>markdown-viewer-editor works!</p>
+<div class="card-body m-1">
+  <strong class="text-muted text-sm-left px-4 pt-3 mb-0">{{resource.documentTitle}}</strong>
+  <div class="border border-secondary rounded shadow-sm p-2" [hidden]="viewerMode && editMode">
+    <textarea class="code-editor" #editor></textarea>
+  </div>
+  <div class="border border-secondary rounded shadow-sm p-2" [hidden]="!viewerMode">
+    <div #markdown [innerHTML]="markdownHTML"></div>
+  </div>
+  <ng-container *ngIf="editMode">
+    <div *ngIf="!isEditing" class="px-1 pt-1">
+      <button class="btn btn-secondary" (click)="startEditMode()">Edit</button>
+    </div>
+    <div [hidden]="!isEditing" class="px-1 pt-1">
+      <button type="button" class="btn btn-outline-secondary" (click)="toggleCodeEditMode()">
+        <i *ngIf="!viewerMode" class="fas fa-eye"></i>
+        <i *ngIf="viewerMode" class="fas fa-eye-slash"></i>
+      </button>
+      <form class="form-inline" #editForm="ngForm" (ngSubmit)="onSaveMarkdown()">
+        <label class="sr-only" for="titleInput">Name</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" id="titleInput"
+               placeholder="Title" name="title" [ngModel]="resource.documentTitle" [disabled]="isSaving">
+        <button class="btn btn-success" type="submit" [disabled]="isSaving">Save</button>
+        <div class="spinner-border" role="status" *ngIf="isSaving">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </form>
+      <button class="btn btn-danger" (click)="onCancelEditing()" [disabled]="isSaving">Cancel</button>
+    </div>
+  </ng-container>
+</div>

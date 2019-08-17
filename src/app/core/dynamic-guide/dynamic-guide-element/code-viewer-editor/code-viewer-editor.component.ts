@@ -26,6 +26,7 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
   disabledMode = false;
   editor: any;
   loading = true;
+  private isSaving = false;
 
   languageOptions = [
     {value: '', key: ''},
@@ -37,7 +38,7 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
     {value: 'htmlmixed', key: 'HTML-mixed'},
     {value: 'markdown', key: 'Markdown'}
   ];
-  private isSaving = false;
+
 
   constructor(private instructorResourceService: InstructorResourceService,
               private toastService: ToastService) { }
@@ -157,7 +158,7 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
       },
         error => {
         this.isSaving = false;
-        this.toastService.addErrorToast('Error', 'Error while saving resources');
+        this.toastService.addResourceSaveErrorSuccessfully(this.resource);
         });
       // }
     }

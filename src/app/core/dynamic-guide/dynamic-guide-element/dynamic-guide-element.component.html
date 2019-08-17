@@ -26,4 +26,9 @@
     [resource]="resource.resourceData" [editMode]="editMode" [courseId]="courseId"
   ></app-code-viewer-editor>
 
+  <app-markdown-viewer-editor *ngSwitchCase="ResourceTypes.RESOURCE_MARKDOWN"
+    [resource]="resource.resourceData" [editMode]="editMode" [courseId]="courseId">
+
+  </app-markdown-viewer-editor>
+
 </ng-container>
