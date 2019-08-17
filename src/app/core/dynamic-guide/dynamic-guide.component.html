@@ -22,7 +22,7 @@
     <ng-container *ngIf="guideData">
       <div *ngFor="let guideElement of guideData.resources" class="col-md-12 mt-2">
         <div  class="card border shadow-sm rounded p-2">
-          <app-dynamic-guide-element [resource]="guideElement"></app-dynamic-guide-element>
+          <app-dynamic-guide-element [resource]="guideElement" [editMode]="editMode" [courseId]="courseId"></app-dynamic-guide-element>
         </div>
       </div>
     </ng-container>
@@ -30,7 +30,7 @@
   </div>
 </div>
 
-<app-dynamic-guide-edit-resources-modal [courseId]="courseId"
+<app-dynamic-guide-edit-resources-modal [courseId]="courseId" *ngIf="editMode"
    (editChangesSubmitted)="onSaveGuide($event)" #editModal>
 
 </app-dynamic-guide-edit-resources-modal>

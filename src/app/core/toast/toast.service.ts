@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {NotificationTypes, Toast, ToastActions} from './toast.model';
 import {Subject} from 'rxjs';
+import {Resource} from '../models/resource-models/resource.model';
 
 @Injectable({
   providedIn: 'root'
@@ -75,5 +76,10 @@ export class ToastService {
       message,
       delay: delay ? delay : 5000
     });
+  }
+
+  addResourceSavedSuccessfully(resource: Resource) {
+    this.addSaveToast('Resource Saved',
+      'Resource "' + resource.name + '" saved successfully.');
   }
 }

@@ -19,3 +19,11 @@
     <td>{{resource.order}}</td>
   </tr>
 </table>
+
+<ng-container [ngSwitch]="resource.type">
+
+  <app-code-viewer-editor *ngSwitchCase="ResourceTypes.RESOURCE_CODE_SNIPPET"
+    [resource]="resource.resourceData" [editMode]="editMode" [courseId]="courseId"
+  ></app-code-viewer-editor>
+
+</ng-container>

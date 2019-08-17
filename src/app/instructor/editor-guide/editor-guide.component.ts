@@ -15,6 +15,7 @@ export class EditorGuideComponent implements OnInit {
   guideResource: ResourceGuide;
   isLoading = false;
   private courseId: number;
+  editMode = true;
 
   constructor(private instructorResourceService: InstructorResourceService,
               private instructorCoursesService: InstructorCoursesService,

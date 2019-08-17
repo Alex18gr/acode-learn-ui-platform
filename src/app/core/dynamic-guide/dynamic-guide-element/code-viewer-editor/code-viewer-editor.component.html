@@ -1,0 +1,26 @@
+<div class="card-body m-1">
+  <strong class="text-muted text-sm-left px-4 pt-3 mb-0">{{title}}</strong>
+  <div class="border border-secondary rounded shadow-sm p-2">
+    <textarea class="code-editor" #editor></textarea>
+  </div>
+  <ng-container *ngIf="editMode">
+    <div *ngIf="!isEditing" class="px-1 pt-1">
+      <button class="btn btn-secondary" (click)="startEditMode()">Edit</button>
+    </div>
+    <div [hidden]="!isEditing" class="px-1 pt-1">
+      <form class="form-inline" #editForm="ngForm" (ngSubmit)="onEditFormSubmit()">
+        <label class="sr-only" for="titleInput">Name</label>
+        <input type="text" class="form-control mb-2 mr-sm-2" id="titleInput"
+               placeholder="Title" name="title" [ngModel]="title" [disabled]="isSaving">
+        <select name="language" [ngModel]="modeLanguage" [disabled]="isSaving">
+          <option [value]="lang.value" *ngFor="let lang of this.languageOptions">{{lang.key}}</option>
+        </select>
+        <button class="btn btn-success" (click)="onSaveCodeDocument()" type="submit" [disabled]="isSaving">Save</button>
+        <div class="spinner-border" role="status" *ngIf="isSaving">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </form>
+      <button class="btn btn-danger" (click)="onCancelEditing()" [disabled]="isSaving">Cancel</button>
+    </div>
+  </ng-container>
+</div>

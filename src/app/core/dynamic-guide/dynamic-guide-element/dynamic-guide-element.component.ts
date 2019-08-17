@@ -10,7 +10,9 @@ import {ResourceTypes} from '../../models/resource-models/resource-types';
 export class DynamicGuideElementComponent implements OnInit {
   @Input() resource: GuideDataResource;
   @Input() editMode: boolean;
+  @Input() courseId;
   private resourceTypes = ResourceTypes;
+  ResourceTypes = ResourceTypes;
 
   constructor() { }
 

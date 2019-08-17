@@ -50,6 +50,11 @@ import { DeleteResourceComponent } from './instructor/delete-resource/delete-res
 import { DynamicGuideComponent } from './core/dynamic-guide/dynamic-guide.component';
 import { DynamicGuideElementComponent } from './core/dynamic-guide/dynamic-guide-element/dynamic-guide-element.component';
 import { DynamicGuideEditResourcesModalComponent } from './core/dynamic-guide/dynamic-guide-edit-resources-modal/dynamic-guide-edit-resources-modal.component';
+import { MarkdownViewerEditorComponent } from './core/dynamic-guide/dynamic-guide-element/markdown-viewer-editor/markdown-viewer-editor.component';
+import { PdfViewerComponent } from './core/dynamic-guide/dynamic-guide-element/pdf-viewer/pdf-viewer.component';
+import { RepositoryViewerComponent } from './core/dynamic-guide/dynamic-guide-element/repository-viewer/repository-viewer.component';
+import { CodeViewerEditorComponent } from './core/dynamic-guide/dynamic-guide-element/code-viewer-editor/code-viewer-editor.component';
+import { FileViewComponent } from './core/dynamic-guide/dynamic-guide-element/file-view/file-view.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +100,12 @@ import { DynamicGuideEditResourcesModalComponent } from './core/dynamic-guide/dy
     DeleteResourceComponent,
     DynamicGuideComponent,
     DynamicGuideElementComponent,
-    DynamicGuideEditResourcesModalComponent
+    DynamicGuideEditResourcesModalComponent,
+    MarkdownViewerEditorComponent,
+    PdfViewerComponent,
+    RepositoryViewerComponent,
+    CodeViewerEditorComponent,
+    FileViewComponent
   ],
   imports: [
     BrowserModule,
