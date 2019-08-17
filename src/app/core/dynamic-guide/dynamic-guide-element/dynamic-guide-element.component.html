@@ -35,4 +35,8 @@
                          [resource]="resource.resourceData" [editMode]="editMode"
   ></app-repository-viewer>
 
+  <app-file-view *ngSwitchCase="ResourceTypes.RESOURCE_FILE" [courseId]="courseId"
+                 [resource]="resource.resourceData" [editMode]="editMode"
+  ></app-file-view>
+
 </ng-container>

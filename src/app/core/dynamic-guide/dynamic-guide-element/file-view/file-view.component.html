@@ -1,1 +1,29 @@
-<p>file-view works!</p>
+<!--<ng-container [ngSwitch]="resource.fileType">-->
+
+  <div class="card-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <table>
+            <tr>
+              <h3 class="text-primary" style="width: 100%;">{{resource.name}}</h3>
+              <h1 class="text-info" *ngIf="fileTypeClass">
+                <i [classList]="fileTypeClass"></i>
+              </h1>
+            </tr>
+            <tr><p style="width: 100%">{{resource.summary}}</p></tr>
+             <tr>Uploaded {{resource.dateCreated | date}}</tr>
+          </table>
+        </div>
+        <div class="col-md-6">
+          <div class="float-right">
+            <button class="btn btn-lg btn-outline-primary" (click)="downloadFile()">
+              <i class="fas fa-download"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--</ng-container>-->

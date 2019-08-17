@@ -144,9 +144,11 @@ export class InstructorResourceService implements OnDestroy {
     return this.httpClient.request(req);
   }
 
-  downloadFile(fileResource: ResourceFile) {
+  downloadFile(fileResource: ResourceFile, courseId?: number) {
+    let cid;
+    if (courseId) {cid = courseId; } else {cid = this.instructorCoursesService.currentCourse.id; }
     const fileUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      this.instructorCoursesService.currentCourse.id + '/resource/' + fileResource.resourceId + '/file';
+      cid + '/resource/' + fileResource.resourceId + '/file';
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
     this.httpClient.get(fileUrl, {
       headers,
