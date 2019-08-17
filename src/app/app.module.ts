@@ -49,6 +49,7 @@ import { EditorCodeComponent } from './instructor/editor-code/editor-code.compon
 import { DeleteResourceComponent } from './instructor/delete-resource/delete-resource.component';
 import { DynamicGuideComponent } from './core/dynamic-guide/dynamic-guide.component';
 import { DynamicGuideElementComponent } from './core/dynamic-guide/dynamic-guide-element/dynamic-guide-element.component';
+import { DynamicGuideEditResourcesModalComponent } from './core/dynamic-guide/dynamic-guide-edit-resources-modal/dynamic-guide-edit-resources-modal.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { DynamicGuideElementComponent } from './core/dynamic-guide/dynamic-guide
     EditorCodeComponent,
     DeleteResourceComponent,
     DynamicGuideComponent,
-    DynamicGuideElementComponent
+    DynamicGuideElementComponent,
+    DynamicGuideEditResourcesModalComponent
   ],
   imports: [
     BrowserModule,

@@ -24,14 +24,15 @@ export class DynamicGuideService {
     const resourceIdsList = this.getResourceIdsList(guideResource.guideData);
 
     return this.instructorResourceService.getResourcesByResourceIds(resourceIdsList)
-      .pipe(map((receivedResources: {resources: CourseResources}) => {
+      // .pipe(map((receivedResources: {resources: CourseResources}) => {
+      .pipe(map((receivedResources: any) => {
         console.log(receivedResources);
-        mGuideData.resources = this.getGuideResourcesFromReceivedCourses(guideResource, receivedResources.resources);
+        mGuideData.resources = this.getGuideResourcesFromReceivedResources(guideResource, receivedResources.resources);
         return mGuideData;
       }));
   }
 
-  private getResourceIdsList(guideData: string) {
+   getResourceIdsList(guideData: string) {
     const guideDataObject = JSON.parse(guideData);
     const resourceIdsList = [];
     for (const res of guideDataObject) {
@@ -40,7 +41,25 @@ export class DynamicGuideService {
     return resourceIdsList;
   }
 
-  private getGuideResourcesFromReceivedCourses(guideResource: ResourceGuide, receivedResources: CourseResources) {
+   getGuideResourcesFromResourcesList(resourcesList: Resource[]) {
+    const guideDataResources: GuideDataResource[] = [];
+    for (const res of resourcesList) {
+      guideDataResources.push(this.getGuideDataResourceFromResource(res));
+    }
+    return guideDataResources;
+  }
+
+  private getGuideDataResourceFromResource(resource: Resource) {
+    // @ts-ignore
+    const guideRes: GuideDataResource = {};
+    guideRes.order = -1;
+    guideRes.type = resource.resourceType;
+    guideRes.resourceId = resource.resourceId;
+    guideRes.resourceData = resource;
+    return guideRes;
+  }
+
+  private getGuideResourcesFromReceivedResources(guideResource: ResourceGuide, receivedResources: CourseResources) {
     const guideDataResources: GuideDataResource[] = [];
     for (const guideResData of JSON.parse(guideResource.guideData)) {
       let index: number;
@@ -70,7 +89,7 @@ export class DynamicGuideService {
           }
           break;
         case ResourceTypes.RESOURCE_REPOSITORY:
-          index = this.resourceIdExistsIn(guideResData.resourceId, receivedResources.repositoryResources)
+          index = this.resourceIdExistsIn(guideResData.resourceId, receivedResources.repositoryResources);
           if (index >= 0) {
             // @ts-ignore
             const guideDataResource: GuideDataResource = {};

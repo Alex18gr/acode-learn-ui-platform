@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
-import {MatDialogModule, MatTooltipModule} from '@angular/material';
+import {
+  MatDialogModule,
+  MatTooltipModule
+} from '@angular/material';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [],
   imports: [
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    DragDropModule
   ],
   exports: [
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    DragDropModule
   ]
 })
 export class MaterialModule { }

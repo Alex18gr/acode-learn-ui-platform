@@ -1,6 +1,7 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ResourceGuide} from '../models/resource-models/resource-guide.model';
 import {DynamicGuideService, GuideData} from './dynamic-guide.service';
+import {DynamicGuideEditResourcesModalComponent} from './dynamic-guide-edit-resources-modal/dynamic-guide-edit-resources-modal.component';
 
 @Component({
   selector: 'app-dynamic-guide',
@@ -9,6 +10,9 @@ import {DynamicGuideService, GuideData} from './dynamic-guide.service';
 })
 export class DynamicGuideComponent implements OnInit, OnChanges {
   @Input() guideResource: ResourceGuide;
+  @Input() editMode = false;
+  @Input() courseId;
+  @ViewChild('editModal', {static: false}) editModal: DynamicGuideEditResourcesModalComponent;
   guideData: GuideData;
 
   constructor(private dynamicGuideService: DynamicGuideService) { }
@@ -38,6 +42,6 @@ export class DynamicGuideComponent implements OnInit, OnChanges {
   }
 
   onEditResources() {
-
+    this.editModal.openModal();
   }
 }

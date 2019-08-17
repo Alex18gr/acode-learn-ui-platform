@@ -7,7 +7,7 @@
       </div>
     </div>
     <hr>
-    <div class="col-md-12 mt-2">
+    <div class="col-md-12 mt-2" *ngIf="editMode">
       <div class="card border shadow-sm rounded p-2 m-buttons">
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-outline-secondary" (click)="onEditResources()">
@@ -29,3 +29,8 @@
 
   </div>
 </div>
+
+<app-dynamic-guide-edit-resources-modal [courseId]="courseId"
+  [guideResourceData]="guideData" (editChangesSubmitted)="onSaveGuide()" #editModal>
+
+</app-dynamic-guide-edit-resources-modal>

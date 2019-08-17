@@ -12,6 +12,7 @@ import {ResourceCodeSnippet} from '../../core/models/resource-models/resource-co
 import {ResourceMarkdown} from '../../core/models/resource-models/resource-markdown.model';
 import {ResourceGuide} from '../../core/models/resource-models/resource-guide.model';
 import {map} from 'rxjs/operators';
+import {ResourceTypes} from '../../core/models/resource-models/resource-types';
 
 export interface CourseResources {
   linkResources: ResourceLink[];
@@ -199,11 +200,51 @@ export class InstructorResourceService implements OnDestroy {
     return this.httpClient.get(getResourceUrl, {headers});
   }
 
-  getResourcesByResourceIds(resourcesIdsList: number[], courseId?: number) {
+  getAllCourseResources(courseId: number, resourceType?: string) {
+    const getAllResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      courseId + '/resources-all';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const options: any = {};
+    const params = new HttpParams();
+    options.headers = headers;
+    if (resourceType) {
+      params.set('type', resourceType);
+    }
+    return this.httpClient.get(getAllResourcesUrl, {
+      headers,
+      params
+    });
+  }
+
+  getResourcesByResourceIds(resourcesIdsList: number[], courseId?: number, resourceType?: string) {
     // let cid;
     // if (courseId) {cid = courseId; } else {cid = this.instructorCoursesService.currentCourse.id; }
     const getAllResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/instructor/get-resources-all';
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
-    return this.httpClient.post(getAllResourcesUrl, resourcesIdsList, { headers });
+    const options: any = {};
+    options.headers = headers;
+    if (resourceType) {
+      options.params = new HttpParams().set('type', resourceType);
+    }
+    return this.httpClient.post(getAllResourcesUrl, resourcesIdsList, options);
+  }
+
+  getResourceListByResourceType(courseResources: CourseResources, type: string) {
+    switch (type) {
+      case ResourceTypes.RESOURCE_FILE:
+        return courseResources.fileResources;
+      case ResourceTypes.RESOURCE_CODE_SNIPPET:
+        return courseResources.codeSnippetResources;
+      case ResourceTypes.RESOURCE_REPOSITORY:
+        return courseResources.repositoryResources;
+      case ResourceTypes.RESOURCE_MARKDOWN:
+        return courseResources.markdownDocumentResources;
+      case ResourceTypes.RESOURCE_LINK:
+        return courseResources.linkResources;
+      case ResourceTypes.RESOURCE_GUIDE:
+        return courseResources.guideResources;
+      default:
+        return [];
+    }
   }
 }
