@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse shadow-sm sps" data-sps-offset="56" *ngIf="dataLoaded">
+<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse shadow-sm"
+     *ngIf="dataLoaded" #navbar>
   <!--  <a class="navbar-brand" href="#">Navbar</a>-->
   <a *ngIf="course" class="navbar-brand dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Course Title: {{course.name}}
@@ -25,23 +26,6 @@
         </li>
           <li class="nav-item">
           <a class="nav-link" routerLink="announcements">Announcements <span class="badge badge-pill badge-danger">4</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
         </li>
       </ul>
     </div>

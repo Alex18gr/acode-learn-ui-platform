@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, HostListener, ViewChild, ElementRef} from '@angular/core';
 import {Course} from '../course.model';
 import { CoursesService } from '../courses.service';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,7 @@ export class CourseNavbarComponent implements OnInit, OnDestroy {
   @Input() courseIndex: any;
   @Input() courses: Course[] = [];
   @Input() dataLoaded: boolean;
+  @ViewChild('navbar', {static: false}) navbarElementRef: ElementRef;
 
   coursesChanged: Subscription;
 
@@ -36,6 +37,16 @@ export class CourseNavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.coursesChanged.unsubscribe();
+  }
+
+  @HostListener('window:scroll', ['$event']) // for window scroll events
+  onScroll(event) {
+    const sticky = this.navbarElementRef.nativeElement.offsetTop;
+    if (window.pageYOffset >= sticky) {
+      this.navbarElementRef.nativeElement.classList.add('sticky');
+    } else {
+      this.navbarElementRef.nativeElement.classList.remove('sticky');
+    }
   }
 
 }

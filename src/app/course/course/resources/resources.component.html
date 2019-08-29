@@ -1,5 +1,7 @@
-<p>resources works!</p>
-<div *ngIf="this.resourcesLoaded">
+<div class="spinner-border text-primary" role="status" *ngIf="!resourcesLoaded">
+  <span class="sr-only">Loading...</span>
+</div>
+<div *ngIf="resourcesLoaded">
   <div class="container">
     <div class="row">
       <div class="col-md-12">

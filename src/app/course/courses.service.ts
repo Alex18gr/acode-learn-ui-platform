@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Course} from './course.model';
 import {Observable, Subject} from 'rxjs';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map} from "rxjs/operators";
-import {AuthService} from "../auth/auth.service";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {AuthService} from '../auth/auth.service';
 
 
 export interface CoursesResponse {
