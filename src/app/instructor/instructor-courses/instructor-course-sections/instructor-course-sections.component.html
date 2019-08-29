@@ -4,10 +4,12 @@
 </div>
 <div class="row">
   <div class="col-md-6 col-sm-12">
-    <div cdkDropList class="example-list" [cdkDropListDisabled]="!editListMode" (cdkDropListDropped)="drop($event)" #listElement>
-      <div class="example-box" [ngStyle]="{'cursor': editMode === true ? 'move' : 'pointer'}" *ngFor="let movie of movies"
+    <div cdkDropList class="example-list" [cdkDropListDisabled]="!editListMode" (cdkDropListDropped)="drop($event)"
+         *ngIf="courseSectionsList" #listElement>
+      <div class="example-box" [ngStyle]="{'cursor': editMode === true ? 'move' : 'pointer'}"
+           *ngFor="let courseSection of courseSectionsList"
            (click)="onListItemClick($event)" cdkDrag>
-        {{movie}}
+        {{courseSection.name}}
         <div class="ml-auto my-0 py-0" *ngIf="editListMode">
           <button class="btn btn-sm btn-outline-primary">
             <i class="fas fa-edit"></i>

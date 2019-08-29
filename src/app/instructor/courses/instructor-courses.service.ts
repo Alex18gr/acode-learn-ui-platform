@@ -100,4 +100,13 @@ export class InstructorCoursesService {
         return this.instructorCourses;
       }));
   }
+
+  getCourseSections(course: Course) {
+    const getCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const options: any = {};
+    options.headers = headers;
+    return this.httpClient.get(getCourseSectionsUrl, options);
+  }
 }

@@ -1,14 +1,19 @@
-import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {InstructorCoursesService} from '../../courses/instructor-courses.service';
+import {Course} from '../../../course/course.model';
+import {Subscription} from 'rxjs';
+import {CourseSection} from '../../../core/models/course-section.model';
 
 @Component({
   selector: 'app-instructor-course-sections',
   templateUrl: './instructor-course-sections.component.html',
   styleUrls: ['./instructor-course-sections.component.css']
 })
-export class InstructorCourseSectionsComponent implements OnInit {
+export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   @ViewChild('listElement', {static: false}) listElementRef: ElementRef;
+  currentCourse: Course;
+  currentCourseSubscription: Subscription;
   movies = [
     'Episode I - The Phantom Menace',
     'Episode II - Attack of the Clones',
@@ -21,11 +26,45 @@ export class InstructorCourseSectionsComponent implements OnInit {
   ];
   editMode = false;
   editListMode = false;
+  courseSectionsList: CourseSection[];
 
   constructor(private renderer: Renderer2,
               private coursesService: InstructorCoursesService) { }
 
   ngOnInit() {
+    this.currentCourse = this.coursesService.currentCourse;
+    this.getCourseSections();
+    this.currentCourseSubscription = this.coursesService.currentCourseChanged.subscribe(
+      (course: Course) => {
+        this.currentCourse = course;
+        this.getCourseSections();
+      }
+    );
+  }
+
+  getCourseSections() {
+    if (this.currentCourse) {
+      this.coursesService.getCourseSections(this.currentCourse)
+        .subscribe((courseSections) => {
+          (courseSections as unknown as CourseSection[]).sort(
+            (a: CourseSection, b: CourseSection) => {
+            if (a.order < b.order) {
+              return -1;
+            } else if (a.order > b.order) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+          this.courseSectionsList = courseSections as unknown as CourseSection[];
+        });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.currentCourseSubscription) {
+      this.currentCourseSubscription.unsubscribe();
+    }
   }
 
   drop(event: CdkDragDrop<string[]>) {
