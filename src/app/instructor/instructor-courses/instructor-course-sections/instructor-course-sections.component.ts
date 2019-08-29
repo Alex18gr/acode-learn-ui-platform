@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {InstructorCoursesService} from '../../courses/instructor-courses.service';
 
 @Component({
   selector: 'app-instructor-course-sections',
@@ -7,6 +8,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./instructor-course-sections.component.css']
 })
 export class InstructorCourseSectionsComponent implements OnInit {
+  @ViewChild('listElement', {static: false}) listElementRef: ElementRef;
   movies = [
     'Episode I - The Phantom Menace',
     'Episode II - Attack of the Clones',
@@ -17,8 +19,11 @@ export class InstructorCourseSectionsComponent implements OnInit {
     'Episode VII - The Force Awakens',
     'Episode VIII - The Last Jedi'
   ];
+  editMode = false;
+  editListMode = false;
 
-  constructor() { }
+  constructor(private renderer: Renderer2,
+              private coursesService: InstructorCoursesService) { }
 
   ngOnInit() {
   }
@@ -27,4 +32,30 @@ export class InstructorCourseSectionsComponent implements OnInit {
     moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
   }
 
+  onListItemClick(event: MouseEvent) {
+    if (!this.editListMode) {
+      if ((event.target as any).classList.contains('selected-list-item')) {
+        this.renderer.removeClass(event.target, 'selected-list-item');
+        this.removeSelection();
+      } else {
+        this.removeSelection();
+        this.renderer.addClass(event.target, 'selected-list-item');
+      }
+    }
+  }
+
+  private removeSelection() {
+    for (const child of this.listElementRef.nativeElement.children) {
+      this.renderer.removeClass(child, 'selected-list-item');
+    }
+  }
+
+  triggerListEditMode() {
+    if (!this.editListMode) {
+      this.removeSelection();
+      this.editListMode = true;
+    } else {
+      this.editListMode = false;
+    }
+  }
 }
