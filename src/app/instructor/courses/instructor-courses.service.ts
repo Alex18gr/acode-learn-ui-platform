@@ -137,4 +137,18 @@ export class InstructorCoursesService {
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
     return this.httpClient.delete(editCourseSectionsUrl, {headers});
   }
+
+  updateCourseSectionsOrder(courseSections: CourseSection[], course: Course) {
+    const editCourseSectionsOrderUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections/order';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const data = [];
+    for (const cs of courseSections) {
+      data.push({
+        courseSectionId: cs.courseSectionId,
+        order: cs.order
+      });
+    }
+    return this.httpClient.put(editCourseSectionsOrderUrl, data, {headers});
+  }
 }
