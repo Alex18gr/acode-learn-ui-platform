@@ -55,6 +55,12 @@ import { PdfViewerComponent } from './core/dynamic-guide/dynamic-guide-element/p
 import { RepositoryViewerComponent } from './core/dynamic-guide/dynamic-guide-element/repository-viewer/repository-viewer.component';
 import { CodeViewerEditorComponent } from './core/dynamic-guide/dynamic-guide-element/code-viewer-editor/code-viewer-editor.component';
 import { FileViewComponent } from './core/dynamic-guide/dynamic-guide-element/file-view/file-view.component';
+import { ModalNewSectionComponent } from './instructor/instructor-courses/instructor-course-sections/modal-new-section/modal-new-section.component';
+import { ModalDeleteSectionComponent } from './instructor/instructor-courses/instructor-course-sections/modal-delete-section/modal-delete-section.component';
+import { ModalAddResourceComponent } from './instructor/instructor-courses/instructor-course-sections/modal-add-resource/modal-add-resource.component';
+import { ModalDeleteResourceComponent } from './instructor/instructor-courses/instructor-course-sections/modal-delete-resource/modal-delete-resource.component';
+import { EditSectionComponent } from './instructor/instructor-courses/instructor-course-sections/edit-section/edit-section.component';
+import { CourseSectionResourcesTableComponent } from './instructor/instructor-courses/instructor-course-sections/course-section-resources-table/course-section-resources-table.component';
 
 @NgModule({
   declarations: [
@@ -105,7 +111,13 @@ import { FileViewComponent } from './core/dynamic-guide/dynamic-guide-element/fi
     PdfViewerComponent,
     RepositoryViewerComponent,
     CodeViewerEditorComponent,
-    FileViewComponent
+    FileViewComponent,
+    ModalNewSectionComponent,
+    ModalDeleteSectionComponent,
+    ModalAddResourceComponent,
+    ModalDeleteResourceComponent,
+    EditSectionComponent,
+    CourseSectionResourcesTableComponent
   ],
   imports: [
     BrowserModule,

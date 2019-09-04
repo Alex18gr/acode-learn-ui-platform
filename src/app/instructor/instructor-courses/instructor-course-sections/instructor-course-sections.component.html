@@ -3,12 +3,12 @@
   <button class="btn btn-outline-dark" (click)="triggerListEditMode()" *ngIf="editListMode">Edit Resources</button>
 </div>
 <div class="row">
-  <div class="col-md-6 col-sm-12">
+  <div class="col-lg-6 col-md-6 col-sm-12">
     <div cdkDropList class="example-list" [cdkDropListDisabled]="!editListMode" (cdkDropListDropped)="drop($event)"
          *ngIf="courseSectionsList" #listElement>
       <div class="example-box" [ngStyle]="{'cursor': editMode === true ? 'move' : 'pointer'}"
            *ngFor="let courseSection of courseSectionsList"
-           (click)="onListItemClick($event)" cdkDrag>
+           (click)="onListItemClick($event, courseSection)" cdkDrag>
         {{courseSection.name}}
         <div class="ml-auto my-0 py-0" *ngIf="editListMode">
           <button class="btn btn-sm btn-outline-primary">
@@ -21,10 +21,35 @@
       </div>
     </div>
   </div>
-  <div class="col-md-6 col-sm-12">
+  <div class="col-lg-6 col-md-6 col-sm-12">
     <div *ngIf="editListMode">
-      <button class="btn btn-outline-success">New Section</button>
+      <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline-success">
+          <i class="fas fa-plus-square"></i>
+          New Section
+        </button>
+        <button type="button" class="btn btn-outline-primary">
+          <i class="fas fa-save"></i>
+          Save Changes
+        </button>
+        <button type="button" class="btn btn-outline-danger">
+          <i class="fas fa-ban"></i>
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <div *ngIf="!editListMode">
+      <h2></h2>
+      <h2>Edit Course Section</h2>
+      <app-edit-section [selectedCourseSection]="selectedCourseSection"></app-edit-section>
     </div>
   </div>
+  <div *ngIf="!editListMode" class="col-md-12 col-lg-12">
+    <h4>Course Section Resources</h4>
+    <app-course-section-resources-table [courseSection]="selectedCourseSection" (deleteResource)="onDeleteResource($event)"></app-course-section-resources-table>
+    <button class="btn btn-outline-secondary" (click)="onAddNewResource()">Add New Resource</button>
+  </div>
 </div>
+<app-modal-add-resource #modalAddResource [courseId]="currentCourse.id"></app-modal-add-resource>
 

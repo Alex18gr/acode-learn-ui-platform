@@ -6,6 +6,9 @@
       <div class="card-decks" *ngIf="courses">
         <app-instructor-course-list-item *ngFor="let course of courses; let i = index" [course]="course" [courseItemIndex]="i"></app-instructor-course-list-item>
       </div>
+      <div *ngIf="!courses" class="spinner-border text-secondary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
   </div>
 </div>

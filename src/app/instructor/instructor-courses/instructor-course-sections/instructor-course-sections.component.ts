@@ -4,6 +4,8 @@ import {InstructorCoursesService} from '../../courses/instructor-courses.service
 import {Course} from '../../../course/course.model';
 import {Subscription} from 'rxjs';
 import {CourseSection} from '../../../core/models/course-section.model';
+import {ModalAddResourceComponent} from './modal-add-resource/modal-add-resource.component';
+import {Resource} from '../../../core/models/resource-models/resource.model';
 
 @Component({
   selector: 'app-instructor-course-sections',
@@ -12,21 +14,13 @@ import {CourseSection} from '../../../core/models/course-section.model';
 })
 export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   @ViewChild('listElement', {static: false}) listElementRef: ElementRef;
+  @ViewChild('modalAddResource', {static: false}) modalAddResource: ModalAddResourceComponent;
   currentCourse: Course;
   currentCourseSubscription: Subscription;
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi'
-  ];
   editMode = false;
   editListMode = false;
   courseSectionsList: CourseSection[];
+  selectedCourseSection: CourseSection;
 
   constructor(private renderer: Renderer2,
               private coursesService: InstructorCoursesService) { }
@@ -68,17 +62,19 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.courseSectionsList, event.previousIndex, event.currentIndex);
   }
 
-  onListItemClick(event: MouseEvent) {
+  onListItemClick(event: MouseEvent, courseSection: CourseSection) {
     if (!this.editListMode) {
       if ((event.target as any).classList.contains('selected-list-item')) {
         this.renderer.removeClass(event.target, 'selected-list-item');
         this.removeSelection();
+        this.selectedCourseSection = undefined;
       } else {
         this.removeSelection();
         this.renderer.addClass(event.target, 'selected-list-item');
+        this.selectedCourseSection = courseSection;
       }
     }
   }
@@ -87,6 +83,7 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
     for (const child of this.listElementRef.nativeElement.children) {
       this.renderer.removeClass(child, 'selected-list-item');
     }
+    this.selectedCourseSection = null;
   }
 
   triggerListEditMode() {
@@ -96,5 +93,13 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
     } else {
       this.editListMode = false;
     }
+  }
+
+  onDeleteResource(res: Resource) {
+    // here we delete the resource
+  }
+
+  onAddNewResource() {
+    this.modalAddResource.showModal();
   }
 }

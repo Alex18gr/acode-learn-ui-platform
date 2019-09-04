@@ -107,6 +107,12 @@ export class InstructorCoursesService {
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
     const options: any = {};
     options.headers = headers;
-    return this.httpClient.get(getCourseSectionsUrl, options);
+    return this.httpClient.get(getCourseSectionsUrl, options).pipe(map((data) => {
+      console.log(data);
+      for (const r of (data as any)) {
+        r.resources = r.resources.resources;
+      }
+      return data;
+    }));
   }
 }

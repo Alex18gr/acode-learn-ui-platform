@@ -1,0 +1,16 @@
+<div *ngIf="selectedCourseSection">
+  <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
+    <div class="form-group">
+      <label for="csName">Name</label>
+      <input type="text" class="form-control" id="csName" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="csDescription">Description</label>
+      <textarea class="form-control" id="csDescription" rows="3" formControlName="description"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<div *ngIf="!selectedCourseSection">
+  Select a Course Section to Edit...
+</div>

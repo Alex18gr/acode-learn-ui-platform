@@ -1,0 +1,25 @@
+<div class="my-2" *ngIf="courseSection && courseSection.resources">
+  <table class="table table-sm table-hover">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date Created</th>
+      <th scope="col">Resource Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let res of getResourcesList()">
+      <th scope="row">1</th>
+      <td>{{res.name}}</td>
+      <td>{{res.dateCreated}}</td>
+      <td>{{res.resourceType}}</td>
+      <td>
+        <button class="btn btn-outline-danger" (click)="onDeleteResource($event, res)">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

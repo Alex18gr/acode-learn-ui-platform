@@ -91,6 +91,22 @@ export class InstructorResourceService implements OnDestroy {
     }));
   }
 
+  getResourcesFromCourseResources(cResources: CourseResources) {
+    const resources: Resource[] =
+      cResources.linkResources.concat(
+        (cResources.repositoryResources as any).concat(
+          cResources.markdownDocumentResources.concat(
+            (cResources.codeSnippetResources as any).concat(
+              cResources.fileResources.concat(
+                cResources.guideResources as any
+              )
+            )
+          )
+        )
+      );
+    return resources;
+  }
+
   getAuthorizedResource(resourceUrl: string) {
     const httpOptions = {
       headers: new HttpHeaders(
