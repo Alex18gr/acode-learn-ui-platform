@@ -117,11 +117,11 @@ export class InstructorCoursesService {
     }));
   }
 
-  updateCourseSection(courseSection: CourseSection, course: Course, courseSectionData) {
+  updateCourseSection(courseSection: CourseSection, course: Course) {
     const editCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
       course.id + '/sections/' + courseSection.courseSectionId;
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
-    return this.httpClient.put(editCourseSectionsUrl, courseSectionData, {headers});
+    return this.httpClient.put(editCourseSectionsUrl, courseSection, {headers});
   }
 
   createCourseSection(courseSection: CourseSection, course: Course, courseSectionData) {

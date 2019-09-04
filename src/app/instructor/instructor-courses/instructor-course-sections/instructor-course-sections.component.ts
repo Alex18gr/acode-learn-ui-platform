@@ -102,4 +102,8 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   onAddNewResource() {
     this.modalAddResource.showModal();
   }
+
+  onCourseSectionSaved(data: any) {
+    this.getCourseSections();
+  }
 }

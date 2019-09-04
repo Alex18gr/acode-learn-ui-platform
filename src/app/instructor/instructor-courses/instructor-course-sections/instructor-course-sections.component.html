@@ -42,7 +42,8 @@
     <div *ngIf="!editListMode">
       <h2></h2>
       <h2>Edit Course Section</h2>
-      <app-edit-section [selectedCourseSection]="selectedCourseSection"></app-edit-section>
+      <app-edit-section [currentCourse]="currentCourse" [selectedCourseSection]="selectedCourseSection"
+      (courseSectionSaved)="onCourseSectionSaved($event)"></app-edit-section>
     </div>
   </div>
   <div *ngIf="!editListMode" class="col-md-12 col-lg-12">
