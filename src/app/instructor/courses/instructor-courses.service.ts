@@ -4,6 +4,7 @@ import {Course} from '../../course/course.model';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {map} from 'rxjs/operators';
+import {CourseSection} from '../../core/models/course-section.model';
 
 export enum CourseLoadingStatus {
   pending,
@@ -114,5 +115,26 @@ export class InstructorCoursesService {
       }
       return data;
     }));
+  }
+
+  updateCourseSection(courseSection: CourseSection, course: Course, courseSectionData) {
+    const editCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections/' + courseSection.courseSectionId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.put(editCourseSectionsUrl, courseSectionData, {headers});
+  }
+
+  createCourseSection(courseSection: CourseSection, course: Course, courseSectionData) {
+    const createCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.post(createCourseSectionsUrl, courseSectionData, {headers});
+  }
+
+  deleteCourseSection(courseSection: CourseSection, course: Course) {
+    const editCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections/' + courseSection.courseSectionId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.delete(editCourseSectionsUrl, {headers});
   }
 }
