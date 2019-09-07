@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../../auth/auth.service';
 import {map} from 'rxjs/operators';
 import {CourseSection} from '../../core/models/course-section.model';
+import {Resource} from '../../core/models/resource-models/resource.model';
 
 export enum CourseLoadingStatus {
   pending,
@@ -30,8 +31,7 @@ export class InstructorCoursesService {
   coursesLoaded = false;
 
   constructor(private httpClient: HttpClient,
-              private authService: AuthService)
-  { }
+              private authService: AuthService) {}
 
   getCourses() {
     return this.instructorCourses.slice();
@@ -110,9 +110,9 @@ export class InstructorCoursesService {
     options.headers = headers;
     return this.httpClient.get(getCourseSectionsUrl, options).pipe(map((data) => {
       console.log(data);
-      for (const r of (data as any)) {
-        r.resources = r.resources.resources;
-      }
+      // for (const r of (data as any)) {
+      //   r.resources = r.resources.resources;
+      // }
       return data;
     }));
   }
@@ -150,5 +150,30 @@ export class InstructorCoursesService {
       });
     }
     return this.httpClient.put(editCourseSectionsOrderUrl, data, {headers});
+  }
+
+  createCourseSectionResources(courseSection: CourseSection, course: Course, resources: Resource[]) {
+    const courseSectionResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections/' + courseSection.courseSectionId + '/resources';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const data = [];
+    for (const res of resources) {
+      data.push(res.resourceId);
+    }
+    return this.httpClient.post(courseSectionResourcesUrl, data, {headers});
+  }
+
+  deleteCourseSectionResources(courseSection: CourseSection, course: Course, resources: Resource[]) {
+    const courseSectionResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections/' + courseSection.courseSectionId + '/resources';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const data = [];
+    for (const res of resources) {
+      data.push(res.resourceId);
+    }
+    const params = {
+      resourceIds: data
+    };
+    return this.httpClient.delete(courseSectionResourcesUrl, {headers, params});
   }
 }

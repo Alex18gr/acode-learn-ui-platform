@@ -30,17 +30,48 @@
 
 
 <!--          Here we put the list with the resources -->
+          <div
+            [cdkDropListDisabled]="addResourcesLoading"
+            [hidden]="!addResourcesList"
+            cdkDropList
+            #addResourcesDragDrop="cdkDropList"
+            [cdkDropListData]="addResourcesList"
+            [cdkDropListConnectedTo]="[currentResourcesDragDrop]"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <ng-container *ngIf="addResourcesList">
+              <div class="example-box" *ngFor="let res of addResourcesList" cdkDrag>
+                {{res.name}}</div>
+            </ng-container>
+
+          </div>
+        </div>
+
+        <div class="example-container">
+          <h3>Resources to Add</h3>
+
+          <div
+            [cdkDropListDisabled]="addResourcesLoading"
+            [cdkDropListConnectedTo]="[addResourcesDragDrop]"
+            cdkDropList
+            #currentResourcesDragDrop="cdkDropList"
+            [cdkDropListData]="resourcesList"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let res of resourcesList" cdkDrag>
+              {{res.name}}</div>
+          </div>
         </div>
       </div>
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
-<!--        <button type="button" class="btn btn-primary" (click)="onSaveChanges()" [disabled]="modalLoading">-->
-<!--          <ng-container *ngIf="modalLoading">-->
-<!--            Saving Changes...<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>-->
-<!--          </ng-container>-->
-<!--          <ng-container *ngIf="!modalLoading">Save changes</ng-container>-->
-<!--        </button>-->
-<!--      </div>-->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="onSaveChanges()" [disabled]="savingChanges">
+          <ng-container *ngIf="savingChanges">
+            Saving Changes...<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </ng-container>
+          <ng-container *ngIf="!savingChanges">Save changes</ng-container>
+        </button>
+      </div>
     </div>
   </div>
 </div>

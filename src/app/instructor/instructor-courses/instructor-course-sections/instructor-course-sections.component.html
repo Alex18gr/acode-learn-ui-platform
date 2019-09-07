@@ -24,15 +24,22 @@
   <div class="col-lg-6 col-md-6 col-sm-12">
     <div *ngIf="editListMode">
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-outline-success">
+        <button type="button" class="btn btn-outline-success" [disabled]="savingOrderData">
           <i class="fas fa-plus-square"></i>
           New Section
         </button>
-        <button type="button" class="btn btn-outline-primary">
-          <i class="fas fa-save"></i>
-          Save Changes
+        <button type="button" class="btn btn-outline-primary" [disabled]="savingOrderData" (click)="onSaveOrderChanges()">
+          <ng-container *ngIf="!savingOrderData">
+            <i class="fas fa-save"></i>
+            Save Changes
+          </ng-container>
+          <ng-container *ngIf="savingOrderData">
+            <i class="fas fa-save"></i>
+            Saving...
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </ng-container>
         </button>
-        <button type="button" class="btn btn-outline-danger">
+        <button type="button" class="btn btn-outline-danger" [disabled]="savingOrderData">
           <i class="fas fa-ban"></i>
           Cancel
         </button>
@@ -48,9 +55,13 @@
   </div>
   <div *ngIf="!editListMode" class="col-md-12 col-lg-12">
     <h4>Course Section Resources</h4>
-    <app-course-section-resources-table [courseSection]="selectedCourseSection" (deleteResource)="onDeleteResource($event)"></app-course-section-resources-table>
+    <app-course-section-resources-table [courseSection]="selectedCourseSection" (deleteResource)="onDeleteResource($event)"
+    ></app-course-section-resources-table>
     <button class="btn btn-outline-secondary" (click)="onAddNewResource()">Add New Resource</button>
   </div>
 </div>
-<app-modal-add-resource #modalAddResource [courseId]="currentCourse.id"></app-modal-add-resource>
+<app-modal-add-resource #modalAddResource [currentCourse]="currentCourse" [currentCourseSection]="selectedCourseSection"
+(savedResources)="onChangedData()"></app-modal-add-resource>
+<app-modal-delete-resource #modalDeleteResources [currentCourseSection]="selectedCourseSection" [currentCourse]="currentCourse"
+(deletedResources)="onChangedData()"></app-modal-delete-resource>
 

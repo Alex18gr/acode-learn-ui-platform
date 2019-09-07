@@ -6,6 +6,9 @@ import {Subscription} from 'rxjs';
 import {CourseSection} from '../../../core/models/course-section.model';
 import {ModalAddResourceComponent} from './modal-add-resource/modal-add-resource.component';
 import {Resource} from '../../../core/models/resource-models/resource.model';
+import * as _ from 'lodash';
+import {ToastService} from '../../../core/toast/toast.service';
+import {ModalDeleteResourceComponent} from './modal-delete-resource/modal-delete-resource.component';
 
 @Component({
   selector: 'app-instructor-course-sections',
@@ -15,20 +18,25 @@ import {Resource} from '../../../core/models/resource-models/resource.model';
 export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   @ViewChild('listElement', {static: false}) listElementRef: ElementRef;
   @ViewChild('modalAddResource', {static: false}) modalAddResource: ModalAddResourceComponent;
+  @ViewChild('modalDeleteResources', {static: false}) modalDeleteResources: ModalDeleteResourceComponent;
   currentCourse: Course;
   currentCourseSubscription: Subscription;
   editMode = false;
   editListMode = false;
   courseSectionsList: CourseSection[];
+  tempCourseSectionsList: CourseSection[];
   selectedCourseSection: CourseSection;
+  savingData = false;
+  savingOrderData = false;
 
   constructor(private renderer: Renderer2,
-              private coursesService: InstructorCoursesService) { }
+              private instructorCoursesService: InstructorCoursesService,
+              private toastService: ToastService) { }
 
   ngOnInit() {
-    this.currentCourse = this.coursesService.currentCourse;
+    this.currentCourse = this.instructorCoursesService.currentCourse;
     this.getCourseSections();
-    this.currentCourseSubscription = this.coursesService.currentCourseChanged.subscribe(
+    this.currentCourseSubscription = this.instructorCoursesService.currentCourseChanged.subscribe(
       (course: Course) => {
         this.currentCourse = course;
         this.getCourseSections();
@@ -38,7 +46,7 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
 
   getCourseSections() {
     if (this.currentCourse) {
-      this.coursesService.getCourseSections(this.currentCourse)
+      this.instructorCoursesService.getCourseSections(this.currentCourse)
         .subscribe((courseSections) => {
           (courseSections as unknown as CourseSection[]).sort(
             (a: CourseSection, b: CourseSection) => {
@@ -89,14 +97,23 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   triggerListEditMode() {
     if (!this.editListMode) {
       this.removeSelection();
+      this.copyTempResourcesList();
       this.editListMode = true;
     } else {
       this.editListMode = false;
+      this.courseSectionsList = this.tempCourseSectionsList;
+      this.tempCourseSectionsList = undefined;
     }
+  }
+  copyTempResourcesList() {
+    this.tempCourseSectionsList = _.cloneDeep(
+      this.courseSectionsList
+    );
   }
 
   onDeleteResource(res: Resource) {
     // here we delete the resource
+    this.modalDeleteResources.showModal([res]);
   }
 
   onAddNewResource() {
@@ -104,6 +121,34 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   }
 
   onCourseSectionSaved(data: any) {
+    this.getCourseSections();
+  }
+
+  onSaveOrderChanges() {
+    this.savingOrderData = true;
+    for (const cs of this.courseSectionsList) {
+      cs.order = this.courseSectionsList.indexOf(cs) + 1;
+    }
+
+    this.instructorCoursesService.updateCourseSectionsOrder(
+      this.courseSectionsList,
+      this.currentCourse
+    ).subscribe((data: CourseSection[]) => {
+      this.tempCourseSectionsList = data;
+      this.courseSectionsList = this.tempCourseSectionsList;
+      this.toastService.addSaveToast(
+        'Order Updated',
+        'Course sections order updated successfully.'
+      );
+      this.savingOrderData = false;
+    },
+      error => {
+      this.toastService.addErrorToast('Error', 'An error occurred while updating the course sections order.');
+      });
+    this.savingOrderData = false;
+  }
+
+  onChangedData() {
     this.getCourseSections();
   }
 }

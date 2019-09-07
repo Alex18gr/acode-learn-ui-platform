@@ -18,6 +18,9 @@ export class CourseSectionResourcesTableComponent implements OnInit {
   }
 
   getResourcesList() {
+    if (!this.courseSection.resources) {
+      return [];
+    }
     return this.instructorResourceService.getResourcesFromCourseResources(this.courseSection.resources);
   }
 
