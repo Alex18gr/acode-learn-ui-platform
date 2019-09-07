@@ -176,4 +176,11 @@ export class InstructorCoursesService {
     };
     return this.httpClient.delete(courseSectionResourcesUrl, {headers, params});
   }
+
+  getCourseEnrolledStudents(course: Course) {
+    const courseStudentsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/students';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.get(courseStudentsUrl, {headers});
+  }
 }
