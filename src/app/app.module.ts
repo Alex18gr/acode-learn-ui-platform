@@ -63,6 +63,8 @@ import { EditSectionComponent } from './instructor/instructor-courses/instructor
 import { CourseSectionResourcesTableComponent } from './instructor/instructor-courses/instructor-course-sections/course-section-resources-table/course-section-resources-table.component';
 import { ModalEditCourseDetailsComponent } from './instructor/instructor-courses/instructor-course-settings/modal-edit-course-details/modal-edit-course-details.component';
 import { TableStudentsComponent } from './instructor/instructor-courses/instructor-course-settings/table-students/table-students.component';
+import { CourseSectionsComponent } from './course/course-sections/course-sections.component';
+import { StudentProfileComponent } from './student/student-profile/student-profile.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +123,9 @@ import { TableStudentsComponent } from './instructor/instructor-courses/instruct
     EditSectionComponent,
     CourseSectionResourcesTableComponent,
     ModalEditCourseDetailsComponent,
-    TableStudentsComponent
+    TableStudentsComponent,
+    CourseSectionsComponent,
+    StudentProfileComponent
   ],
   imports: [
     BrowserModule,

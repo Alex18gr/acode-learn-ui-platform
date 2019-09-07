@@ -28,17 +28,21 @@ import {InstructorCourseSettingsComponent} from './instructor/instructor-courses
 import {EditorCodeComponent} from './instructor/editor-code/editor-code.component';
 import {EditorMarkdownComponent} from './instructor/editor-markdown/editor-markdown.component';
 import {EditorGuideComponent} from './instructor/editor-guide/editor-guide.component';
+import {CourseSectionsComponent} from './course/course-sections/course-sections.component';
+import {StudentProfileComponent} from './student/student-profile/student-profile.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent, canActivate: [AuthGuardHomeService]},
   {path: 'student', component: StudentHomeComponent, canActivate: [AuthGuardStudentService], children: [
       {path: '', component: HomeComponent},
+      {path: 'profile', component: StudentProfileComponent},
       {path: 'courses', component: CourseListComponent, children: [
         ]},
       {path: 'course/:id', component: CourseComponent, children: [
           {path: '', component: CourseDashboardComponent},
           {path: 'resources', component: ResourcesComponent},
-          {path: 'announcements', component: CourseAnnouncementsComponent}
+          {path: 'announcements', component: CourseAnnouncementsComponent},
+          {path: 'sections', component: CourseSectionsComponent}
         ]}
     ]},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuardAuthenticatedService]},
