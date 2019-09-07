@@ -14,7 +14,7 @@
           <button class="btn btn-sm btn-outline-primary" (click)="openNewSectionModal(courseSection)">
             <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-sm btn-outline-danger ml-1">
+          <button class="btn btn-sm btn-outline-danger ml-1" (click)="openDeleteSectionModal(courseSection)">
             <i class="fas fa-trash-alt"></i>
           </button>
         </div>
@@ -66,4 +66,6 @@
 (deletedResources)="onChangedData()"></app-modal-delete-resource>
 <app-modal-new-section #modalNewSectionComponent [currentCourse]="currentCourse" (editedCourseSection)="onChangedData()"
 ></app-modal-new-section>
+<app-modal-delete-section #modalDeleteSectionComponent [currentCourse]="currentCourse" (deletedSection)="onChangedData()"
+></app-modal-delete-section>
 

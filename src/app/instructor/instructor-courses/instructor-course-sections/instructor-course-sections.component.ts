@@ -10,6 +10,7 @@ import * as _ from 'lodash';
 import {ToastService} from '../../../core/toast/toast.service';
 import {ModalDeleteResourceComponent} from './modal-delete-resource/modal-delete-resource.component';
 import {ModalNewSectionComponent} from './modal-new-section/modal-new-section.component';
+import {ModalDeleteSectionComponent} from './modal-delete-section/modal-delete-section.component';
 
 @Component({
   selector: 'app-instructor-course-sections',
@@ -21,6 +22,7 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   @ViewChild('modalAddResource', {static: false}) modalAddResource: ModalAddResourceComponent;
   @ViewChild('modalDeleteResources', {static: false}) modalDeleteResources: ModalDeleteResourceComponent;
   @ViewChild('modalNewSectionComponent', {static: false}) modalNewSectionComponent: ModalNewSectionComponent;
+  @ViewChild('modalDeleteSectionComponent', {static: false}) modalDeleteSectionComponent: ModalDeleteSectionComponent;
   currentCourse: Course;
   currentCourseSubscription: Subscription;
   editMode = false;
@@ -156,5 +158,9 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
 
   openNewSectionModal(courseSection?: CourseSection) {
     this.modalNewSectionComponent.showModal(courseSection);
+  }
+
+  openDeleteSectionModal(courseSection: CourseSection) {
+    this.modalDeleteSectionComponent.showModal(courseSection);
   }
 }
