@@ -83,7 +83,7 @@ export class EditSectionComponent implements OnInit, OnChanges {
       error => {
         this.toastService.addErrorToast(
           'Update Error',
-          'An error occured while updating course section'
+          'An error occurred while updating course section'
         );
         this.savingData = false;
       });

@@ -1,1 +1,37 @@
-<p>modal-new-section works!</p>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" #editSectionModal
+     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="exampleModalLabel">{{title}}</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="cssName">Name</label>
+            <input [disabled]="savingChanges" type="text" class="form-control" id="cssName" formControlName="name">
+          </div>
+          <div class="form-group">
+            <label for="cssDescription">Description</label>
+            <textarea [disabled]="savingChanges" class="form-control" id="cssDescription" rows="3" formControlName="description"></textarea>
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-outline-primary" (click)="onSaveChanges()" [disabled]="savingChanges">
+          <ng-container *ngIf="savingChanges">
+            Saving...<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </ng-container>
+          <ng-container *ngIf="!savingChanges">Save</ng-container>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

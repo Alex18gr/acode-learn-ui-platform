@@ -11,7 +11,7 @@
            (click)="onListItemClick($event, courseSection)" cdkDrag>
         {{courseSection.name}}
         <div class="ml-auto my-0 py-0" *ngIf="editListMode">
-          <button class="btn btn-sm btn-outline-primary">
+          <button class="btn btn-sm btn-outline-primary" (click)="openNewSectionModal(courseSection)">
             <i class="fas fa-edit"></i>
           </button>
           <button class="btn btn-sm btn-outline-danger ml-1">
@@ -24,7 +24,7 @@
   <div class="col-lg-6 col-md-6 col-sm-12">
     <div *ngIf="editListMode">
       <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-outline-success" [disabled]="savingOrderData">
+        <button type="button" class="btn btn-outline-success" [disabled]="savingOrderData" (click)="openNewSectionModal()">
           <i class="fas fa-plus-square"></i>
           New Section
         </button>
@@ -64,4 +64,6 @@
 (savedResources)="onChangedData()"></app-modal-add-resource>
 <app-modal-delete-resource #modalDeleteResources [currentCourseSection]="selectedCourseSection" [currentCourse]="currentCourse"
 (deletedResources)="onChangedData()"></app-modal-delete-resource>
+<app-modal-new-section #modalNewSectionComponent [currentCourse]="currentCourse" (editedCourseSection)="onChangedData()"
+></app-modal-new-section>
 

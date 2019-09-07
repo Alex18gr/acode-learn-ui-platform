@@ -124,7 +124,7 @@ export class InstructorCoursesService {
     return this.httpClient.put(editCourseSectionsUrl, courseSection, {headers});
   }
 
-  createCourseSection(courseSection: CourseSection, course: Course, courseSectionData) {
+  createCourseSection(courseSectionData: CourseSection, course: Course) {
     const createCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
       course.id + '/sections';
     const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
