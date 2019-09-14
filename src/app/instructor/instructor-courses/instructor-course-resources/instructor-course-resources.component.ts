@@ -119,6 +119,9 @@ export class InstructorCourseResourcesComponent implements OnInit, OnDestroy, Af
   }
 
   openEditModal(resource?: Resource) {
+    if (this.currentResourceType === 'RESOURCES_ALL') {
+      return;
+    }
     if (resource) {
       this.editResourcesComponent.openModal(resource.resourceType, resource);
     } else {

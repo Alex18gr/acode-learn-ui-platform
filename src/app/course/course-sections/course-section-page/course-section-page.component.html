@@ -1,0 +1,17 @@
+<div *ngIf="!courseSection" class="spinner-border text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div *ngIf="courseSection" class="card">
+  <div class="card-body">
+    <h2>{{courseSection.name}}</h2>
+    <p>{{courseSection.description}}</p>
+    <hr>
+    <select class="custom-select" (change)="resourceTypeChanged($event)" [value]="resourcesType" #selectResourceType>
+      <option value="RESOURCES_ALL">All Resources</option>
+      <option *ngFor="let opt of resourceTypesListSelect" [value]="opt.value">{{opt.name}}</option>
+    </select>
+
+    <app-resource-table [resourceType]="resourcesType" [instructorMode]="false"
+                        [resources]="courseSection.resources" [courseId]="currCourseId"></app-resource-table>
+  </div>
+</div>

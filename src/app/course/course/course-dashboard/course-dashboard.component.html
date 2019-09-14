@@ -31,10 +31,14 @@
     <div class="col-md-8" *ngIf="currentCourse">
 
       <div class="card">
+        <div class="card-header">
+          <h5>
+            Fast Actions
+          </h5>
+        </div>
         <div class="card-body">
-          Some fast actions
-
-          <div class="card bg-primary m-3">
+          <div class="card bg-primary m-3" style="cursor: pointer"
+               (click)="navigateTo('resources')">
             <div class="card-body text-white">
               <i class="fas fa-book fa-3x mr-3"></i>
               <div class="d-inline-block">
@@ -48,13 +52,14 @@
             </div>
           </div>
 
-          <div class="card bg-warning m-3">
+          <div class="card bg-warning m-3" style="cursor: pointer"
+               (click)="navigateTo('sections')">
             <div class="card-body text-dark">
-              <i class="fas fa-tasks fa-3x mr-3"></i>
+              <i class="fas fa-book-reader fa-3x mr-3"></i>
               <div class="d-inline-block">
                 <h5>
                   <strong>
-                    See the available tasks
+                    Check the available course sections
                     <i class="fas fa-location-arrow"></i>
                   </strong>
                 </h5>

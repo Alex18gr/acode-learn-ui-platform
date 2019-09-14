@@ -1,1 +1,34 @@
-<p>instructor-course-home works!</p>
+
+<div class="jumbotron">
+  <h1>Welcome back</h1>
+</div>
+
+<div class="card bg-primary m-3" style="cursor: pointer"
+     (click)="navigateTo('resources')">
+  <div class="card-body text-white">
+    <i class="fas fa-book fa-3x mr-3"></i>
+    <div class="d-inline-block">
+      <h5>
+        <strong>
+          Edit the course Resources
+          <i class="fas fa-location-arrow"></i>
+        </strong>
+      </h5>
+    </div>
+  </div>
+</div>
+
+<div class="card bg-warning m-3" style="cursor: pointer"
+     (click)="navigateTo('sections')">
+  <div class="card-body text-dark">
+    <i class="fas fa-book-reader fa-3x mr-3"></i>
+    <div class="d-inline-block">
+      <h5>
+        <strong>
+          Edit the course Sections
+          <i class="fas fa-location-arrow"></i>
+        </strong>
+      </h5>
+    </div>
+  </div>
+</div>

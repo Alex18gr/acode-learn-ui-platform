@@ -119,4 +119,28 @@ export class CoursesService {
 
     return this.httpClient.get(resourceUrl, httpOptions);
   }
+  getCourseSections(course: Course) {
+    const getCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id + '/sections';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const options: any = {};
+    options.headers = headers;
+    return this.httpClient.get(getCourseSectionsUrl, options).pipe(map((data) => {
+      console.log(data);
+      // for (const r of (data as any)) {
+      //   r.resources = r.resources.resources;
+      // }
+      return data;
+    }));
+  }
+
+  getCourseSection(courseId: number, sectionId: number) {
+    const getCourseSectionUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      courseId + '/sections/' + sectionId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const options: any = {};
+    options.headers = headers;
+    return this.httpClient.get(getCourseSectionUrl, options);
+  }
+
 }

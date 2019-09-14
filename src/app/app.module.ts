@@ -69,6 +69,7 @@ import { ResourceViewerComponent } from './course/course/resources/resource-view
 import { ViewerCodeComponent } from './course/course/resources/resource-viewer/viewer-code/viewer-code.component';
 import { ViewerMarkdownComponent } from './course/course/resources/resource-viewer/viewer-markdown/viewer-markdown.component';
 import { ViewerGuideComponent } from './course/course/resources/resource-viewer/viewer-guide/viewer-guide.component';
+import { CourseSectionPageComponent } from './course/course-sections/course-section-page/course-section-page.component';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import { ViewerGuideComponent } from './course/course/resources/resource-viewer/
     ResourceViewerComponent,
     ViewerCodeComponent,
     ViewerMarkdownComponent,
-    ViewerGuideComponent
+    ViewerGuideComponent,
+    CourseSectionPageComponent
   ],
   imports: [
     BrowserModule,

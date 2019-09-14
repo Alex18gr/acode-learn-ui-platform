@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CoursesService} from '../../courses.service';
 import {Course} from '../../course.model';
 import {Subscription} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-course-dashboard',
@@ -12,7 +13,9 @@ export class CourseDashboardComponent implements OnInit, OnDestroy {
   currentCourse: Course;
   currentCourseSubscription: Subscription;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.currentCourse = this.coursesService.currentCourse;
@@ -45,4 +48,9 @@ export class CourseDashboardComponent implements OnInit, OnDestroy {
     }
   }
 
+  navigateTo(destination: string) {
+    this.router.navigate([destination], {
+      relativeTo: this.route
+    });
+  }
 }

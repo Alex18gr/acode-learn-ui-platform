@@ -16,6 +16,7 @@ export class ResourceTableComponent implements OnInit {
   @Input() resourceType: string;
   @Input() resources: CourseResources;
   @Input() currentCourse: Course;
+  @Input() courseId: number;
   @Input() instructorMode: boolean;
   @Output() editResource: EventEmitter<Resource> = new EventEmitter<Resource>();
   @Output() deleteResource: EventEmitter<Resource> = new EventEmitter<Resource>();
@@ -87,11 +88,22 @@ export class ResourceTableComponent implements OnInit {
   }
 
   navigateToResource(resourceId: number) {
-    this.router.navigate([resourceId], {
-      relativeTo: this.route
-    }).then(data => {
-      // this.resourceService.selectedViewResourceChanged.next(true);
-    });
+    if (!this.currentCourse) {
+      this.router.navigate(
+        ['student/course/', this.courseId, 'resources', resourceId], {
+          // relativeTo: this.route
+        }).then(data => {
+        // this.resourceService.selectedViewResourceChanged.next(true);
+      });
+    } else {
+      this.router.navigate(
+        ['student/course/', this.currentCourse.id, 'resources', resourceId], {
+          // relativeTo: this.route
+        }).then(data => {
+        // this.resourceService.selectedViewResourceChanged.next(true);
+      });
+    }
+
   }
 
   getFileTypeClass(fileType: string) {

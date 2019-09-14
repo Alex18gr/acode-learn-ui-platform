@@ -31,6 +31,7 @@ import {EditorGuideComponent} from './instructor/editor-guide/editor-guide.compo
 import {CourseSectionsComponent} from './course/course-sections/course-sections.component';
 import {StudentProfileComponent} from './student/student-profile/student-profile.component';
 import {ResourceViewerComponent} from './course/course/resources/resource-viewer/resource-viewer.component';
+import {CourseSectionPageComponent} from './course/course-sections/course-section-page/course-section-page.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent, canActivate: [AuthGuardHomeService]},
@@ -44,7 +45,8 @@ const routes: Routes = [
           {path: 'resources', component: ResourcesComponent},
           {path: 'resources/:rid', component: ResourceViewerComponent},
           {path: 'announcements', component: CourseAnnouncementsComponent},
-          {path: 'sections', component: CourseSectionsComponent}
+          {path: 'sections', component: CourseSectionsComponent},
+          {path: 'sections/:secid', component: CourseSectionPageComponent}
         ]}
     ]},
   {path: 'login', component: LoginComponent, canActivate: [AuthGuardAuthenticatedService]},

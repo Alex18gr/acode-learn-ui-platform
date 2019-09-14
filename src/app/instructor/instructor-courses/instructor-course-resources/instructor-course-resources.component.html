@@ -17,7 +17,7 @@
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-<div>
+<div *ngIf="!isLoading">
   <div class="btn-group mr-2" role="group" aria-label="First group">
     <button type="button" class="btn btn-secondary" (click)="openEditModal()"
     >
@@ -25,9 +25,6 @@
          [placement]="'top'"
          [tooltipText]="'Hello world!'" class="fas fa-plus-circle"></i>
     </button>
-    <button type="button" class="btn btn-secondary" (click)="openEditModal()">2</button>
-    <button type="button" class="btn btn-secondary">3</button>
-    <button type="button" class="btn btn-secondary">4</button>
   </div>
 </div>
 <app-edit-resource #editResourceComponent (modalFormSubmittedSuccess)="resourceEditFomSubmittedSuccess($event)"></app-edit-resource>

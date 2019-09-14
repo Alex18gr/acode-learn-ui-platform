@@ -1,1 +1,12 @@
-<p>course-sections works!</p>
+<h3>Course Sections List</h3>
+<div *ngIf="!courseSections" class="spinner-border text-primary" role="status">
+  <span class="sr-only">Loading...</span>
+</div>
+<div *ngIf="courseSections">
+  <div class="list-group">
+    <a *ngFor="let cs of courseSections; let i = index" [routerLink]="[cs.courseSectionId]"
+       class="list-group-item list-group-item-action">
+      {{i + 1}} - {{cs.name}}
+      </a>
+  </div>
+</div>
