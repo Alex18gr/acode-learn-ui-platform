@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from '../../core/user.service';
+import {User} from '../../core/models/user.model';
 
 @Component({
   selector: 'app-student-profile',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-profile.component.css']
 })
 export class StudentProfileComponent implements OnInit {
+  currentUser: User;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.userService.getUserDetails().subscribe((data: User) => {
+      this.currentUser = data;
+    });
   }
 
 }

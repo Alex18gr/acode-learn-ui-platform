@@ -1,1 +1,38 @@
-<p>instructor-profile works!</p>
+<div class="container">
+  <div class="spinner-border text-secondary" role="status" *ngIf="!currentUser">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <div class="row mt-4" *ngIf="currentUser">
+    <div class="col-md-4">
+      <i class="fas fa-user-circle fa-9x fa-fw" style="width: inherit"></i>
+    </div>
+    <div class="col-md-8">
+      <h3>User Details</h3>
+      <hr>
+      <table class="table table-borderless">
+        <tbody>
+        <!--        <tr>-->
+        <!--          <td>User ID:</td>-->
+        <!--          <td>{{currentUser.userId}}</td>-->
+        <!--        </tr>-->
+        <tr>
+          <td><strong>Username:</strong></td>
+          <td class="text-primary">{{currentUser.userName}}</td>
+        </tr>
+        <tr>
+          <td><strong>First Name:</strong></td>
+          <td class="text-primary">{{currentUser.firstName}}</td>
+        </tr>
+        <tr>
+          <td><strong>Last Name:</strong></td>
+          <td class="text-primary">{{currentUser.lastName}}</td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td class="text-primary">{{currentUser.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
