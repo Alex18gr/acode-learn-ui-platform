@@ -1,0 +1,4 @@
+<p>resource-viewer works!</p>
+<div *ngIf="currentResource" [ngSwitch]="currentResource.resourceType">
+  <app-viewer-code *ngSwitchCase="resourceTypes.RESOURCE_CODE_SNIPPET" [resource]="currentResource"></app-viewer-code>
+</div>

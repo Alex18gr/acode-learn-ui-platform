@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Resource} from '../../core/models/resource-models/resource.model';
 import {CoursesService} from '../courses.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Course} from '../course.model';
 import {AuthService} from '../../auth/auth.service';
 import {map} from 'rxjs/operators';
@@ -16,6 +16,7 @@ export class ResourceService {
   courseResources: ResourceStore = undefined;
   resourcesLoaded = false;
   resourcesLoadedSubject = new Subject<boolean>();
+  selectedViewResourceChanged = new Subject<boolean>();
   currentCourseChangedSubscription: Subscription;
 
   getCourseResources(currentCourse?: Course) {
@@ -74,6 +75,33 @@ export class ResourceService {
       }
     }
     return resourceStore;
+  }
+
+  getCourseResource(resourceId: number, courseId: number) {
+    const getResourceUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      courseId + '/resource/' + resourceId;
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    return this.httpClient.get(getResourceUrl, {headers});
+  }
+
+  getAllCourseResources(courseId: number, resourceType?: string) {
+    const getAllResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
+      courseId + '/resources-all';
+    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const options: any = {};
+    const params = new HttpParams();
+    options.headers = headers;
+    if (resourceType) {
+      params.set('type', resourceType);
+    }
+    return this.httpClient.get(getAllResourcesUrl, {
+      headers,
+      params
+    });
+  }
+
+  getResourceById() {
+
   }
 
   private init() {

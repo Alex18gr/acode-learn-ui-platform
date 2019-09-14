@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Course} from "../../course.model";
+import {Course} from '../../course.model';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -18,6 +18,6 @@ export class CourseListItemComponent implements OnInit {
   }
 
   onCourseClicked() {
-    this.router.navigate(['course', this.courseItemIndex], {relativeTo: this.activatedRoute.parent});
+    this.router.navigate(['course', this.course.id], {relativeTo: this.activatedRoute.parent});
   }
 }

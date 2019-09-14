@@ -9,7 +9,7 @@
         <th scope="col">Date Created</th>
         <th scope="col">Description</th>
         <th scope="col">Link</th>
-        <th scope="col">Actions</th>
+        <th scope="col" *ngIf="instructorMode">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -20,7 +20,7 @@
         <td>{{res.dateCreated | date}}</td>
         <td>{{res.description}}</td>
         <td><a [href]="res.link" target="_blank">{{res.link}}</a></td>
-        <td>
+        <td *ngIf="instructorMode">
           <div class="btn-group mr-2" role="group" aria-label="First group">
             <button class="btn btn-outline-info" (click)="editResource.emit(res)">
               <i class="fas fa-edit"></i>
@@ -48,7 +48,7 @@
       <th scope="col">File Type</th>
       <th scope="col">Summary</th>
       <th scope="col">Download Link</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="instructorMode">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -66,7 +66,7 @@
           <i class="fas fa-download"></i>
         </button>
       </td>
-      <td>
+      <td *ngIf="instructorMode">
         <div class="btn-group mr-2" role="group" aria-label="First group">
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
@@ -93,7 +93,7 @@
       <th scope="col">Repository URL</th>
       <th scope="col">Repository Name</th>
       <th scope="col">Repository Name Repo</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="instructorMode">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -105,7 +105,7 @@
       <td>{{res.repoUrl}}</td>
       <td>{{res.repoName}}</td>
       <td>{{res.repoNameRepo}}</td>
-      <td>
+      <td *ngIf="instructorMode">
         <div class="btn-group mr-2" role="group" aria-label="First group">
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
@@ -132,7 +132,7 @@
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Markdown Data</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="instructorMode">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -148,7 +148,7 @@
           <i class="fas fa-external-link-alt"></i>
         </button>
       </td>
-      <td>
+      <td *ngIf="instructorMode">
         <div class="btn-group mr-2" role="group" aria-label="First group">
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
@@ -176,7 +176,7 @@
       <th scope="col">Description</th>
       <th scope="col">Code</th>
       <th scope="col">Language</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="instructorMode">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -193,7 +193,7 @@
         </button>
       </td>
       <td>{{res.snippetLanguage}}</td>
-      <td>
+      <td *ngIf="instructorMode">
         <div class="btn-group mr-2" role="group" aria-label="First group">
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>
@@ -220,7 +220,7 @@
       <th scope="col">Title</th>
       <th scope="col">Description</th>
       <th scope="col">Guide Data</th>
-      <th scope="col">Actions</th>
+      <th scope="col" *ngIf="instructorMode">Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -236,7 +236,7 @@
           <i class="fas fa-external-link-alt"></i>
         </button>
       </td>
-      <td>
+      <td *ngIf="instructorMode">
         <div class="btn-group mr-2" role="group" aria-label="First group">
           <button class="btn btn-outline-info" (click)="editResource.emit(res)">
             <i class="fas fa-edit"></i>

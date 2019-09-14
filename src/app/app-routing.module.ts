@@ -30,6 +30,7 @@ import {EditorMarkdownComponent} from './instructor/editor-markdown/editor-markd
 import {EditorGuideComponent} from './instructor/editor-guide/editor-guide.component';
 import {CourseSectionsComponent} from './course/course-sections/course-sections.component';
 import {StudentProfileComponent} from './student/student-profile/student-profile.component';
+import {ResourceViewerComponent} from './course/course/resources/resource-viewer/resource-viewer.component';
 
 const routes: Routes = [
   {path: '', component: AppComponent, canActivate: [AuthGuardHomeService]},
@@ -38,9 +39,10 @@ const routes: Routes = [
       {path: 'profile', component: StudentProfileComponent},
       {path: 'courses', component: CourseListComponent, children: [
         ]},
-      {path: 'course/:id', component: CourseComponent, children: [
+      {path: 'course/:cid', component: CourseComponent, children: [
           {path: '', component: CourseDashboardComponent},
           {path: 'resources', component: ResourcesComponent},
+          {path: 'resources/:rid', component: ResourceViewerComponent},
           {path: 'announcements', component: CourseAnnouncementsComponent},
           {path: 'sections', component: CourseSectionsComponent}
         ]}

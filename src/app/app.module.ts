@@ -65,6 +65,10 @@ import { ModalEditCourseDetailsComponent } from './instructor/instructor-courses
 import { TableStudentsComponent } from './instructor/instructor-courses/instructor-course-settings/table-students/table-students.component';
 import { CourseSectionsComponent } from './course/course-sections/course-sections.component';
 import { StudentProfileComponent } from './student/student-profile/student-profile.component';
+import { ResourceViewerComponent } from './course/course/resources/resource-viewer/resource-viewer.component';
+import { ViewerCodeComponent } from './course/course/resources/resource-viewer/viewer-code/viewer-code.component';
+import { ViewerMarkdownComponent } from './course/course/resources/resource-viewer/viewer-markdown/viewer-markdown.component';
+import { ViewerGuideComponent } from './course/course/resources/resource-viewer/viewer-guide/viewer-guide.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +129,11 @@ import { StudentProfileComponent } from './student/student-profile/student-profi
     ModalEditCourseDetailsComponent,
     TableStudentsComponent,
     CourseSectionsComponent,
-    StudentProfileComponent
+    StudentProfileComponent,
+    ResourceViewerComponent,
+    ViewerCodeComponent,
+    ViewerMarkdownComponent,
+    ViewerGuideComponent
   ],
   imports: [
     BrowserModule,

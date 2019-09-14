@@ -2,10 +2,10 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ResourceTypes} from '../../core/models/resource-models/resource-types';
 import {CourseResources, InstructorResourceService} from '../resource/instructor-resource.service';
 import {Course} from '../../course/course.model';
-import {retry} from 'rxjs/operators';
 import {ResourceFile} from '../../core/models/resource-models/resource-file.model';
 import {Resource} from '../../core/models/resource-models/resource.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ResourceService} from '../../course/resource/resource.service';
 
 @Component({
   selector: 'app-resource-table',
@@ -16,6 +16,7 @@ export class ResourceTableComponent implements OnInit {
   @Input() resourceType: string;
   @Input() resources: CourseResources;
   @Input() currentCourse: Course;
+  @Input() instructorMode: boolean;
   @Output() editResource: EventEmitter<Resource> = new EventEmitter<Resource>();
   @Output() deleteResource: EventEmitter<Resource> = new EventEmitter<Resource>();
   resourceTypes = ResourceTypes;
@@ -36,7 +37,8 @@ export class ResourceTableComponent implements OnInit {
 
   constructor(private instructorResourceService: InstructorResourceService,
               private router: Router,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private resourceService: ResourceService) { }
 
   ngOnInit() {
   }
@@ -46,29 +48,49 @@ export class ResourceTableComponent implements OnInit {
   }
 
   navigateToCodeEditor(resourceId: number) {
-    this.router.navigate(['/instructor/editor/code'], {
-      queryParams: {
-        res: resourceId,
-        cid: this.currentCourse.id
-      }
-    });
+    if (this.instructorMode) {
+      this.router.navigate(['/instructor/editor/code'], {
+        queryParams: {
+          res: resourceId,
+          cid: this.currentCourse.id
+        }
+      });
+    } else {
+      this.navigateToResource(resourceId);
+    }
   }
 
   navigateToMarkdownEditor(resourceId: number) {
-    this.router.navigate(['/instructor/editor/markdown'], {
-      queryParams: {
-        res: resourceId,
-        cid: this.currentCourse.id
-      }
-    });
+    if (this.instructorMode) {
+      this.router.navigate(['/instructor/editor/markdown'], {
+        queryParams: {
+          res: resourceId,
+          cid: this.currentCourse.id
+        }
+      });
+    } else {
+      this.navigateToResource(resourceId);
+    }
   }
 
   navigateToGuideEditor(resourceId: number) {
-    this.router.navigate(['/instructor/editor/guide'], {
-      queryParams: {
-        res: resourceId,
-        cid: this.currentCourse.id
-      }
+    if (this.instructorMode) {
+      this.router.navigate(['/instructor/editor/guide'], {
+        queryParams: {
+          res: resourceId,
+          cid: this.currentCourse.id
+        }
+      });
+    } else {
+      this.navigateToResource(resourceId);
+    }
+  }
+
+  navigateToResource(resourceId: number) {
+    this.router.navigate([resourceId], {
+      relativeTo: this.route
+    }).then(data => {
+      // this.resourceService.selectedViewResourceChanged.next(true);
     });
   }
 

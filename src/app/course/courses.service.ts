@@ -49,9 +49,16 @@ export class CoursesService {
       return null;
     }
 
-    this.currentCourse = this.userCourses[id];
-    this.currentCourseChanged.next(this.currentCourse);
-    return this.userCourses[id];
+    // this.currentCourse = this.userCourses[id];
+    for (const course of this.userCourses) {
+      if (course.id === id) {
+        this.currentCourse = course;
+        this.currentCourseChanged.next(this.currentCourse);
+        return this.currentCourse;
+      }
+    }
+
+    return null;
   }
 
   findCourseNameById(id: number) {
@@ -96,6 +103,7 @@ export class CoursesService {
           this.userCoursesReceivedTimestamp = new Date((data as any).timestamp);
           this.userCourses = receivedCourses;
         }
+        this.coursesChanged.next(this.userCourses);
         return this.userCourses;
       }));
   }

@@ -9,7 +9,7 @@
 </div>
 <div>
   <app-resource-table *ngIf="resources && !isLoading" [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="course"
-    (editResource)="onResourceEdit($event)" (deleteResource)="onResourceDelete($event)"
+    (editResource)="onResourceEdit($event)" (deleteResource)="onResourceDelete($event)" [instructorMode]="true"
   >
 
   </app-resource-table>

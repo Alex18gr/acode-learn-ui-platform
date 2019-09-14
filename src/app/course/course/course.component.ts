@@ -29,9 +29,10 @@ export class CourseComponent implements OnInit {
     //     this.coursesService.getCourseById(params.get('id'))
     //   )
     // );
+    this.courses = this.coursesService.userCourses;
     this.coursesSubscription = this.coursesService.coursesChanged.subscribe(courses => this.courses = courses);
     this.route.params.subscribe((params: Params) => {
-      this.currentCourseId = +params.id;
+      this.currentCourseId = +params.cid;
       this.currentCourse = this.coursesService.getCourseById(this.currentCourseId);
       if (this.currentCourse == null) {
         this.coursesService.getUserCoursesRest()
