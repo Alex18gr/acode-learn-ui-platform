@@ -1,6 +1,6 @@
 <div class="card-body m-1">
   <strong class="text-muted text-sm-left px-4 pt-3 mb-0">{{resource.documentTitle}}</strong>
-  <div class="border border-secondary rounded shadow-sm p-2" [hidden]="viewerMode && editMode">
+  <div class="border border-secondary rounded shadow-sm p-2" [hidden]="viewerMode || !editMode">
     <textarea class="code-editor" #editor></textarea>
   </div>
   <div class="border border-secondary rounded shadow-sm p-2" [hidden]="!viewerMode">

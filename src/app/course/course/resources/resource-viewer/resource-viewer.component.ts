@@ -16,6 +16,8 @@ export class ResourceViewerComponent implements OnInit, OnDestroy {
   currentResource: Resource;
   resourceTypes = ResourceTypes;
   currentCourseSubscription: Subscription;
+  currCourseId: number;
+  currResourceId: number;
 
   constructor(private resourceService: ResourceService,
               private route: ActivatedRoute,
@@ -31,6 +33,8 @@ export class ResourceViewerComponent implements OnInit, OnDestroy {
     // });
     this.route.parent.params.subscribe((par) => {
       this.route.params.subscribe((params) => {
+        this.currCourseId = +par.cid;
+        this.currResourceId = +params.rid;
         this.getResource(
           +params.rid,
           +par.cid
