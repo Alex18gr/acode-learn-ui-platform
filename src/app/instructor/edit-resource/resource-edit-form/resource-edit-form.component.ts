@@ -115,6 +115,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
         res = this.resource as ResourceGuide;
         this.form.patchValue({
           gdName: res.name,
+          gTitle: res.guideTitle,
           gDescription: res.guideDescription
         });
         break;
@@ -175,6 +176,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
   private getGuideResourceFormGroup() {
     return new FormGroup({
       gdName: new FormControl(''),
+      gTitle: new FormControl(''),
       gDescription: new FormControl('')
     });
   }
@@ -228,7 +230,9 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
         return submitData;
       case ResourceTypes.RESOURCE_GUIDE:
         (submitData as ResourceGuide).name = rawValue.gdName;
+        (submitData as ResourceGuide).guideTitle = rawValue.gTitle;
         (submitData as ResourceGuide).guideDescription = rawValue.gDescription;
+        (submitData as ResourceGuide).guideData = '[]';
         return submitData;
     }
   }
