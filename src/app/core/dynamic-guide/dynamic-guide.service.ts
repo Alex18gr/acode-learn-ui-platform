@@ -36,6 +36,9 @@ export class DynamicGuideService {
    getResourceIdsList(guideData: string) {
     const guideDataObject = JSON.parse(guideData);
     const resourceIdsList = [];
+    if (!guideDataObject) {
+      return resourceIdsList;
+    }
     for (const res of guideDataObject) {
       resourceIdsList.push(res.resourceId);
     }
@@ -63,6 +66,9 @@ export class DynamicGuideService {
 
   private getGuideResourcesFromReceivedResources(guideResource: ResourceGuide, receivedResources: CourseResources) {
     const guideDataResources: GuideDataResource[] = [];
+    if (!guideResource.guideData) {
+      return;
+    }
     for (const guideResData of JSON.parse(guideResource.guideData)) {
       let index: number;
       switch (guideResData.type) {
