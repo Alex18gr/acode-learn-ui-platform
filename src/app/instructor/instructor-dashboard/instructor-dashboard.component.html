@@ -3,6 +3,21 @@
     <div class="col-md-12">
       <div class="jumbotron-fluid">
         <h1>Welcome To the Dashboard</h1>
+        <hr>
+        <div class="card shadow" style="min-width: auto;">
+          <div class="card-body">
+            <h5 class="card-title">Enrolled Courses</h5>
+            <p>Check your courses</p>
+            <a [routerLink]="['courses']" class="btn btn-outline-primary shadow-sm">Go Enrolled Courses <i class="fas fa-location-arrow"></i></a>
+          </div>
+        </div>
+        <div class="card shadow" style="min-width: auto;">
+          <div class="card-body">
+            <h5 class="card-title">Profile</h5>
+            <p>Check your profile</p>
+            <a [routerLink]="['profile']" class="btn btn-outline-primary shadow-sm">Go Your Profile <i class="fas fa-location-arrow"></i></a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
