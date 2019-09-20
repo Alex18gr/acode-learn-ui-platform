@@ -102,7 +102,7 @@
       <td>{{res.resourceId}}</td>
       <td>{{res.name}}</td>
       <td>{{res.dateCreated | date}}</td>
-      <td>{{res.repoUrl}}</td>
+      <td><a [href]="res.repoUrl" target="_blank">{{res.repoUrl}}</a></td>
       <td>{{res.repoName}}</td>
       <td>{{res.repoNameRepo}}</td>
       <td *ngIf="instructorMode">
