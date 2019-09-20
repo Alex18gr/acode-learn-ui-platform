@@ -1,5 +1,7 @@
 # ACode Learn UI
 
+Asynchronous learning platform for programming lessons based on Angular
+
 # UiPlatform
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.3.
