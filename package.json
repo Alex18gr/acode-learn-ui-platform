@@ -28,7 +28,7 @@
     "highlight.js": "^9.15.9",
     "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "markdown-it": "^9.1.0",
     "moment": "^2.24.0",
     "ng2-pdf-viewer": "^5.3.2",
