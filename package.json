@@ -30,7 +30,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "markdown-it": "^9.1.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ng2-pdf-viewer": "^5.3.2",
     "pdfjs-dist": "^2.1.266",
     "popper.js": "^1.15.0",
