@@ -1,24 +1,34 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ResourceCodeSnippet} from '../../../../../core/models/resource-models/resource-code-snippet.model';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { ResourceCodeSnippet } from '../../../../../core/models/resource-models/resource-code-snippet.model';
 import * as CodeMirror from 'codemirror';
 
 @Component({
   selector: 'app-viewer-code',
   templateUrl: './viewer-code.component.html',
-  styleUrls: ['./viewer-code.component.css']
+  styleUrls: ['./viewer-code.component.css'],
 })
 export class ViewerCodeComponent implements OnInit, OnChanges {
   @Input() resource: ResourceCodeSnippet;
-  @ViewChild('viewer', {static: true}) editorElementRef: ElementRef;
+  @ViewChild('viewer', { static: true }) editorElementRef: ElementRef;
   editor: CodeMirror;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resource && (changes.resource.currentValue !== changes.resource.previousValue)) {
+    if (
+      changes.resource &&
+      changes.resource.currentValue !== changes.resource.previousValue
+    ) {
       this.initViewer();
     }
   }
@@ -27,15 +37,16 @@ export class ViewerCodeComponent implements OnInit, OnChanges {
     // load the languages styles
     this.loadLanguages();
 
-    this.editor = new CodeMirror.fromTextArea(this.editorElementRef.nativeElement,
+    this.editor = new CodeMirror.fromTextArea(
+      this.editorElementRef.nativeElement,
       {
         lineNumbers: true,
         mode: {
           name: this.resource.snippetLanguage,
-          globalVars: true
+          globalVars: true,
         },
         readOnly: true,
-        viewportMargin: Infinity
+        viewportMargin: Infinity,
       }
     );
     this.editor.setSize(null, 'auto');
@@ -56,5 +67,4 @@ export class ViewerCodeComponent implements OnInit, OnChanges {
     // @ts-ignore
     require('node_modules/codemirror/mode/markdown/markdown.js');
   }
-
 }

@@ -1,17 +1,23 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {InstructorResourceService} from '../resource/instructor-resource.service';
-import {InstructorCoursesService} from '../courses/instructor-courses.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ToastService} from '../../core/toast/toast.service';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { InstructorResourceService } from '../resource/instructor-resource.service';
+import { InstructorCoursesService } from '../courses/instructor-courses.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastService } from '../../core/toast/toast.service';
 import * as CodeMirror from 'codemirror';
 import * as MarkdownIt from 'markdown-it';
 import * as hljs from 'highlight.js';
-import {ResourceMarkdown} from '../../core/models/resource-models/resource-markdown.model';
+import { ResourceMarkdown } from '../../core/models/resource-models/resource-markdown.model';
 
 @Component({
   selector: 'app-editor-markdown',
   templateUrl: './editor-markdown.component.html',
-  styleUrls: ['./editor-markdown.component.css']
+  styleUrls: ['./editor-markdown.component.css'],
 })
 export class EditorMarkdownComponent implements OnInit {
   isLoading = true;
@@ -23,51 +29,58 @@ export class EditorMarkdownComponent implements OnInit {
   private markdownHTML = '<h1>HELLO WORLD!!!</h1>';
   private markdownView: MarkdownIt;
 
-  @ViewChild('editor', {static: false}) set content(content: ElementRef) {
+  @ViewChild('editor', { static: false }) set content(content: ElementRef) {
     this.editorElementRef = content;
   }
   private editorElementRef: ElementRef;
 
-  constructor(private instructorResourceService: InstructorResourceService,
-              private instructorCoursesService: InstructorCoursesService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private toastService: ToastService) { }
+  constructor(
+    private instructorResourceService: InstructorResourceService,
+    private instructorCoursesService: InstructorCoursesService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
-    this.route.queryParamMap.subscribe(params => {
+    this.route.queryParamMap.subscribe((params) => {
       if (params.get('res') && params.get('cid')) {
-        this.getResource(parseInt(params.get('res'), 10), parseInt(params.get('cid'), 10));
+        this.getResource(
+          parseInt(params.get('res'), 10),
+          parseInt(params.get('cid'), 10)
+        );
       }
     });
   }
 
   private getResource(resourceId: number, courseId: number) {
     this.isLoading = true;
-    this.instructorResourceService.getResource(resourceId, courseId).subscribe(data => {
-      this.editingResource = data as ResourceMarkdown;
-      this.isLoading = false;
-      this.courseId = courseId;
-      this.initEditor();
-      this.initMarkdown();
-    });
+    this.instructorResourceService
+      .getResource(resourceId, courseId)
+      .subscribe((data) => {
+        this.editingResource = data as ResourceMarkdown;
+        this.isLoading = false;
+        this.courseId = courseId;
+        this.initEditor();
+        this.initMarkdown();
+      });
   }
 
   private initEditor() {
-
     // load the markdown language styles
     // @ts-ignore
     require('node_modules/codemirror/mode/markdown/markdown.js');
 
-    this.editor = new CodeMirror.fromTextArea(this.editorElementRef.nativeElement,
+    this.editor = new CodeMirror.fromTextArea(
+      this.editorElementRef.nativeElement,
       {
         lineNumbers: true,
         mode: {
           name: 'markdown',
-          globalVars: true
+          globalVars: true,
         },
         readOnly: false,
-        viewportMargin: Infinity
+        viewportMargin: Infinity,
       }
     );
     this.editor.setSize(null, 'auto');
@@ -80,12 +93,18 @@ export class EditorMarkdownComponent implements OnInit {
     this.editingResource.markdownDocumentData = documentValue;
     console.log(documentValue);
     this.isLoading = true;
-    this.instructorResourceService.updateResource(this.editingResource, this.courseId)
-      .subscribe(data => {
+    this.instructorResourceService
+      .updateResource(this.editingResource, this.courseId)
+      .subscribe((data) => {
         this.editingResource = data as ResourceMarkdown;
-        this.toastService.addSaveToast('Resource Saved',
-          'Resource ' + this.editingResource.name + ' of course ' +
-          this.editingResource.courseName + ' saved successfully.');
+        this.toastService.addSaveToast(
+          'Resource Saved',
+          'Resource ' +
+            this.editingResource.name +
+            ' of course ' +
+            this.editingResource.courseName +
+            ' saved successfully.'
+        );
         this.isLoading = false;
       });
   }
@@ -107,38 +126,36 @@ export class EditorMarkdownComponent implements OnInit {
         if (lang && hljs.getLanguage(lang)) {
           try {
             return hljs(lang, str).value;
-          } catch (__) {
-          }
+          } catch (__) {}
         }
         return '';
-      }
+      },
     });
     this.markdownView = new MarkdownIt({
       highlight: (str, lang) => {
         if (lang && hljs.getLanguage(lang)) {
           try {
             return hljs(lang, str).value;
-          } catch (__) {
-          }
+          } catch (__) {}
         }
         return '';
-      }
+      },
     });
   }
 
   toggleCodeEditMode() {
-      if (this.codeEditMode) {
-        // view the markdown
-        this.editingResource.markdownDocumentData = this.editor.getValue();
-        this.initMarkdownData();
-        this.codeEditMode = false;
-      } else {
-        // view the code
-        // this.initEditor();
-        this.editor.getDoc().setValue(this.editingResource.markdownDocumentData);
-        this.codeEditMode = true;
-      }
+    if (this.codeEditMode) {
+      // view the markdown
+      this.editingResource.markdownDocumentData = this.editor.getValue();
+      this.initMarkdownData();
+      this.codeEditMode = false;
+    } else {
+      // view the code
+      // this.initEditor();
+      this.editor.getDoc().setValue(this.editingResource.markdownDocumentData);
+      this.codeEditMode = true;
     }
+  }
 
   // toggleCodeEditMode() {
   //   if (this.codeEditMode) {
@@ -162,6 +179,8 @@ export class EditorMarkdownComponent implements OnInit {
   // }
 
   private initMarkdownData() {
-    this.markdownHTML = this.markdownView.render(this.editingResource.markdownDocumentData);
+    this.markdownHTML = this.markdownView.render(
+      this.editingResource.markdownDocumentData
+    );
   }
 }

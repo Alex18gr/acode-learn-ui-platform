@@ -8,9 +8,8 @@ describe('ViewerGuideComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewerGuideComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewerGuideComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

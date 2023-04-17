@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Course} from '../course.model';
-import {CoursesService} from '../courses.service';
-import {Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Course } from '../course.model';
+import { CoursesService } from '../courses.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
-  styleUrls: ['./course-list.component.css']
+  styleUrls: ['./course-list.component.css'],
 })
 export class CourseListComponent implements OnInit, OnDestroy {
   // courses = [
@@ -22,19 +22,19 @@ export class CourseListComponent implements OnInit, OnDestroy {
   courses: Course[];
   courseSubscription: Subscription;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
     // this.courses = this.coursesService.getCourses();
-    this.courseSubscription = this.coursesService.coursesChanged.subscribe((courses: Course[]) => {
-      this.courses = courses;
-    });
+    this.courseSubscription = this.coursesService.coursesChanged.subscribe(
+      (courses: Course[]) => {
+        this.courses = courses;
+      }
+    );
     this.coursesService.getUserCourses().subscribe((coursesData) => {
       console.log(coursesData);
     });
   }
 
-  ngOnDestroy(): void {
-  }
-
+  ngOnDestroy(): void {}
 }

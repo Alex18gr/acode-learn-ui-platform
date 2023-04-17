@@ -8,9 +8,8 @@ describe('DynamicGuideEditResourcesModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DynamicGuideEditResourcesModalComponent ]
-    })
-    .compileComponents();
+      declarations: [DynamicGuideEditResourcesModalComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

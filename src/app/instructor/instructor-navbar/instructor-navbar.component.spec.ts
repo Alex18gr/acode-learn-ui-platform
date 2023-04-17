@@ -8,9 +8,8 @@ describe('InstructorNavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InstructorNavbarComponent ]
-    })
-    .compileComponents();
+      declarations: [InstructorNavbarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

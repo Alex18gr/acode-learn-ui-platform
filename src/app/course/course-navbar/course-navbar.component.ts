@@ -1,23 +1,31 @@
-import {Component, Input, OnInit, OnDestroy, HostListener, ViewChild, ElementRef} from '@angular/core';
-import {Course} from '../course.model';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  HostListener,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-navbar',
   templateUrl: './course-navbar.component.html',
-  styleUrls: ['./course-navbar.component.css']
+  styleUrls: ['./course-navbar.component.css'],
 })
 export class CourseNavbarComponent implements OnInit, OnDestroy {
   @Input() course: Course; // = new Course(-1, '', '', '', -1, []);
   @Input() courseIndex: any;
   @Input() courses: Course[] = [];
   @Input() dataLoaded: boolean;
-  @ViewChild('navbar', {static: false}) navbarElementRef: ElementRef;
+  @ViewChild('navbar', { static: false }) navbarElementRef: ElementRef;
 
   coursesChanged: Subscription;
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
     // this.courses = this.coursesService.userCourses;
@@ -48,5 +56,4 @@ export class CourseNavbarComponent implements OnInit, OnDestroy {
       this.navbarElementRef.nativeElement.classList.remove('sticky');
     }
   }
-
 }

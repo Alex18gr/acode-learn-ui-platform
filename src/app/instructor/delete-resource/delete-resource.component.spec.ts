@@ -8,9 +8,8 @@ describe('DeleteResourceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteResourceComponent ]
-    })
-    .compileComponents();
+      declarations: [DeleteResourceComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

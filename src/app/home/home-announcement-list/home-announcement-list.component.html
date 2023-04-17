@@ -1,5 +1,12 @@
 <div class="border-bottom">
-  <app-home-announcement-list-item *ngFor="let announcement of viewedAnnouncements; let i = index"
-  [announcement]="announcement"></app-home-announcement-list-item>
+  <app-home-announcement-list-item
+    *ngFor="let announcement of viewedAnnouncements; let i = index"
+    [announcement]="announcement"
+  ></app-home-announcement-list-item>
 </div>
-<a *ngIf="announcements.length > viewedAnnouncements.length" class="d-block text-primary" style="text-align: end; cursor: pointer;">View more announcements...</a>
+<a
+  *ngIf="announcements.length > viewedAnnouncements.length"
+  class="d-block text-primary"
+  style="text-align: end; cursor: pointer"
+  >View more announcements...</a
+>

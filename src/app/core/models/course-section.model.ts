@@ -1,5 +1,5 @@
-import {Course} from '../../course/course.model';
-import {CourseResources} from '../../instructor/resource/instructor-resource.service';
+import { Course } from '../../course/course.model';
+import { CourseResources } from '../../instructor/resource/instructor-resource.service';
 
 export class CourseSection {
   public courseSectionId: number;
@@ -10,9 +10,15 @@ export class CourseSection {
   public course: Course;
   public resources: CourseResources;
 
-
-  constructor(courseSectionId?: number, name?: string, description?: string, order?: number, dateCreated?: Date,
-              course?: Course, resources?: CourseResources) {
+  constructor(
+    courseSectionId?: number,
+    name?: string,
+    description?: string,
+    order?: number,
+    dateCreated?: Date,
+    course?: Course,
+    resources?: CourseResources
+  ) {
     this.courseSectionId = courseSectionId;
     this.name = name;
     this.description = description;

@@ -1,4 +1,6 @@
-<app-home-navbar-component *ngIf="isAuthenticated()"></app-home-navbar-component>
+<app-home-navbar-component
+  *ngIf="isAuthenticated()"
+></app-home-navbar-component>
 <div class="d-flex justify-content-center" *ngIf="loading">
   <div class="spinner-border" role="status">
     <span class="sr-only">Loading...</span>

@@ -1,4 +1,4 @@
-import {Resource} from './resource.model';
+import { Resource } from './resource.model';
 
 export class ResourceMarkdown extends Resource {
   public documentTitle: string;

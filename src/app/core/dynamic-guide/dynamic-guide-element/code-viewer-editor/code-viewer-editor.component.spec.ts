@@ -8,9 +8,8 @@ describe('CodeViewerEditorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodeViewerEditorComponent ]
-    })
-    .compileComponents();
+      declarations: [CodeViewerEditorComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

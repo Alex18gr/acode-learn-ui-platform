@@ -6,7 +6,9 @@ describe('AuthGuardAuthenticatedInstructorService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AuthGuardInstructorService = TestBed.get(AuthGuardInstructorService);
+    const service: AuthGuardInstructorService = TestBed.get(
+      AuthGuardInstructorService
+    );
     expect(service).toBeTruthy();
   });
 });

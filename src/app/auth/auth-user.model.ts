@@ -13,7 +13,7 @@ export class AuthUserModel {
     if (tokenExpirationDate) {
       this.tokenExpirationDate = tokenExpirationDate;
     } else {
-      this.tokenExpirationDate = new Date(+new Date() + (_expiresIn * 1000));
+      this.tokenExpirationDate = new Date(+new Date() + _expiresIn * 1000);
     }
   }
 

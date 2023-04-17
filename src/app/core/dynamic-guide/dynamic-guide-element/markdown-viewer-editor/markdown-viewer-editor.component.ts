@@ -1,22 +1,29 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ResourceCodeSnippet} from '../../../models/resource-models/resource-code-snippet.model';
-import {ResourceMarkdown} from '../../../models/resource-models/resource-markdown.model';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ResourceCodeSnippet } from '../../../models/resource-models/resource-code-snippet.model';
+import { ResourceMarkdown } from '../../../models/resource-models/resource-markdown.model';
 import * as CodeMirror from 'codemirror';
 import * as MarkdownIt from 'markdown-it';
-import {InstructorResourceService} from '../../../../instructor/resource/instructor-resource.service';
-import {ToastService} from '../../../toast/toast.service';
-import {Resource} from '../../../models/resource-models/resource.model';
+import { InstructorResourceService } from '../../../../instructor/resource/instructor-resource.service';
+import { ToastService } from '../../../toast/toast.service';
+import { Resource } from '../../../models/resource-models/resource.model';
 
 @Component({
   selector: 'app-markdown-viewer-editor',
   templateUrl: './markdown-viewer-editor.component.html',
-  styleUrls: ['./markdown-viewer-editor.component.css']
+  styleUrls: ['./markdown-viewer-editor.component.css'],
 })
 export class MarkdownViewerEditorComponent implements OnInit, AfterViewInit {
-  @ViewChild('editor', {static: false}) editorElementRef: ElementRef;
-  @ViewChild('markdown', {static: false}) markdownViewElement: ElementRef;
-  @ViewChild('editForm', {static: false}) editForm: NgForm;
+  @ViewChild('editor', { static: false }) editorElementRef: ElementRef;
+  @ViewChild('markdown', { static: false }) markdownViewElement: ElementRef;
+  @ViewChild('editForm', { static: false }) editForm: NgForm;
   @Input() resource: ResourceMarkdown;
   @Input() editMode: boolean;
   @Input() courseId;
@@ -28,28 +35,30 @@ export class MarkdownViewerEditorComponent implements OnInit, AfterViewInit {
   viewerMode = true;
   markdownView: MarkdownIt;
 
-  constructor(private instructorResourceService: InstructorResourceService,
-              private toastService: ToastService) { }
+  constructor(
+    private instructorResourceService: InstructorResourceService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.initMarkdown();
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 
   initEditor() {
     if (!this.editor) {
       // @ts-ignore
       require('node_modules/codemirror/mode/markdown/markdown.js');
-      this.editor = new CodeMirror.fromTextArea(this.editorElementRef.nativeElement,
+      this.editor = new CodeMirror.fromTextArea(
+        this.editorElementRef.nativeElement,
         {
           lineNumbers: true,
           mode: {
             name: 'markdown',
-            globalVars: true
+            globalVars: true,
           },
-          viewportMargin: Infinity
+          viewportMargin: Infinity,
         }
       );
       this.editor.setSize(null, 'auto');
@@ -73,7 +82,7 @@ export class MarkdownViewerEditorComponent implements OnInit, AfterViewInit {
       this.isEditing = true;
       this.viewerMode = false;
       this.editForm.setValue({
-        title: this.resource.documentTitle
+        title: this.resource.documentTitle,
       });
       this.initEditor();
     }
@@ -95,16 +104,19 @@ export class MarkdownViewerEditorComponent implements OnInit, AfterViewInit {
     if (this.editMode) {
       this.resource.markdownDocumentData = this.editor.getValue();
       this.isSaving = true;
-      this.saveChanges().subscribe((data: ResourceMarkdown) => {
+      this.saveChanges().subscribe(
+        (data: ResourceMarkdown) => {
           this.toastService.addResourceSavedSuccessfully(data as Resource);
           this.isSaving = false;
           this.isEditing = false;
           this.viewerMode = true;
           this.initMarkdown();
-      },
-      error => {
-        this.isSaving = false;
-        this.toastService.addResourceSaveErrorSuccessfully(this.resource);      });
+        },
+        (error) => {
+          this.isSaving = false;
+          this.toastService.addResourceSaveErrorSuccessfully(this.resource);
+        }
+      );
     }
   }
 
@@ -117,6 +129,9 @@ export class MarkdownViewerEditorComponent implements OnInit, AfterViewInit {
 
   private saveChanges() {
     // here we save the changes to the sever
-    return this.instructorResourceService.updateResource(this.resource, this.courseId);
+    return this.instructorResourceService.updateResource(
+      this.resource,
+      this.courseId
+    );
   }
 }

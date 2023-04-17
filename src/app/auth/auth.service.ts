@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {AuthUserModel} from './auth-user.model';
-import {Subject} from 'rxjs';
-import {Router} from '@angular/router';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { AuthUserModel } from './auth-user.model';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   isAuthed = false;
@@ -15,8 +15,7 @@ export class AuthService {
   currentUserSubject = new Subject<AuthUserModel>();
   private tokenExpirationTimer: any;
 
-  constructor(private httpClient: HttpClient,
-              private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   get isAuthenticated() {
     return this.currentUser != null;
@@ -35,18 +34,24 @@ export class AuthService {
     customParams.append('client_id', 'uiPlatformClient');
 
     const httpOptions = {
-      headers: new HttpHeaders(
-        {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-          Authorization: 'Basic ' + btoa('uiPlatformClient:secret')
-        })
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        Authorization: 'Basic ' + btoa('uiPlatformClient:secret'),
+      }),
     };
 
-    return this.httpClient.post('http://localhost:8081/spring-security-oauth-server/oauth/token', customParams.toString(), httpOptions)
-      .pipe(map((data) => {
-        console.log(data);
-        return data;
-      }));
+    return this.httpClient
+      .post(
+        'http://localhost:8081/spring-security-oauth-server/oauth/token',
+        customParams.toString(),
+        httpOptions
+      )
+      .pipe(
+        map((data) => {
+          console.log(data);
+          return data;
+        })
+      );
   }
 
   setUser(user: AuthUserModel) {
@@ -67,20 +72,28 @@ export class AuthService {
 
   autoLogin() {
     const userData: {
-      _refreshToken: string,
-      _token: string,
-      tokenExpirationDate: Date,
-      username: string
+      _refreshToken: string;
+      _token: string;
+      tokenExpirationDate: Date;
+      username: string;
     } = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {
       return;
     }
 
-    console.log('user data received from local storage via auto login method: ');
+    console.log(
+      'user data received from local storage via auto login method: '
+    );
     console.log(userData);
 
     // tslint:disable-next-line:max-line-length
-    const user: AuthUserModel = new AuthUserModel(userData.username, userData._token, userData._refreshToken, null, new Date(userData.tokenExpirationDate));
+    const user: AuthUserModel = new AuthUserModel(
+      userData.username,
+      userData._token,
+      userData._refreshToken,
+      null,
+      new Date(userData.tokenExpirationDate)
+    );
     if (user.token) {
       this.currentUser = user;
       this.currentUserSubject.next(user);

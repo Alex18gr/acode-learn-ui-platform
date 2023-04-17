@@ -8,9 +8,8 @@ describe('ResourceViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceViewerComponent ]
-    })
-    .compileComponents();
+      declarations: [ResourceViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

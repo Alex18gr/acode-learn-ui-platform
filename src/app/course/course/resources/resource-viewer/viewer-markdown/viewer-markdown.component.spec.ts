@@ -8,9 +8,8 @@ describe('ViewerMarkdownComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewerMarkdownComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewerMarkdownComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

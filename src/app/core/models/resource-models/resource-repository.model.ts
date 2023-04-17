@@ -1,4 +1,4 @@
-import {Resource} from './resource.model';
+import { Resource } from './resource.model';
 
 export class ResourceRepository extends Resource {
   public repoUrl: string;
@@ -11,6 +11,4 @@ export class ResourceRepository extends Resource {
     this.repoUrl = (options as any).repoUrl || '';
     this.repoNameRepo = (options as any).repoNameRepo || '';
   }
-
-
 }

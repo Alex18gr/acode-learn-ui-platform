@@ -1,29 +1,30 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CoursesService} from '../../courses.service';
-import {Course} from '../../course.model';
-import {Subscription} from 'rxjs';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CoursesService } from '../../courses.service';
+import { Course } from '../../course.model';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-course-dashboard',
   templateUrl: './course-dashboard.component.html',
-  styleUrls: ['./course-dashboard.component.css']
+  styleUrls: ['./course-dashboard.component.css'],
 })
 export class CourseDashboardComponent implements OnInit, OnDestroy {
   currentCourse: Course;
   currentCourseSubscription: Subscription;
 
-  constructor(private coursesService: CoursesService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+  constructor(
+    private coursesService: CoursesService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.currentCourse = this.coursesService.currentCourse;
-    this.currentCourseSubscription = this.coursesService.currentCourseChanged.subscribe(
-      (course: Course) => {
+    this.currentCourseSubscription =
+      this.coursesService.currentCourseChanged.subscribe((course: Course) => {
         this.currentCourse = course;
-      }
-    );
+      });
   }
 
   ngOnDestroy(): void {
@@ -50,7 +51,7 @@ export class CourseDashboardComponent implements OnInit, OnDestroy {
 
   navigateTo(destination: string) {
     this.router.navigate([destination], {
-      relativeTo: this.route
+      relativeTo: this.route,
     });
   }
 }

@@ -8,9 +8,8 @@ describe('ModalDeleteSectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalDeleteSectionComponent ]
-    })
-    .compileComponents();
+      declarations: [ModalDeleteSectionComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

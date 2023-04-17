@@ -1,35 +1,51 @@
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" #editModal
-     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  #editModal
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel">{{title}}</h2>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h2 class="modal-title" id="exampleModalLabel">{{ title }}</h2>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <p>
-          You can edit the order of the resources and add more resources.
-        </p>
+        <p>You can edit the order of the resources and add more resources.</p>
         <!--        Drag and drop example -->
 
         <div class="example-container">
           <h3>Add Reources</h3>
-          <hr>
+          <hr />
           <div class="my-1">
-            <select #resTypeSelect (change)="onAddResourcesTypeSelectChange($event.target.value)"
-                    class="custom-select" [disabled]="addResourcesLoading">
+            <select
+              #resTypeSelect
+              (change)="onAddResourcesTypeSelectChange($event.target.value)"
+              class="custom-select"
+              [disabled]="addResourcesLoading"
+            >
               <option value="-" selected></option>
-              <option *ngFor="let resType of resourceTypesSelect" [value]="resType.value">
-                {{resType.name}}
+              <option
+                *ngFor="let resType of resourceTypesSelect"
+                [value]="resType.value"
+              >
+                {{ resType.name }}
               </option>
             </select>
           </div>
 
-
-<!--          Here we put the list with the resources -->
+          <!--          Here we put the list with the resources -->
           <div
             [cdkDropListDisabled]="addResourcesLoading"
             [hidden]="!addResourcesList"
@@ -38,12 +54,17 @@
             [cdkDropListData]="addResourcesList"
             [cdkDropListConnectedTo]="[currentResourcesDragDrop]"
             class="example-list"
-            (cdkDropListDropped)="drop($event)">
+            (cdkDropListDropped)="drop($event)"
+          >
             <ng-container *ngIf="addResourcesList">
-              <div class="example-box" *ngFor="let res of addResourcesList" cdkDrag>
-                {{res.name}}</div>
+              <div
+                class="example-box"
+                *ngFor="let res of addResourcesList"
+                cdkDrag
+              >
+                {{ res.name }}
+              </div>
             </ng-container>
-
           </div>
         </div>
 
@@ -57,17 +78,30 @@
             #currentResourcesDragDrop="cdkDropList"
             [cdkDropListData]="resourcesList"
             class="example-list"
-            (cdkDropListDropped)="drop($event)">
+            (cdkDropListDropped)="drop($event)"
+          >
             <div class="example-box" *ngFor="let res of resourcesList" cdkDrag>
-              {{res.name}}</div>
+              {{ res.name }}
+            </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="onSaveChanges()" [disabled]="savingChanges">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="onSaveChanges()"
+          [disabled]="savingChanges"
+        >
           <ng-container *ngIf="savingChanges">
-            Saving Changes...<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Saving Changes...<span
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
           </ng-container>
           <ng-container *ngIf="!savingChanges">Save changes</ng-container>
         </button>

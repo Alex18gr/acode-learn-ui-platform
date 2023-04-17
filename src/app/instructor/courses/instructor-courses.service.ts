@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {Subject} from 'rxjs';
-import {Course} from '../../course/course.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AuthService} from '../../auth/auth.service';
-import {map} from 'rxjs/operators';
-import {CourseSection} from '../../core/models/course-section.model';
-import {Resource} from '../../core/models/resource-models/resource.model';
+import { Subject } from 'rxjs';
+import { Course } from '../../course/course.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../../auth/auth.service';
+import { map } from 'rxjs/operators';
+import { CourseSection } from '../../core/models/course-section.model';
+import { Resource } from '../../core/models/resource-models/resource.model';
 
 export enum CourseLoadingStatus {
   pending,
   loading,
   loaded,
-  failed
+  failed,
 }
 
 export interface CoursesResponse {
@@ -20,7 +20,7 @@ export interface CoursesResponse {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InstructorCoursesService {
   coursesChanged = new Subject<Course[]>();
@@ -30,8 +30,10 @@ export class InstructorCoursesService {
   instructorCourses: Course[] = undefined;
   coursesLoaded = false;
 
-  constructor(private httpClient: HttpClient,
-              private authService: AuthService) {}
+  constructor(
+    private httpClient: HttpClient,
+    private authService: AuthService
+  ) {}
 
   getCourses() {
     return this.instructorCourses.slice();
@@ -49,7 +51,7 @@ export class InstructorCoursesService {
 
   findCourseNameById(id: number) {
     let courseName = '';
-    this.instructorCourses.forEach(course => {
+    this.instructorCourses.forEach((course) => {
       if (course.id === id) {
         courseName = course.name;
       }
@@ -74,113 +76,188 @@ export class InstructorCoursesService {
       }
       this.currentCourseLoadStatus = CourseLoadingStatus.failed;
     });
-
   }
 
   receiveInstructorCourses() {
     const httpOptions = {
-      headers: new HttpHeaders(
-        {
-          'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-          Authorization: 'Bearer ' + this.authService.currentUser.token
-        })
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+        Authorization: 'Bearer ' + this.authService.currentUser.token,
+      }),
     };
 
     this.coursesLoaded = false;
     // tslint:disable-next-line:max-line-length
-    return this.httpClient.get<CoursesResponse>('http://localhost:8082/spring-security-oauth-resource/instructor/owned-courses', httpOptions)
-      .pipe(map((data) => {
-        console.log(data);
-        const receivedCourses: Course[] = [];
-        for (const courseData of data.courseList) {
-          receivedCourses.push(new Course(courseData.id, courseData.title, courseData.description,
-            null, courseData.semester, courseData.instructors));
-        }
-        this.instructorCourses = receivedCourses;
-        this.coursesLoaded = true;
-        return this.instructorCourses;
-      }));
+    return this.httpClient
+      .get<CoursesResponse>(
+        'http://localhost:8082/spring-security-oauth-resource/instructor/owned-courses',
+        httpOptions
+      )
+      .pipe(
+        map((data) => {
+          console.log(data);
+          const receivedCourses: Course[] = [];
+          for (const courseData of data.courseList) {
+            receivedCourses.push(
+              new Course(
+                courseData.id,
+                courseData.title,
+                courseData.description,
+                null,
+                courseData.semester,
+                courseData.instructors
+              )
+            );
+          }
+          this.instructorCourses = receivedCourses;
+          this.coursesLoaded = true;
+          return this.instructorCourses;
+        })
+      );
   }
 
   getCourseSections(course: Course) {
-    const getCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/sections';
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const getCourseSectionsUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/sections';
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
     const options: any = {};
     options.headers = headers;
-    return this.httpClient.get(getCourseSectionsUrl, options).pipe(map((data) => {
-      console.log(data);
-      // for (const r of (data as any)) {
-      //   r.resources = r.resources.resources;
-      // }
-      return data;
-    }));
+    return this.httpClient.get(getCourseSectionsUrl, options).pipe(
+      map((data) => {
+        console.log(data);
+        // for (const r of (data as any)) {
+        //   r.resources = r.resources.resources;
+        // }
+        return data;
+      })
+    );
   }
 
   updateCourseSection(courseSection: CourseSection, course: Course) {
-    const editCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/sections/' + courseSection.courseSectionId;
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
-    return this.httpClient.put(editCourseSectionsUrl, courseSection, {headers});
+    const editCourseSectionsUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/sections/' +
+      courseSection.courseSectionId;
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
+    return this.httpClient.put(editCourseSectionsUrl, courseSection, {
+      headers,
+    });
   }
 
   createCourseSection(courseSectionData: CourseSection, course: Course) {
-    const createCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/sections';
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
-    return this.httpClient.post(createCourseSectionsUrl, courseSectionData, {headers});
+    const createCourseSectionsUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/sections';
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
+    return this.httpClient.post(createCourseSectionsUrl, courseSectionData, {
+      headers,
+    });
   }
 
   deleteCourseSection(courseSection: CourseSection, course: Course) {
-    const editCourseSectionsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/sections/' + courseSection.courseSectionId;
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
-    return this.httpClient.delete(editCourseSectionsUrl, {headers});
+    const editCourseSectionsUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/sections/' +
+      courseSection.courseSectionId;
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
+    return this.httpClient.delete(editCourseSectionsUrl, { headers });
   }
 
   updateCourseSectionsOrder(courseSections: CourseSection[], course: Course) {
-    const editCourseSectionsOrderUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/sections/order';
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+    const editCourseSectionsOrderUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/sections/order';
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
     const data = [];
     for (const cs of courseSections) {
       data.push({
         courseSectionId: cs.courseSectionId,
-        order: cs.order
+        order: cs.order,
       });
     }
-    return this.httpClient.put(editCourseSectionsOrderUrl, data, {headers});
+    return this.httpClient.put(editCourseSectionsOrderUrl, data, { headers });
   }
 
-  createCourseSectionResources(courseSection: CourseSection, course: Course, resources: Resource[]) {
-    const courseSectionResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/sections/' + courseSection.courseSectionId + '/resources';
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+  createCourseSectionResources(
+    courseSection: CourseSection,
+    course: Course,
+    resources: Resource[]
+  ) {
+    const courseSectionResourcesUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/sections/' +
+      courseSection.courseSectionId +
+      '/resources';
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
     const data = [];
     for (const res of resources) {
       data.push(res.resourceId);
     }
-    return this.httpClient.post(courseSectionResourcesUrl, data, {headers});
+    return this.httpClient.post(courseSectionResourcesUrl, data, { headers });
   }
 
-  deleteCourseSectionResources(courseSection: CourseSection, course: Course, resources: Resource[]) {
-    const courseSectionResourcesUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/sections/' + courseSection.courseSectionId + '/resources';
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
+  deleteCourseSectionResources(
+    courseSection: CourseSection,
+    course: Course,
+    resources: Resource[]
+  ) {
+    const courseSectionResourcesUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/sections/' +
+      courseSection.courseSectionId +
+      '/resources';
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
     const data = [];
     for (const res of resources) {
       data.push(res.resourceId);
     }
     const params = {
-      resourceIds: data
+      resourceIds: data,
     };
-    return this.httpClient.delete(courseSectionResourcesUrl, {headers, params});
+    return this.httpClient.delete(courseSectionResourcesUrl, {
+      headers,
+      params,
+    });
   }
 
   getCourseEnrolledStudents(course: Course) {
-    const courseStudentsUrl = 'http://localhost:8082/spring-security-oauth-resource/course/' +
-      course.id + '/students';
-    const headers = new HttpHeaders().set('authorization', 'Bearer ' + this.authService.currentUser.token);
-    return this.httpClient.get(courseStudentsUrl, {headers});
+    const courseStudentsUrl =
+      'http://localhost:8082/spring-security-oauth-resource/course/' +
+      course.id +
+      '/students';
+    const headers = new HttpHeaders().set(
+      'authorization',
+      'Bearer ' + this.authService.currentUser.token
+    );
+    return this.httpClient.get(courseStudentsUrl, { headers });
   }
 }

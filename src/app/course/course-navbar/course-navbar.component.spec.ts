@@ -8,9 +8,8 @@ describe('CourseNavbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CourseNavbarComponent ]
-    })
-    .compileComponents();
+      declarations: [CourseNavbarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

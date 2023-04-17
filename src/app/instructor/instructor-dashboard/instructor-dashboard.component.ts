@@ -1,17 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {ToastService} from '../../core/toast/toast.service';
-import {NotificationTypes, ToastActions} from '../../core/toast/toast.model';
+import { Component, OnInit } from '@angular/core';
+import { ToastService } from '../../core/toast/toast.service';
+import { NotificationTypes, ToastActions } from '../../core/toast/toast.model';
 
 @Component({
   selector: 'app-instructor-dashboard',
   templateUrl: './instructor-dashboard.component.html',
-  styleUrls: ['./instructor-dashboard.component.css']
+  styleUrls: ['./instructor-dashboard.component.css'],
 })
 export class InstructorDashboardComponent implements OnInit {
-  constructor(private toastService: ToastService) { }
+  constructor(private toastService: ToastService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   addToast(num: number) {
     switch (num) {
@@ -21,7 +20,7 @@ export class InstructorDashboardComponent implements OnInit {
           notificationType: NotificationTypes.none,
           title: 'Resource Added !!!',
           message: 'Resource added to course !!!',
-          delay: 5000
+          delay: 5000,
         });
         break;
       case 2:
@@ -30,9 +29,8 @@ export class InstructorDashboardComponent implements OnInit {
           notificationType: NotificationTypes.none,
           title: 'File Upload',
           message: 'File uploading... 74% completed',
-          delay: 5000
+          delay: 5000,
         });
-
     }
   }
 }

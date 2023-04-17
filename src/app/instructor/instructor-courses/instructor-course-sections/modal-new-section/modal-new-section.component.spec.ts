@@ -8,9 +8,8 @@ describe('ModalNewSectionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalNewSectionComponent ]
-    })
-    .compileComponents();
+      declarations: [ModalNewSectionComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

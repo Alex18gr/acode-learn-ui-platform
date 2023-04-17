@@ -9,15 +9,15 @@ import { CourseComponent } from './course/course/course.component';
 import { CourseNavbarComponent } from './course/course-navbar/course-navbar.component';
 import { CourseListComponent } from './course/course-list/course-list.component';
 import { CourseListItemComponent } from './course/course-list/course-list-item/course-list-item.component';
-import {CoursesService} from './course/courses.service';
+import { CoursesService } from './course/courses.service';
 import { ResourcesComponent } from './course/course/resources/resources.component';
 import { CourseDashboardComponent } from './course/course/course-dashboard/course-dashboard.component';
 import { CourseAnnouncementsComponent } from './course/course-announcements/course-announcements.component';
 import { HomeAnnouncementListItemComponent } from './home/home-announcement-list/home-announcement-list-item/home-announcement-list-item.component';
 import { HomeAnnouncementListComponent } from './home/home-announcement-list/home-announcement-list.component';
 import { LoginComponent } from './auth/login/login.component';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ResourcesTableComponent } from './course/course/resources/resources-table/resources-table.component';
 import { InstructorComponent } from './instructor/instructor/instructor.component';
 import { InstructorNavbarComponent } from './instructor/instructor-navbar/instructor-navbar.component';
@@ -29,14 +29,14 @@ import { InstructorCourseListItemComponent } from './instructor/instructor-cours
 import { InstructorProfileComponent } from './instructor/instructor-profile/instructor-profile.component';
 import { InstructorAnnouncementsComponent } from './instructor/instructor-announcements/instructor-announcements.component';
 import { InstructorCoursesComponent } from './instructor/instructor-courses/instructor-courses.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InstructorCourseDashboardComponent } from './instructor/instructor-courses/instructor-course-dashboard/instructor-course-dashboard.component';
 import { InstructorCourseHomeComponent } from './instructor/instructor-courses/instructor-course-home/instructor-course-home.component';
 import { InstructorCourseAnnouncementsComponent } from './instructor/instructor-courses/instructor-course-announcements/instructor-course-announcements.component';
 import { InstructorCourseSectionsComponent } from './instructor/instructor-courses/instructor-course-sections/instructor-course-sections.component';
 import { InstructorCourseResourcesComponent } from './instructor/instructor-courses/instructor-course-resources/instructor-course-resources.component';
 import { InstructorCourseSettingsComponent } from './instructor/instructor-courses/instructor-course-settings/instructor-course-settings.component';
-import {MaterialModule} from './material/material.module';
+import { MaterialModule } from './material/material.module';
 import { TooltipDirective } from './shared/tooltip.directive';
 import { EditResourceComponent } from './instructor/edit-resource/edit-resource.component';
 import { ResourceTableComponent } from './instructor/resource-table/resource-table.component';
@@ -135,7 +135,7 @@ import { CourseSectionPageComponent } from './course/course-sections/course-sect
     ViewerCodeComponent,
     ViewerMarkdownComponent,
     ViewerGuideComponent,
-    CourseSectionPageComponent
+    CourseSectionPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -144,11 +144,9 @@ import { CourseSectionPageComponent } from './course/course-sections/course-sect
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [
-    CoursesService
-  ],
-  bootstrap: [AppComponent]
+  providers: [CoursesService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

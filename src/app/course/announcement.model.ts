@@ -6,7 +6,14 @@ export class Announcement {
   public professor: string;
   public timestamp: Date;
 
-  constructor(id: number, courseId: number, title: string, contents: string, professor: string, timestamp: Date) {
+  constructor(
+    id: number,
+    courseId: number,
+    title: string,
+    contents: string,
+    professor: string,
+    timestamp: Date
+  ) {
     this.id = id;
     this.courseId = courseId;
     this.title = title;

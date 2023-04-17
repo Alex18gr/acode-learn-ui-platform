@@ -8,9 +8,8 @@ describe('ResourceEditFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceEditFormComponent ]
-    })
-    .compileComponents();
+      declarations: [ResourceEditFormComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

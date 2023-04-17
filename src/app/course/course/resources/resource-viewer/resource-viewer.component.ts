@@ -1,16 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ResourceService} from '../../../resource/resource.service';
-import {ActivatedRoute, ParamMap} from '@angular/router';
-import {Resource} from '../../../../core/models/resource-models/resource.model';
-import {ResourceTypes} from '../../../../core/models/resource-models/resource-types';
-import {CoursesService} from '../../../courses.service';
-import {Course} from '../../../course.model';
-import {forkJoin, Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ResourceService } from '../../../resource/resource.service';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Resource } from '../../../../core/models/resource-models/resource.model';
+import { ResourceTypes } from '../../../../core/models/resource-models/resource-types';
+import { CoursesService } from '../../../courses.service';
+import { Course } from '../../../course.model';
+import { forkJoin, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-resource-viewer',
   templateUrl: './resource-viewer.component.html',
-  styleUrls: ['./resource-viewer.component.css']
+  styleUrls: ['./resource-viewer.component.css'],
 })
 export class ResourceViewerComponent implements OnInit, OnDestroy {
   currentResource: Resource;
@@ -19,9 +19,11 @@ export class ResourceViewerComponent implements OnInit, OnDestroy {
   currCourseId: number;
   currResourceId: number;
 
-  constructor(private resourceService: ResourceService,
-              private route: ActivatedRoute,
-              private coursesSevice: CoursesService) { }
+  constructor(
+    private resourceService: ResourceService,
+    private route: ActivatedRoute,
+    private coursesSevice: CoursesService
+  ) {}
 
   ngOnInit() {
     this.initData();
@@ -35,10 +37,7 @@ export class ResourceViewerComponent implements OnInit, OnDestroy {
       this.route.params.subscribe((params) => {
         this.currCourseId = +par.cid;
         this.currResourceId = +params.rid;
-        this.getResource(
-          +params.rid,
-          +par.cid
-        );
+        this.getResource(+params.rid, +par.cid);
       });
     });
   }
@@ -61,7 +60,8 @@ export class ResourceViewerComponent implements OnInit, OnDestroy {
   }
 
   getResource(resourceId: number, courseId: number) {
-    this.resourceService.getCourseResource(resourceId, courseId)
+    this.resourceService
+      .getCourseResource(resourceId, courseId)
       .subscribe((data: Resource) => {
         this.currentResource = data;
       });

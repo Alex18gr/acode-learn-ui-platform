@@ -5,14 +5,15 @@ export class Resource {
   public resourceType: string;
   public courseName: string;
 
-
-  constructor(options: {
-    resourceId?: number,
-    name?: string,
-    dateCreated?: Date,
-    resourceType?: string,
-    courseName?: string
-  } = {}) {
+  constructor(
+    options: {
+      resourceId?: number;
+      name?: string;
+      dateCreated?: Date;
+      resourceType?: string;
+      courseName?: string;
+    } = {}
+  ) {
     this.resourceId = options.resourceId;
     this.name = options.name || '';
     this.dateCreated = options.dateCreated || undefined;

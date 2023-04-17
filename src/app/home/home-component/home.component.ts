@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Announcement } from 'src/app/course/announcement.model';
-import {HttpClient} from "@angular/common/http";
-import {CoursesService} from '../../course/courses.service';
-import {Course} from '../../course/course.model';
+import { HttpClient } from '@angular/common/http';
+import { CoursesService } from '../../course/courses.service';
+import { Course } from '../../course/course.model';
 
 @Component({
   selector: 'app-home-component',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   // announcements = [
@@ -49,18 +49,22 @@ export class HomeComponent implements OnInit {
   ];
   courses: Course[];
 
-  constructor(private httpClient: HttpClient,
-              private coursesService: CoursesService) { }
+  constructor(
+    private httpClient: HttpClient,
+    private coursesService: CoursesService
+  ) {}
 
   ngOnInit() {
-    this.coursesService.getUserCoursesRest()
-      .subscribe((courses) => {
-        this.courses = courses;
-      });
+    this.coursesService.getUserCoursesRest().subscribe((courses) => {
+      this.courses = courses;
+    });
   }
 
   getFooResource() {
-    this.coursesService.getAuthorizedResource('http://localhost:8082/spring-security-oauth-resource/foos/1')
+    this.coursesService
+      .getAuthorizedResource(
+        'http://localhost:8082/spring-security-oauth-resource/foos/1'
+      )
       .subscribe((data) => {
         console.log(data);
       });

@@ -1,4 +1,4 @@
-import {Resource} from './resource.model';
+import { Resource } from './resource.model';
 
 export class ResourceFile extends Resource {
   public fileName: string;

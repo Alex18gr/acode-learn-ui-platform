@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute, ParamMap, Params} from '@angular/router';
-import {CoursesResponse, CoursesService} from '../courses.service';
-import {Course} from '../course.model';
-import {AuthService} from '../../auth/auth.service';
-import {of, Subscription} from 'rxjs';
+import { Router, ActivatedRoute, ParamMap, Params } from '@angular/router';
+import { CoursesResponse, CoursesService } from '../courses.service';
+import { Course } from '../course.model';
+import { AuthService } from '../../auth/auth.service';
+import { of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course',
   templateUrl: './course.component.html',
-  styleUrls: ['./course.component.css']
+  styleUrls: ['./course.component.css'],
 })
 export class CourseComponent implements OnInit {
   currentCourse: Course;
@@ -18,10 +18,12 @@ export class CourseComponent implements OnInit {
 
   coursesSubscription: Subscription;
 
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private coursesService: CoursesService,
-              private authService: AuthService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private coursesService: CoursesService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     // this.route.paramMap.pipe(
@@ -30,25 +32,30 @@ export class CourseComponent implements OnInit {
     //   )
     // );
     this.courses = this.coursesService.userCourses;
-    this.coursesSubscription = this.coursesService.coursesChanged.subscribe(courses => this.courses = courses);
+    this.coursesSubscription = this.coursesService.coursesChanged.subscribe(
+      (courses) => (this.courses = courses)
+    );
     this.route.params.subscribe((params: Params) => {
       this.currentCourseId = +params.cid;
-      this.currentCourse = this.coursesService.getCourseById(this.currentCourseId);
+      this.currentCourse = this.coursesService.getCourseById(
+        this.currentCourseId
+      );
       if (this.currentCourse == null) {
-        this.coursesService.getUserCoursesRest()
-          .subscribe(data => {
-            this.currentCourse = this.coursesService.getCourseById(this.currentCourseId);
-            this.courses = data;
-            this.dataLoaded = true;
-          });
-      // .subscribe((data) => {
-      //     for (const course of data) {
-      //       if (course.id === this.currentCourseId) {
-      //         this.currentCourse = course;
-      //       }
-      //       // TODO: if course not found then we view an error
-      //     }
-      //   });
+        this.coursesService.getUserCoursesRest().subscribe((data) => {
+          this.currentCourse = this.coursesService.getCourseById(
+            this.currentCourseId
+          );
+          this.courses = data;
+          this.dataLoaded = true;
+        });
+        // .subscribe((data) => {
+        //     for (const course of data) {
+        //       if (course.id === this.currentCourseId) {
+        //         this.currentCourse = course;
+        //       }
+        //       // TODO: if course not found then we view an error
+        //     }
+        //   });
       } else {
         this.dataLoaded = true;
       }
@@ -58,5 +65,4 @@ export class CourseComponent implements OnInit {
   isActivated(): boolean {
     return this.authService.isAuthenticated;
   }
-
 }

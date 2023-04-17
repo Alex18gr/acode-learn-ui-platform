@@ -11,15 +11,15 @@ export class ResourceTypes {
     ResourceTypes.RESOURCE_REPOSITORY,
     ResourceTypes.RESOURCE_CODE_SNIPPET,
     ResourceTypes.RESOURCE_MARKDOWN,
-    ResourceTypes.RESOURCE_GUIDE
+    ResourceTypes.RESOURCE_GUIDE,
   ];
-  public static ResourceTypesListSelect: {name: string, value: string}[] = [
-    {name: 'Link', value: ResourceTypes.RESOURCE_LINK},
-    {name: 'File', value: ResourceTypes.RESOURCE_FILE},
-    {name: 'Repository', value: ResourceTypes.RESOURCE_REPOSITORY},
-    {name: 'Code Snippet', value: ResourceTypes.RESOURCE_CODE_SNIPPET},
-    {name: 'Markdown Document', value: ResourceTypes.RESOURCE_MARKDOWN},
-    {name: 'Guide', value: ResourceTypes.RESOURCE_GUIDE}
+  public static ResourceTypesListSelect: { name: string; value: string }[] = [
+    { name: 'Link', value: ResourceTypes.RESOURCE_LINK },
+    { name: 'File', value: ResourceTypes.RESOURCE_FILE },
+    { name: 'Repository', value: ResourceTypes.RESOURCE_REPOSITORY },
+    { name: 'Code Snippet', value: ResourceTypes.RESOURCE_CODE_SNIPPET },
+    { name: 'Markdown Document', value: ResourceTypes.RESOURCE_MARKDOWN },
+    { name: 'Guide', value: ResourceTypes.RESOURCE_GUIDE },
   ];
   public static ResourceTypeExists(resType: string) {
     for (const value of ResourceTypes.ResourceTypesList) {

@@ -22,10 +22,10 @@
   width: 400px;
   margin: auto;
 }
-.form-signin input[type="text"] {
+.form-signin input[type='text'] {
   border-radius: 2rem;
 }
-.form-signin input[type="password"] {
+.form-signin input[type='password'] {
   border-radius: 2rem;
 }
 

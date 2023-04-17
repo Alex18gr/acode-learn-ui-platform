@@ -10,7 +10,7 @@ export enum NotificationTypes {
   none,
   info,
   warning,
-  danger
+  danger,
 }
 
 export enum ToastActions {
@@ -21,5 +21,5 @@ export enum ToastActions {
   deleted,
   failed,
   new,
-  important
+  important,
 }

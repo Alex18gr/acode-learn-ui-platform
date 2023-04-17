@@ -1,8 +1,18 @@
 <div *ngIf="currentResource" [ngSwitch]="currentResource.resourceType">
-  <app-viewer-code *ngSwitchCase="resourceTypes.RESOURCE_CODE_SNIPPET" [resource]="currentResource"></app-viewer-code>
+  <app-viewer-code
+    *ngSwitchCase="resourceTypes.RESOURCE_CODE_SNIPPET"
+    [resource]="currentResource"
+  ></app-viewer-code>
 
-  <app-viewer-markdown *ngSwitchCase="resourceTypes.RESOURCE_MARKDOWN" [resource]="currentResource"></app-viewer-markdown>
+  <app-viewer-markdown
+    *ngSwitchCase="resourceTypes.RESOURCE_MARKDOWN"
+    [resource]="currentResource"
+  ></app-viewer-markdown>
 
-  <app-dynamic-guide *ngSwitchCase="resourceTypes.RESOURCE_GUIDE" [courseId]="currCourseId" [editMode]="false" [guideResource]="currentResource"></app-dynamic-guide>
-
+  <app-dynamic-guide
+    *ngSwitchCase="resourceTypes.RESOURCE_GUIDE"
+    [courseId]="currCourseId"
+    [editMode]="false"
+    [guideResource]="currentResource"
+  ></app-dynamic-guide>
 </div>

@@ -5,8 +5,8 @@
   <div class="row mt-4" *ngIf="currentCourse">
     <div class="col-md-8">
       <div *ngIf="currentCourse">
-        <h1>{{currentCourse.name}}</h1>
-        <p>{{currentCourse.description}}</p>
+        <h1>{{ currentCourse.name }}</h1>
+        <p>{{ currentCourse.description }}</p>
       </div>
     </div>
     <div class="col-md-4">
@@ -14,31 +14,36 @@
         <div class="card-body text-info">
           <div class="mb-2">
             <i class="fas fa-calendar-alt m-info-icon"></i>
-            {{currentCourse.semester}} Semester
+            {{ currentCourse.semester }} Semester
           </div>
           <div>
-            <i class="fas fa-chalkboard-teacher m-info-icon"></i> {{getInstructorsString()}}
+            <i class="fas fa-chalkboard-teacher m-info-icon"></i>
+            {{ getInstructorsString() }}
           </div>
         </div>
       </div>
     </div>
   </div>
-  <hr>
+  <hr />
   <div class="row">
-    <div class="spinner-border text-primary" role="status" *ngIf="!currentCourse">
+    <div
+      class="spinner-border text-primary"
+      role="status"
+      *ngIf="!currentCourse"
+    >
       <span class="sr-only">Loading...</span>
     </div>
     <div class="col-md-8" *ngIf="currentCourse">
-
       <div class="card">
         <div class="card-header">
-          <h5>
-            Fast Actions
-          </h5>
+          <h5>Fast Actions</h5>
         </div>
         <div class="card-body">
-          <div class="card bg-primary m-3" style="cursor: pointer"
-               (click)="navigateTo('resources')">
+          <div
+            class="card bg-primary m-3"
+            style="cursor: pointer"
+            (click)="navigateTo('resources')"
+          >
             <div class="card-body text-white">
               <i class="fas fa-book fa-3x mr-3"></i>
               <div class="d-inline-block">
@@ -52,8 +57,11 @@
             </div>
           </div>
 
-          <div class="card bg-warning m-3" style="cursor: pointer"
-               (click)="navigateTo('sections')">
+          <div
+            class="card bg-warning m-3"
+            style="cursor: pointer"
+            (click)="navigateTo('sections')"
+          >
             <div class="card-body text-dark">
               <i class="fas fa-book-reader fa-3x mr-3"></i>
               <div class="d-inline-block">
@@ -72,9 +80,7 @@
     <div class="col-md-4" *ngIf="currentCourse">
       <div class="card">
         <div class="card-header">Announcements</div>
-        <div class="card-body">
-          Some announcements...
-        </div>
+        <div class="card-body">Some announcements...</div>
       </div>
     </div>
   </div>

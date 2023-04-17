@@ -6,73 +6,85 @@
     <div class="row">
       <div class="col-md-12">
         <div class="input-group mb-3">
-          <select class="custom-select" (change)="resourceTypeChanged($event)" [value]="currentResourceType" #selectResourceType>
+          <select
+            class="custom-select"
+            (change)="resourceTypeChanged($event)"
+            [value]="currentResourceType"
+            #selectResourceType
+          >
             <option value="RESOURCES_ALL">All Resources</option>
-            <option *ngFor="let opt of resourceTypesListSelect" [value]="opt.value">{{opt.name}}</option>
+            <option
+              *ngFor="let opt of resourceTypesListSelect"
+              [value]="opt.value"
+            >
+              {{ opt.name }}
+            </option>
           </select>
         </div>
-<!--        <table class="table table-hover">-->
-<!--          <thead>-->
-<!--          <tr>-->
-<!--            <th scope="col">#</th>-->
-<!--            <th scope="col">Resource Id</th>-->
-<!--            <th scope="col">Resource Name</th>-->
-<!--            <th scope="col">Date Created</th>-->
-<!--            <th scope="col">Resource Type</th>-->
-<!--          </tr>-->
-<!--          </thead>-->
-<!--          <tbody>-->
-<!--          <tr *ngFor="let resourceElement of resources.linkResources; let i = index">-->
-<!--            <th scope="row">{{i}}</th>-->
-<!--            <td>{{resourceElement.resourceId}}</td>-->
-<!--            <td>{{resourceElement.name}}</td>-->
-<!--            <td>{{resourceElement.dateCreated | date}}</td>-->
-<!--            <td>{{resourceElement.resourceType}}</td>-->
-<!--          </tr>-->
-<!--          <tr *ngFor="let resourceElement of resources.fileResources; let i = index">-->
-<!--            <th scope="row">{{i}}</th>-->
-<!--            <td>{{resourceElement.resourceId}}</td>-->
-<!--            <td>{{resourceElement.name}}</td>-->
-<!--            <td>{{resourceElement.dateCreated | date}}</td>-->
-<!--            <td>{{resourceElement.resourceType}}</td>-->
-<!--          </tr>-->
-<!--          <tr *ngFor="let resourceElement of resources.codeSnippetResources; let i = index">-->
-<!--            <th scope="row">{{i}}</th>-->
-<!--            <td>{{resourceElement.resourceId}}</td>-->
-<!--            <td>{{resourceElement.name}}</td>-->
-<!--            <td>{{resourceElement.dateCreated | date}}</td>-->
-<!--            <td>{{resourceElement.resourceType}}</td>-->
-<!--          </tr>-->
-<!--          <tr *ngFor="let resourceElement of resources.guideResources; let i = index">-->
-<!--            <th scope="row">{{i}}</th>-->
-<!--            <td>{{resourceElement.resourceId}}</td>-->
-<!--            <td>{{resourceElement.name}}</td>-->
-<!--            <td>{{resourceElement.dateCreated | date}}</td>-->
-<!--            <td>{{resourceElement.resourceType}}</td>-->
-<!--          </tr>-->
-<!--          <tr *ngFor="let resourceElement of resources.repositoryResources; let i = index">-->
-<!--            <th scope="row">{{i}}</th>-->
-<!--            <td>{{resourceElement.resourceId}}</td>-->
-<!--            <td>{{resourceElement.name}}</td>-->
-<!--            <td>{{resourceElement.dateCreated | date}}</td>-->
-<!--            <td>{{resourceElement.resourceType}}</td>-->
-<!--          </tr>-->
-<!--          <tr *ngFor="let resourceElement of resources.markdownDocumentResources; let i = index">-->
-<!--            <th scope="row">{{i}}</th>-->
-<!--            <td>{{resourceElement.resourceId}}</td>-->
-<!--            <td>{{resourceElement.name}}</td>-->
-<!--            <td>{{resourceElement.dateCreated | date}}</td>-->
-<!--            <td>{{resourceElement.resourceType}}</td>-->
-<!--          </tr>-->
-<!--          </tbody>-->
-<!--        </table>-->
-        <hr>
-        <app-resource-table [resourceType]="currentResourceType" [resources]="resources" [currentCourse]="currentCourse"
-                            [instructorMode]="false"
+        <!--        <table class="table table-hover">-->
+        <!--          <thead>-->
+        <!--          <tr>-->
+        <!--            <th scope="col">#</th>-->
+        <!--            <th scope="col">Resource Id</th>-->
+        <!--            <th scope="col">Resource Name</th>-->
+        <!--            <th scope="col">Date Created</th>-->
+        <!--            <th scope="col">Resource Type</th>-->
+        <!--          </tr>-->
+        <!--          </thead>-->
+        <!--          <tbody>-->
+        <!--          <tr *ngFor="let resourceElement of resources.linkResources; let i = index">-->
+        <!--            <th scope="row">{{i}}</th>-->
+        <!--            <td>{{resourceElement.resourceId}}</td>-->
+        <!--            <td>{{resourceElement.name}}</td>-->
+        <!--            <td>{{resourceElement.dateCreated | date}}</td>-->
+        <!--            <td>{{resourceElement.resourceType}}</td>-->
+        <!--          </tr>-->
+        <!--          <tr *ngFor="let resourceElement of resources.fileResources; let i = index">-->
+        <!--            <th scope="row">{{i}}</th>-->
+        <!--            <td>{{resourceElement.resourceId}}</td>-->
+        <!--            <td>{{resourceElement.name}}</td>-->
+        <!--            <td>{{resourceElement.dateCreated | date}}</td>-->
+        <!--            <td>{{resourceElement.resourceType}}</td>-->
+        <!--          </tr>-->
+        <!--          <tr *ngFor="let resourceElement of resources.codeSnippetResources; let i = index">-->
+        <!--            <th scope="row">{{i}}</th>-->
+        <!--            <td>{{resourceElement.resourceId}}</td>-->
+        <!--            <td>{{resourceElement.name}}</td>-->
+        <!--            <td>{{resourceElement.dateCreated | date}}</td>-->
+        <!--            <td>{{resourceElement.resourceType}}</td>-->
+        <!--          </tr>-->
+        <!--          <tr *ngFor="let resourceElement of resources.guideResources; let i = index">-->
+        <!--            <th scope="row">{{i}}</th>-->
+        <!--            <td>{{resourceElement.resourceId}}</td>-->
+        <!--            <td>{{resourceElement.name}}</td>-->
+        <!--            <td>{{resourceElement.dateCreated | date}}</td>-->
+        <!--            <td>{{resourceElement.resourceType}}</td>-->
+        <!--          </tr>-->
+        <!--          <tr *ngFor="let resourceElement of resources.repositoryResources; let i = index">-->
+        <!--            <th scope="row">{{i}}</th>-->
+        <!--            <td>{{resourceElement.resourceId}}</td>-->
+        <!--            <td>{{resourceElement.name}}</td>-->
+        <!--            <td>{{resourceElement.dateCreated | date}}</td>-->
+        <!--            <td>{{resourceElement.resourceType}}</td>-->
+        <!--          </tr>-->
+        <!--          <tr *ngFor="let resourceElement of resources.markdownDocumentResources; let i = index">-->
+        <!--            <th scope="row">{{i}}</th>-->
+        <!--            <td>{{resourceElement.resourceId}}</td>-->
+        <!--            <td>{{resourceElement.name}}</td>-->
+        <!--            <td>{{resourceElement.dateCreated | date}}</td>-->
+        <!--            <td>{{resourceElement.resourceType}}</td>-->
+        <!--          </tr>-->
+        <!--          </tbody>-->
+        <!--        </table>-->
+        <hr />
+        <app-resource-table
+          [resourceType]="currentResourceType"
+          [resources]="resources"
+          [currentCourse]="currentCourse"
+          [instructorMode]="false"
         >
-
         </app-resource-table>
-<!--        <app-resources-table [resourcesList]="resources.fileResources" [resourceType]="'RESOURCE_FILE'"></app-resources-table>-->
+        <!--        <app-resources-table [resourcesList]="resources.fileResources" [resourceType]="'RESOURCE_FILE'"></app-resources-table>-->
       </div>
     </div>
   </div>

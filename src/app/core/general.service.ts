@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GeneralService {
-
-  constructor() { }
+  constructor() {}
 
   getFileTypeClass(fileType: string) {
     switch (fileType) {

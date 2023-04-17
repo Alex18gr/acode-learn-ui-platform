@@ -8,9 +8,8 @@ describe('PdfViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PdfViewerComponent ]
-    })
-    .compileComponents();
+      declarations: [PdfViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

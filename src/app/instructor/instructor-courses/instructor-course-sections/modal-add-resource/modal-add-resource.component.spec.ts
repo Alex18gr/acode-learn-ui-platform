@@ -8,9 +8,8 @@ describe('ModalAddResourceComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalAddResourceComponent ]
-    })
-    .compileComponents();
+      declarations: [ModalAddResourceComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

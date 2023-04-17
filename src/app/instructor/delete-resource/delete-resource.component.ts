@@ -1,24 +1,33 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Resource} from '../../core/models/resource-models/resource.model';
-import {InstructorResourceService} from '../resource/instructor-resource.service';
-import {ToastService} from '../../core/toast/toast.service';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { Resource } from '../../core/models/resource-models/resource.model';
+import { InstructorResourceService } from '../resource/instructor-resource.service';
+import { ToastService } from '../../core/toast/toast.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-delete-resource',
   templateUrl: './delete-resource.component.html',
-  styleUrls: ['./delete-resource.component.css']
+  styleUrls: ['./delete-resource.component.css'],
 })
 export class DeleteResourceComponent implements OnInit {
-  @ViewChild('deleteModal', {static: false}) deleteModal: ElementRef;
-  @Output() deleteSuccess: EventEmitter<Resource>
-    = new EventEmitter<Resource>();
+  @ViewChild('deleteModal', { static: false }) deleteModal: ElementRef;
+  @Output() deleteSuccess: EventEmitter<Resource> =
+    new EventEmitter<Resource>();
   modalLoading = false;
   private deleteResource: Resource;
   title = 'Delete Resource';
-  constructor(private resourceService: InstructorResourceService,
-              private toastService: ToastService) { }
+  constructor(
+    private resourceService: InstructorResourceService,
+    private toastService: ToastService
+  ) {}
 
   showModal() {
     $(this.deleteModal.nativeElement).modal();
@@ -37,23 +46,29 @@ export class DeleteResourceComponent implements OnInit {
 
   onDeleteResource() {
     this.modalLoading = true;
-    this.resourceService.deleteResource(this.deleteResource.resourceId)
-      .subscribe(() => {
-        this.modalLoading = false;
-        this.toastService.addDeleteToast('Resource Deleted', 'Resource "' +
-        this.deleteResource.name + '" deleted successfully.');
-        this.deleteSuccess.emit(this.deleteResource);
-        this.hideModal();
-      },
-      (error => {
-        this.modalLoading = false;
-        this.toastService.addErrorToast('Resource Delete Error',
-          'An error occurred while deleteing resource "' +
-        this.deleteResource.name + '".');
-      }));
+    this.resourceService
+      .deleteResource(this.deleteResource.resourceId)
+      .subscribe(
+        () => {
+          this.modalLoading = false;
+          this.toastService.addDeleteToast(
+            'Resource Deleted',
+            'Resource "' + this.deleteResource.name + '" deleted successfully.'
+          );
+          this.deleteSuccess.emit(this.deleteResource);
+          this.hideModal();
+        },
+        (error) => {
+          this.modalLoading = false;
+          this.toastService.addErrorToast(
+            'Resource Delete Error',
+            'An error occurred while deleteing resource "' +
+              this.deleteResource.name +
+              '".'
+          );
+        }
+      );
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

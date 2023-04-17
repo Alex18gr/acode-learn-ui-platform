@@ -1,4 +1,7 @@
-<form *ngIf="resourceType === ResTypes.RESOURCE_LINK && form" [formGroup]="form">
+<form
+  *ngIf="resourceType === ResTypes.RESOURCE_LINK && form"
+  [formGroup]="form"
+>
   <div class="form-group">
     <label for="resLinkName">Resource Name</label>
     <input
@@ -7,7 +10,7 @@
       id="resLinkName"
       placeholder="Resource name"
       formControlName="resLinkName"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="resLinkUrl">Link URL</label>
@@ -17,7 +20,7 @@
       id="resLinkUrl"
       placeholder="Link URL"
       formControlName="resLinkUrl"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="resLinkDescription">Description</label>
@@ -27,11 +30,14 @@
       id="resLinkDescription"
       placeholder="Description"
       formControlName="resLinkDescription"
-    >
+    />
   </div>
 </form>
 
-<form *ngIf="resourceType === ResTypes.RESOURCE_REPOSITORY && form" [formGroup]="form">
+<form
+  *ngIf="resourceType === ResTypes.RESOURCE_REPOSITORY && form"
+  [formGroup]="form"
+>
   <div class="form-group">
     <label for="resRepoName">Resource Name</label>
     <input
@@ -40,7 +46,7 @@
       id="resRepoName"
       placeholder="Resource name"
       formControlName="resRepoName"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="resRepositoryName">Repository Name</label>
@@ -50,7 +56,7 @@
       id="resRepositoryName"
       placeholder="Repository Name"
       formControlName="resRepositoryName"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="resRepoUrl">Repository URL</label>
@@ -60,7 +66,7 @@
       id="resRepoUrl"
       placeholder="Repository URL"
       formControlName="resRepoUrl"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="repoNameRepo">Repository / Name</label>
@@ -71,11 +77,14 @@
       placeholder="Repository / Name"
       formControlName="repoNameRepo"
       [ngModel]="getRepositoryName()"
-    >
+    />
   </div>
 </form>
 
-<form *ngIf="resourceType === ResTypes.RESOURCE_FILE && form" [formGroup]="form">
+<form
+  *ngIf="resourceType === ResTypes.RESOURCE_FILE && form"
+  [formGroup]="form"
+>
   <div class="form-group">
     <label for="resFileName">Resource Name</label>
     <input
@@ -84,7 +93,7 @@
       id="resFileName"
       placeholder="Resource name"
       formControlName="resFileName"
-    >
+    />
   </div>
   <div class="input-group mb-3">
     <label class="custom-file-label" for="resFileData">Choose file</label>
@@ -95,7 +104,7 @@
         id="resFileData"
         formControlName="resFileData"
         (change)="handleFileInput($event.target.files)"
-      >
+      />
     </div>
   </div>
   <div class="form-group">
@@ -106,7 +115,7 @@
       id="resFileFileName"
       placeholder="File Name"
       formControlName="resFileFileName"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="resFileSummary">Summary</label>
@@ -116,11 +125,14 @@
       id="resFileSummary"
       placeholder="Summary"
       formControlName="resFileSummary"
-    >
+    />
   </div>
 </form>
 
-<form *ngIf="resourceType === ResTypes.RESOURCE_CODE_SNIPPET && form" [formGroup]="form">
+<form
+  *ngIf="resourceType === ResTypes.RESOURCE_CODE_SNIPPET && form"
+  [formGroup]="form"
+>
   <div class="form-group">
     <label for="csName">Resource Name</label>
     <input
@@ -129,7 +141,7 @@
       id="csName"
       placeholder="Resource name"
       formControlName="csName"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="csTitle">Title</label>
@@ -139,7 +151,7 @@
       id="csTitle"
       placeholder="Title"
       formControlName="csTitle"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="csDescription">Description</label>
@@ -169,11 +181,14 @@
       id="csLang"
       placeholder="Language"
       formControlName="csLang"
-    >
+    />
   </div>
 </form>
 
-<form *ngIf="resourceType === ResTypes.RESOURCE_MARKDOWN && form" [formGroup]="form">
+<form
+  *ngIf="resourceType === ResTypes.RESOURCE_MARKDOWN && form"
+  [formGroup]="form"
+>
   <div class="form-group">
     <label for="mdName">Resource Name</label>
     <input
@@ -182,7 +197,7 @@
       id="mdName"
       placeholder="Resource name"
       formControlName="mdName"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="mdTitle">Title</label>
@@ -192,7 +207,7 @@
       id="mdTitle"
       placeholder="Title"
       formControlName="mdTitle"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="mdDescription">Description</label>
@@ -216,7 +231,10 @@
   </div>
 </form>
 
-<form *ngIf="resourceType === ResTypes.RESOURCE_GUIDE && form" [formGroup]="form">
+<form
+  *ngIf="resourceType === ResTypes.RESOURCE_GUIDE && form"
+  [formGroup]="form"
+>
   <div class="form-group">
     <label for="gdName">Resource Name</label>
     <input
@@ -225,7 +243,7 @@
       id="gdName"
       placeholder="Resource name"
       formControlName="gdName"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="gTitle">Guide Title</label>
@@ -235,7 +253,7 @@
       id="gTitle"
       placeholder="Guide Title"
       formControlName="gTitle"
-    >
+    />
   </div>
   <div class="form-group">
     <label for="gDescription">Description</label>

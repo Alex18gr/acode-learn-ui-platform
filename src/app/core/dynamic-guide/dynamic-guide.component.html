@@ -2,35 +2,48 @@
   <div class="row">
     <div class="col-md-12" *ngIf="guideResource">
       <div class="card shadow-sm border p-2">
-        <h1>{{guideResource.guideTitle}}</h1>
-        <p>{{guideResource.guideDescription}}</p>
+        <h1>{{ guideResource.guideTitle }}</h1>
+        <p>{{ guideResource.guideDescription }}</p>
       </div>
     </div>
-    <hr>
+    <hr />
     <div class="col-md-12 mt-2" *ngIf="editMode">
       <div class="card border shadow-sm rounded p-2 m-buttons">
         <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-outline-secondary" (click)="onEditResources()">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="onEditResources()"
+          >
             <i class="fas fa-edit"></i> Edit Resources List
           </button>
-<!--          <button type="button" class="btn btn-outline-secondary" (click)="onSaveGuide()">-->
-<!--            <i class="fas fa-save"></i>-->
-<!--          </button>-->
+          <!--          <button type="button" class="btn btn-outline-secondary" (click)="onSaveGuide()">-->
+          <!--            <i class="fas fa-save"></i>-->
+          <!--          </button>-->
         </div>
       </div>
     </div>
     <ng-container *ngIf="guideData">
-      <div *ngFor="let guideElement of guideData.resources" class="col-md-12 mt-2">
-        <div  class="card border shadow-sm rounded p-2">
-          <app-dynamic-guide-element [resource]="guideElement" [editMode]="editMode" [courseId]="courseId"></app-dynamic-guide-element>
+      <div
+        *ngFor="let guideElement of guideData.resources"
+        class="col-md-12 mt-2"
+      >
+        <div class="card border shadow-sm rounded p-2">
+          <app-dynamic-guide-element
+            [resource]="guideElement"
+            [editMode]="editMode"
+            [courseId]="courseId"
+          ></app-dynamic-guide-element>
         </div>
       </div>
     </ng-container>
-
   </div>
 </div>
 
-<app-dynamic-guide-edit-resources-modal [courseId]="courseId" *ngIf="editMode"
-   (editChangesSubmitted)="onSaveGuide($event)" #editModal>
-
+<app-dynamic-guide-edit-resources-modal
+  [courseId]="courseId"
+  *ngIf="editMode"
+  (editChangesSubmitted)="onSaveGuide($event)"
+  #editModal
+>
 </app-dynamic-guide-edit-resources-modal>

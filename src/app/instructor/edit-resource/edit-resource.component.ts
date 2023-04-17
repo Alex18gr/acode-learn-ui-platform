@@ -1,31 +1,47 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-import {Resource} from '../../core/models/resource-models/resource.model';
-import {ResourceEditFormComponent} from './resource-edit-form/resource-edit-form.component';
-import {ResourceTypes} from '../../core/models/resource-models/resource-types';
-import {tap} from 'rxjs/operators';
-import {HttpErrorResponse, HttpEvent, HttpEventType} from '@angular/common/http';
-import {InstructorResourceService} from '../resource/instructor-resource.service';
-import {ToastService} from '../../core/toast/toast.service';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { Resource } from '../../core/models/resource-models/resource.model';
+import { ResourceEditFormComponent } from './resource-edit-form/resource-edit-form.component';
+import { ResourceTypes } from '../../core/models/resource-models/resource-types';
+import { tap } from 'rxjs/operators';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpEventType,
+} from '@angular/common/http';
+import { InstructorResourceService } from '../resource/instructor-resource.service';
+import { ToastService } from '../../core/toast/toast.service';
 
 declare var $: any;
 
 @Component({
   selector: 'app-edit-resource',
   templateUrl: './edit-resource.component.html',
-  styleUrls: ['./edit-resource.component.css']
+  styleUrls: ['./edit-resource.component.css'],
 })
 export class EditResourceComponent implements OnInit {
-  @ViewChild('editModal', {static: false}) editModal: ElementRef;
-  @ViewChild('editFormComponent', {static: false}) editFormComponent: ResourceEditFormComponent;
-  @Output() modalFormSubmittedSuccess: EventEmitter<{resource: Resource, eventType: string}>
-    = new EventEmitter<{resource: Resource, eventType: string}>();
+  @ViewChild('editModal', { static: false }) editModal: ElementRef;
+  @ViewChild('editFormComponent', { static: false })
+  editFormComponent: ResourceEditFormComponent;
+  @Output() modalFormSubmittedSuccess: EventEmitter<{
+    resource: Resource;
+    eventType: string;
+  }> = new EventEmitter<{ resource: Resource; eventType: string }>();
   modalLoading = false;
   editResourceType: string;
   private editResource: Resource;
   private editMode = false;
   title = 'New Resource';
-  constructor(private resourceService: InstructorResourceService,
-              private toastService: ToastService) { }
+  constructor(
+    private resourceService: InstructorResourceService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     // $('#myModal').on('hidden.bs.modal', (e) => {
@@ -79,7 +95,7 @@ export class EditResourceComponent implements OnInit {
   private showProgress(event: HttpEvent<any>) {
     switch (event.type) {
       case HttpEventType.UploadProgress:
-        const percentDone = Math.round(100 * event.loaded / event.total);
+        const percentDone = Math.round((100 * event.loaded) / event.total);
         return percentDone;
     }
   }
@@ -91,29 +107,32 @@ export class EditResourceComponent implements OnInit {
       console.log(submitData);
       console.log(fileReader.result);
       delete submitData.fileData;
-      this.resourceService.createFileResourceRequest(
-        submitData,
-        this.editFormComponent.submitForm().fileData
-        // String.fromCharCode.apply(null, new Uint16Array(fileReader.result as ArrayBuffer))
-      ).subscribe(data => {
-          console.log(this.showProgress(data));
-          this.modalLoading = false;
-          this.resourceService.getCourseResources();
-          this.hideModal();
-        },
-        error => {
-          this.modalLoading = false;
-        },
-        () => {
-          console.log('upload completed');
-          this.modalLoading = false;
-          this.hideModal();
-          this.modalFormSubmittedSuccess.emit({
-            eventType: (this.editMode) ? 'update' : 'create',
-            resource: submitData
-          });
-        },
-      );
+      this.resourceService
+        .createFileResourceRequest(
+          submitData,
+          this.editFormComponent.submitForm().fileData
+          // String.fromCharCode.apply(null, new Uint16Array(fileReader.result as ArrayBuffer))
+        )
+        .subscribe(
+          (data) => {
+            console.log(this.showProgress(data));
+            this.modalLoading = false;
+            this.resourceService.getCourseResources();
+            this.hideModal();
+          },
+          (error) => {
+            this.modalLoading = false;
+          },
+          () => {
+            console.log('upload completed');
+            this.modalLoading = false;
+            this.hideModal();
+            this.modalFormSubmittedSuccess.emit({
+              eventType: this.editMode ? 'update' : 'create',
+              resource: submitData,
+            });
+          }
+        );
     };
     fileReader.readAsArrayBuffer(submitData.fileData);
     // fileReader.readAsBinaryString(submitData.fileData);
@@ -122,19 +141,23 @@ export class EditResourceComponent implements OnInit {
   private saveOrUpdateResource(submitData: any) {
     this.modalLoading = true;
     if (this.editMode) {
-      this.resourceService.updateResource(submitData).subscribe((data) => {
-        this.handleSaveOrUpdateResponse(data);
-      },
-(err) => {
+      this.resourceService.updateResource(submitData).subscribe(
+        (data) => {
+          this.handleSaveOrUpdateResponse(data);
+        },
+        (err) => {
           this.handleErrorResponse(err);
-      });
+        }
+      );
     } else {
-      this.resourceService.saveResource(submitData).subscribe((data) => {
-        this.handleSaveOrUpdateResponse(data);
-      },
-      (err) => {
-        this.handleErrorResponse(err);
-      });
+      this.resourceService.saveResource(submitData).subscribe(
+        (data) => {
+          this.handleSaveOrUpdateResponse(data);
+        },
+        (err) => {
+          this.handleErrorResponse(err);
+        }
+      );
     }
   }
 
@@ -143,8 +166,8 @@ export class EditResourceComponent implements OnInit {
     this.resourceService.getCourseResources();
     this.hideModal();
     this.modalFormSubmittedSuccess.emit({
-      eventType: (this.editMode) ? 'update' : 'create',
-      resource: data
+      eventType: this.editMode ? 'update' : 'create',
+      resource: data,
     });
   }
 

@@ -3,15 +3,26 @@
 </div>
 <div *ngIf="courseSection" class="card">
   <div class="card-body">
-    <h2>{{courseSection.name}}</h2>
-    <p>{{courseSection.description}}</p>
-    <hr>
-    <select class="custom-select" (change)="resourceTypeChanged($event)" [value]="resourcesType" #selectResourceType>
+    <h2>{{ courseSection.name }}</h2>
+    <p>{{ courseSection.description }}</p>
+    <hr />
+    <select
+      class="custom-select"
+      (change)="resourceTypeChanged($event)"
+      [value]="resourcesType"
+      #selectResourceType
+    >
       <option value="RESOURCES_ALL">All Resources</option>
-      <option *ngFor="let opt of resourceTypesListSelect" [value]="opt.value">{{opt.name}}</option>
+      <option *ngFor="let opt of resourceTypesListSelect" [value]="opt.value">
+        {{ opt.name }}
+      </option>
     </select>
 
-    <app-resource-table [resourceType]="resourcesType" [instructorMode]="false"
-                        [resources]="courseSection.resources" [courseId]="currCourseId"></app-resource-table>
+    <app-resource-table
+      [resourceType]="resourcesType"
+      [instructorMode]="false"
+      [resources]="courseSection.resources"
+      [courseId]="currCourseId"
+    ></app-resource-table>
   </div>
 </div>

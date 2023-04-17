@@ -1,6 +1,9 @@
 <ng-container *ngIf="resourceType === resourceTypes.RESOURCE_LINK">
   <p *ngIf="resourcesEmpty(resources.linkResources)">No Resources</p>
-  <table class="table table-sm table-hover table-striped" *ngIf="!resourcesEmpty(resources.linkResources)">
+  <table
+    class="table table-sm table-hover table-striped"
+    *ngIf="!resourcesEmpty(resources.linkResources)"
+  >
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -13,19 +16,30 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let res of resources.linkResources; let i = index" [attr.data-index]="i">
-        <th scope="row">{{i}}</th>
-        <td>{{res.resourceId}}</td>
-        <td>{{res.name}}</td>
-        <td>{{res.dateCreated | date}}</td>
-        <td>{{res.description}}</td>
-        <td><a [href]="res.link" target="_blank">{{res.link}}</a></td>
+      <tr
+        *ngFor="let res of resources.linkResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+        <td>{{ res.description }}</td>
+        <td>
+          <a [href]="res.link" target="_blank">{{ res.link }}</a>
+        </td>
         <td *ngIf="instructorMode">
           <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button class="btn btn-outline-info" (click)="editResource.emit(res)">
+            <button
+              class="btn btn-outline-info"
+              (click)="editResource.emit(res)"
+            >
               <i class="fas fa-edit"></i>
             </button>
-            <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
+            <button
+              class="btn btn-outline-danger"
+              (click)="deleteResource.emit(res)"
+            >
               <i class="fas fa-trash-alt"></i>
             </button>
           </div>
@@ -37,275 +51,375 @@
 
 <ng-container *ngIf="resourceType === resourceTypes.RESOURCE_FILE">
   <p *ngIf="resourcesEmpty(resources.fileResources)">No Resources</p>
-  <table class="table table-sm table-hover table-striped" *ngIf="!resourcesEmpty(resources.fileResources)">
+  <table
+    class="table table-sm table-hover table-striped"
+    *ngIf="!resourcesEmpty(resources.fileResources)"
+  >
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Resource ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Date Created</th>
-      <th scope="col">File Name</th>
-      <th scope="col">File Type</th>
-      <th scope="col">Summary</th>
-      <th scope="col">Download Link</th>
-      <th scope="col" *ngIf="instructorMode">Actions</th>
-    </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Resource ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">File Name</th>
+        <th scope="col">File Type</th>
+        <th scope="col">Summary</th>
+        <th scope="col">Download Link</th>
+        <th scope="col" *ngIf="instructorMode">Actions</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let res of resources.fileResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.dateCreated | date}}</td>
-      <td>{{res.fileName}}</td>
-      <td style="font-size: x-large;"><i [classList]="getFileTypeClass(res.fileType)"></i></td>
-      <td style="font-size: small;">{{res.summary}}</td>
-      <!-- TODO: Configure an environment variable for the resource server address -->
-      <td>
-        <button class="btn btn-outline-primary" type="button" (click)="downloadFile(res)">
-          <i class="fas fa-download"></i>
-        </button>
-      </td>
-      <td *ngIf="instructorMode">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-          <button class="btn btn-outline-info" (click)="editResource.emit(res)">
-            <i class="fas fa-edit"></i>
+      <tr
+        *ngFor="let res of resources.fileResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+        <td>{{ res.fileName }}</td>
+        <td style="font-size: x-large">
+          <i [classList]="getFileTypeClass(res.fileType)"></i>
+        </td>
+        <td style="font-size: small">{{ res.summary }}</td>
+        <!-- TODO: Configure an environment variable for the resource server address -->
+        <td>
+          <button
+            class="btn btn-outline-primary"
+            type="button"
+            (click)="downloadFile(res)"
+          >
+            <i class="fas fa-download"></i>
           </button>
-          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </td>
-    </tr>
+        </td>
+        <td *ngIf="instructorMode">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button
+              class="btn btn-outline-info"
+              (click)="editResource.emit(res)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              class="btn btn-outline-danger"
+              (click)="deleteResource.emit(res)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </ng-container>
 
 <ng-container *ngIf="resourceType === resourceTypes.RESOURCE_REPOSITORY">
   <p *ngIf="resourcesEmpty(resources.repositoryResources)">No Resources</p>
-  <table class="table table-sm table-hover table-striped" *ngIf="!resourcesEmpty(resources.repositoryResources)">
+  <table
+    class="table table-sm table-hover table-striped"
+    *ngIf="!resourcesEmpty(resources.repositoryResources)"
+  >
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Resource ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Date Created</th>
-      <th scope="col">Repository URL</th>
-      <th scope="col">Repository Name</th>
-      <th scope="col">Repository Name Repo</th>
-      <th scope="col" *ngIf="instructorMode">Actions</th>
-    </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Resource ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Repository URL</th>
+        <th scope="col">Repository Name</th>
+        <th scope="col">Repository Name Repo</th>
+        <th scope="col" *ngIf="instructorMode">Actions</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let res of resources.repositoryResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.dateCreated | date}}</td>
-      <td><a [href]="res.repoUrl" target="_blank">{{res.repoUrl}}</a></td>
-      <td>{{res.repoName}}</td>
-      <td>{{res.repoNameRepo}}</td>
-      <td *ngIf="instructorMode">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-          <button class="btn btn-outline-info" (click)="editResource.emit(res)">
-            <i class="fas fa-edit"></i>
-          </button>
-          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </td>
-    </tr>
+      <tr
+        *ngFor="let res of resources.repositoryResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+        <td>
+          <a [href]="res.repoUrl" target="_blank">{{ res.repoUrl }}</a>
+        </td>
+        <td>{{ res.repoName }}</td>
+        <td>{{ res.repoNameRepo }}</td>
+        <td *ngIf="instructorMode">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button
+              class="btn btn-outline-info"
+              (click)="editResource.emit(res)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              class="btn btn-outline-danger"
+              (click)="deleteResource.emit(res)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </ng-container>
 
 <ng-container *ngIf="resourceType === resourceTypes.RESOURCE_MARKDOWN">
-  <p *ngIf="resourcesEmpty(resources.markdownDocumentResources)">No Resources</p>
-  <table class="table table-sm table-hover table-striped" *ngIf="!resourcesEmpty(resources.markdownDocumentResources)">
+  <p *ngIf="resourcesEmpty(resources.markdownDocumentResources)">
+    No Resources
+  </p>
+  <table
+    class="table table-sm table-hover table-striped"
+    *ngIf="!resourcesEmpty(resources.markdownDocumentResources)"
+  >
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Resource ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Date Created</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Markdown Data</th>
-      <th scope="col" *ngIf="instructorMode">Actions</th>
-    </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Resource ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Markdown Data</th>
+        <th scope="col" *ngIf="instructorMode">Actions</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let res of resources.markdownDocumentResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.dateCreated | date}}</td>
-      <td>{{res.documentTitle}}</td>
-      <td>{{res.description}}</td>
-      <td>
-        <button class="btn btn-outline-primary" (click)="navigateToMarkdownEditor(res.resourceId)">
-          <i class="fas fa-external-link-alt"></i>
-        </button>
-      </td>
-      <td *ngIf="instructorMode">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-          <button class="btn btn-outline-info" (click)="editResource.emit(res)">
-            <i class="fas fa-edit"></i>
+      <tr
+        *ngFor="let res of resources.markdownDocumentResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+        <td>{{ res.documentTitle }}</td>
+        <td>{{ res.description }}</td>
+        <td>
+          <button
+            class="btn btn-outline-primary"
+            (click)="navigateToMarkdownEditor(res.resourceId)"
+          >
+            <i class="fas fa-external-link-alt"></i>
           </button>
-          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </td>
-    </tr>
+        </td>
+        <td *ngIf="instructorMode">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button
+              class="btn btn-outline-info"
+              (click)="editResource.emit(res)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              class="btn btn-outline-danger"
+              (click)="deleteResource.emit(res)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </ng-container>
 
 <ng-container *ngIf="resourceType === resourceTypes.RESOURCE_CODE_SNIPPET">
   <p *ngIf="resourcesEmpty(resources.codeSnippetResources)">No Resources</p>
-  <table class="table table-sm table-hover table-striped" *ngIf="!resourcesEmpty(resources.codeSnippetResources)">
+  <table
+    class="table table-sm table-hover table-striped"
+    *ngIf="!resourcesEmpty(resources.codeSnippetResources)"
+  >
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Resource ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Date Created</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Code</th>
-      <th scope="col">Language</th>
-      <th scope="col" *ngIf="instructorMode">Actions</th>
-    </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Resource ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Code</th>
+        <th scope="col">Language</th>
+        <th scope="col" *ngIf="instructorMode">Actions</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let res of resources.codeSnippetResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.dateCreated | date}}</td>
-      <td>{{res.snippetTitle}}</td>
-      <td>{{res.snippetDescription}}</td>
-      <td>
-        <button class="btn btn-outline-primary" (click)="navigateToCodeEditor(res.resourceId)">
-          <i class="fas fa-external-link-alt"></i>
-        </button>
-      </td>
-      <td>{{res.snippetLanguage}}</td>
-      <td *ngIf="instructorMode">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-          <button class="btn btn-outline-info" (click)="editResource.emit(res)">
-            <i class="fas fa-edit"></i>
+      <tr
+        *ngFor="let res of resources.codeSnippetResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+        <td>{{ res.snippetTitle }}</td>
+        <td>{{ res.snippetDescription }}</td>
+        <td>
+          <button
+            class="btn btn-outline-primary"
+            (click)="navigateToCodeEditor(res.resourceId)"
+          >
+            <i class="fas fa-external-link-alt"></i>
           </button>
-          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </td>
-    </tr>
+        </td>
+        <td>{{ res.snippetLanguage }}</td>
+        <td *ngIf="instructorMode">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button
+              class="btn btn-outline-info"
+              (click)="editResource.emit(res)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              class="btn btn-outline-danger"
+              (click)="deleteResource.emit(res)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </ng-container>
 
 <ng-container *ngIf="resourceType === resourceTypes.RESOURCE_GUIDE">
   <p *ngIf="resourcesEmpty(resources.guideResources)">No Resources</p>
-  <table class="table table-sm table-hover table-striped" *ngIf="!resourcesEmpty(resources.guideResources)">
+  <table
+    class="table table-sm table-hover table-striped"
+    *ngIf="!resourcesEmpty(resources.guideResources)"
+  >
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Resource ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Date Created</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Guide Data</th>
-      <th scope="col" *ngIf="instructorMode">Actions</th>
-    </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Resource ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Date Created</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Guide Data</th>
+        <th scope="col" *ngIf="instructorMode">Actions</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let res of resources.guideResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.dateCreated | date}}</td>
-      <td>{{res.guideTitle}}</td>
-      <td>{{res.guideDescription}}</td>
-      <td>
-        <button class="btn btn-outline-primary" (click)="navigateToGuideEditor(res.resourceId)">
-          <i class="fas fa-external-link-alt"></i>
-        </button>
-      </td>
-      <td *ngIf="instructorMode">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-          <button class="btn btn-outline-info" (click)="editResource.emit(res)">
-            <i class="fas fa-edit"></i>
+      <tr
+        *ngFor="let res of resources.guideResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+        <td>{{ res.guideTitle }}</td>
+        <td>{{ res.guideDescription }}</td>
+        <td>
+          <button
+            class="btn btn-outline-primary"
+            (click)="navigateToGuideEditor(res.resourceId)"
+          >
+            <i class="fas fa-external-link-alt"></i>
           </button>
-          <button class="btn btn-outline-danger" (click)="deleteResource.emit(res)">
-            <i class="fas fa-trash-alt"></i>
-          </button>
-        </div>
-      </td>
-    </tr>
+        </td>
+        <td *ngIf="instructorMode">
+          <div class="btn-group mr-2" role="group" aria-label="First group">
+            <button
+              class="btn btn-outline-info"
+              (click)="editResource.emit(res)"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
+            <button
+              class="btn btn-outline-danger"
+              (click)="deleteResource.emit(res)"
+            >
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </ng-container>
 
 <ng-container *ngIf="resourceType === 'RESOURCES_ALL'">
   <p *ngIf="allResourcesEmpty">No Resources</p>
-  <table class="table table-sm table-hover table-striped" *ngIf="!allResourcesEmpty">
+  <table
+    class="table table-sm table-hover table-striped"
+    *ngIf="!allResourcesEmpty"
+  >
     <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Resource ID</th>
-      <th scope="col">Name</th>
-      <th scope="col">Resource Type</th>
-      <th scope="col">Date Created</th>
-    </tr>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Resource ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Resource Type</th>
+        <th scope="col">Date Created</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let res of resources.linkResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.resourceType}}</td>
-      <td>{{res.dateCreated | date}}</td>
-    </tr>
-    <tr *ngFor="let res of resources.fileResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.resourceType}}</td>
-      <td>{{res.dateCreated | date}}</td>
-    </tr>
-    <tr *ngFor="let res of resources.repositoryResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.resourceType}}</td>
-      <td>{{res.dateCreated | date}}</td>
-    </tr>
-    <tr *ngFor="let res of resources.codeSnippetResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.resourceType}}</td>
-      <td>{{res.dateCreated | date}}</td>
-    </tr>
-    <tr *ngFor="let res of resources.markdownDocumentResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.resourceType}}</td>
-      <td>{{res.dateCreated | date}}</td>
-    </tr>
-    <tr *ngFor="let res of resources.guideResources; let i = index" [attr.data-index]="i">
-      <th scope="row">{{i}}</th>
-      <td>{{res.resourceId}}</td>
-      <td>{{res.name}}</td>
-      <td>{{res.resourceType}}</td>
-      <td>{{res.dateCreated | date}}</td>
-    </tr>
+      <tr
+        *ngFor="let res of resources.linkResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.resourceType }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+      </tr>
+      <tr
+        *ngFor="let res of resources.fileResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.resourceType }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+      </tr>
+      <tr
+        *ngFor="let res of resources.repositoryResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.resourceType }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+      </tr>
+      <tr
+        *ngFor="let res of resources.codeSnippetResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.resourceType }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+      </tr>
+      <tr
+        *ngFor="let res of resources.markdownDocumentResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.resourceType }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+      </tr>
+      <tr
+        *ngFor="let res of resources.guideResources; let i = index"
+        [attr.data-index]="i"
+      >
+        <th scope="row">{{ i }}</th>
+        <td>{{ res.resourceId }}</td>
+        <td>{{ res.name }}</td>
+        <td>{{ res.resourceType }}</td>
+        <td>{{ res.dateCreated | date }}</td>
+      </tr>
     </tbody>
   </table>
 </ng-container>

@@ -8,9 +8,8 @@ describe('RepositoryViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RepositoryViewerComponent ]
-    })
-    .compileComponents();
+      declarations: [RepositoryViewerComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

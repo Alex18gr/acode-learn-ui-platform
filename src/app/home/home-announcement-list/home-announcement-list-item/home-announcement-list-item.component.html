@@ -1,8 +1,13 @@
 <div class="my-1 p-2 bg-white border-top">
-    <h5 class="text-left text-grey">{{this.announcement.title}}</h5>
-    <h6 class="text-muted">{{courseTitle}}</h6>
-    <span class="text-right text-primary">{{this.announcement.professor}}</span> -
-    <div class="mb-1 text-muted d-inline">{{this.announcement.timestamp | date:'dd/MM/yy hh:mm' }}</div>
-    <p>{{this.announcement.contents}}</p>
-    <a class="d-block text-primary" style="text-align: end; cursor: pointer;">Read more...</a>
+  <h5 class="text-left text-grey">{{ this.announcement.title }}</h5>
+  <h6 class="text-muted">{{ courseTitle }}</h6>
+  <span class="text-right text-primary">{{ this.announcement.professor }}</span>
+  -
+  <div class="mb-1 text-muted d-inline">
+    {{ this.announcement.timestamp | date : 'dd/MM/yy hh:mm' }}
+  </div>
+  <p>{{ this.announcement.contents }}</p>
+  <a class="d-block text-primary" style="text-align: end; cursor: pointer"
+    >Read more...</a
+  >
 </div>

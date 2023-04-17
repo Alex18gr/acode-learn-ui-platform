@@ -2,24 +2,47 @@
   <form [formGroup]="form" (ngSubmit)="onFormSubmit()">
     <div class="form-group">
       <label for="csName">Name</label>
-      <input [disabled]="savingData" type="text" class="form-control" id="csName" formControlName="name">
+      <input
+        [disabled]="savingData"
+        type="text"
+        class="form-control"
+        id="csName"
+        formControlName="name"
+      />
     </div>
     <div class="form-group">
       <label for="csDescription">Description</label>
-      <textarea [disabled]="savingData" class="form-control" id="csDescription" rows="3" formControlName="description"></textarea>
+      <textarea
+        [disabled]="savingData"
+        class="form-control"
+        id="csDescription"
+        rows="3"
+        formControlName="description"
+      ></textarea>
     </div>
-    <button type="submit" class="btn btn-outline-primary" [disabled]="savingData">
-      <div *ngIf="!savingData">
-        Save
-      </div>
+    <button
+      type="submit"
+      class="btn btn-outline-primary"
+      [disabled]="savingData"
+    >
+      <div *ngIf="!savingData">Save</div>
       <div *ngIf="savingData">
         Saving...
-        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
       </div>
     </button>
-    <button [disabled]="savingData" type="button" class="btn btn-outline-secondary" (click)="onFormReset()">Reset</button>
+    <button
+      [disabled]="savingData"
+      type="button"
+      class="btn btn-outline-secondary"
+      (click)="onFormReset()"
+    >
+      Reset
+    </button>
   </form>
 </div>
-<div *ngIf="!selectedCourseSection">
-  Select a Course Section to Edit...
-</div>
+<div *ngIf="!selectedCourseSection">Select a Course Section to Edit...</div>

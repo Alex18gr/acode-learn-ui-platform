@@ -1,15 +1,18 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ResourceService, ResourceStore} from '../../resource/resource.service';
-import {Subject, Subscription} from 'rxjs';
-import {CourseResources} from '../../../instructor/resource/instructor-resource.service';
-import {CoursesService} from '../../courses.service';
-import {Course} from '../../course.model';
-import {ResourceTypes} from '../../../core/models/resource-models/resource-types';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  ResourceService,
+  ResourceStore,
+} from '../../resource/resource.service';
+import { Subject, Subscription } from 'rxjs';
+import { CourseResources } from '../../../instructor/resource/instructor-resource.service';
+import { CoursesService } from '../../courses.service';
+import { Course } from '../../course.model';
+import { ResourceTypes } from '../../../core/models/resource-models/resource-types';
 
 @Component({
   selector: 'app-resources',
   templateUrl: './resources.component.html',
-  styleUrls: ['./resources.component.css']
+  styleUrls: ['./resources.component.css'],
 })
 export class ResourcesComponent implements OnInit, OnDestroy {
   resources: CourseResources;
@@ -18,18 +21,22 @@ export class ResourcesComponent implements OnInit, OnDestroy {
   currentCourse: Course;
   currentResourceType = 'RESOURCES_ALL';
   resourceTypesListSelect = ResourceTypes.ResourceTypesListSelect;
-  @ViewChild('selectResourceType', {static: false}) selectResourceType: HTMLSelectElement;
+  @ViewChild('selectResourceType', { static: false })
+  selectResourceType: HTMLSelectElement;
 
-  constructor(private resourceService: ResourceService,
-              private coursesService: CoursesService) { }
+  constructor(
+    private resourceService: ResourceService,
+    private coursesService: CoursesService
+  ) {}
 
   ngOnInit() {
     this.currentCourse = this.coursesService.currentCourse;
-    this.courseChanged = this.coursesService.currentCourseChanged
-      .subscribe((course: Course) => {
+    this.courseChanged = this.coursesService.currentCourseChanged.subscribe(
+      (course: Course) => {
         this.currentCourse = course;
         this.getResources();
-      });
+      }
+    );
     this.getResources();
   }
 
@@ -45,8 +52,9 @@ export class ResourcesComponent implements OnInit, OnDestroy {
 
   getResources() {
     if (this.currentCourse) {
-      this.resourceService.getAllCourseResources(this.currentCourse.id)
-        .subscribe((data: {resources: CourseResources}) => {
+      this.resourceService
+        .getAllCourseResources(this.currentCourse.id)
+        .subscribe((data: { resources: CourseResources }) => {
           this.resources = data.resources;
         });
     }

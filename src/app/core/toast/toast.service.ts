@@ -1,13 +1,12 @@
-import {Injectable} from '@angular/core';
-import {NotificationTypes, Toast, ToastActions} from './toast.model';
-import {Subject} from 'rxjs';
-import {Resource} from '../models/resource-models/resource.model';
+import { Injectable } from '@angular/core';
+import { NotificationTypes, Toast, ToastActions } from './toast.model';
+import { Subject } from 'rxjs';
+import { Resource } from '../models/resource-models/resource.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastService {
-
   toasts: Toast[] = [
     // {
     //   action: ToastActions.none,
@@ -54,7 +53,7 @@ export class ToastService {
       notificationType: NotificationTypes.danger,
       title,
       message,
-      delay: delay ? delay : 5000
+      delay: delay ? delay : 5000,
     });
   }
 
@@ -64,7 +63,7 @@ export class ToastService {
       notificationType: NotificationTypes.info,
       title,
       message,
-      delay: delay ? delay : 5000
+      delay: delay ? delay : 5000,
     });
   }
 
@@ -74,18 +73,21 @@ export class ToastService {
       notificationType: NotificationTypes.info,
       title,
       message,
-      delay: delay ? delay : 5000
+      delay: delay ? delay : 5000,
     });
   }
 
   addResourceSavedSuccessfully(resource: Resource) {
-    this.addSaveToast('Resource Saved',
-      'Resource "' + resource.name + '" saved successfully.');
+    this.addSaveToast(
+      'Resource Saved',
+      'Resource "' + resource.name + '" saved successfully.'
+    );
   }
 
   addResourceSaveErrorSuccessfully(resource: Resource) {
-    this.addErrorToast('Resource Save Error',
-      'An error occurred while trying to save resource "'
-      + resource.name + '".');
+    this.addErrorToast(
+      'Resource Save Error',
+      'An error occurred while trying to save resource "' + resource.name + '".'
+    );
   }
 }

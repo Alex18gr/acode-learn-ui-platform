@@ -5,13 +5,13 @@ import { CoursesService } from 'src/app/course/courses.service';
 @Component({
   selector: 'app-home-announcement-list',
   templateUrl: './home-announcement-list.component.html',
-  styleUrls: ['./home-announcement-list.component.css']
+  styleUrls: ['./home-announcement-list.component.css'],
 })
 export class HomeAnnouncementListComponent implements OnInit {
   @Input() announcements: Announcement[];
   viewedAnnouncements: Announcement[];
 
-  constructor(private coursesService: CoursesService) { }
+  constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
     this.manipulateAnnouncementsList();
@@ -19,7 +19,9 @@ export class HomeAnnouncementListComponent implements OnInit {
 
   private manipulateAnnouncementsList() {
     // sort the list of the announcements by the timestamp
-    this.announcements.sort((a, b) => a.timestamp < b.timestamp ? 1 : ((a.timestamp > b.timestamp) ? -1 : 0));
+    this.announcements.sort((a, b) =>
+      a.timestamp < b.timestamp ? 1 : a.timestamp > b.timestamp ? -1 : 0
+    );
 
     // we will get only the 5 newest announcements
     if (this.announcements.length > 5) {
@@ -28,5 +30,4 @@ export class HomeAnnouncementListComponent implements OnInit {
       this.viewedAnnouncements = this.announcements;
     }
   }
-
 }

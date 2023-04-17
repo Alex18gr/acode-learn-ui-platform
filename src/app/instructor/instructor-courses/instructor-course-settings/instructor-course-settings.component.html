@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h1>
-        Course Settings
-      </h1>
-      <hr>
-      <div class="spinner-border text-secondary" role="status" *ngIf="!currentCourse">
+      <h1>Course Settings</h1>
+      <hr />
+      <div
+        class="spinner-border text-secondary"
+        role="status"
+        *ngIf="!currentCourse"
+      >
         <span class="sr-only">Loading...</span>
       </div>
       <div *ngIf="currentCourse">
@@ -13,21 +15,25 @@
           <li class="list-group-item">
             <div class="row">
               <div class="col-md-8">
-                <h3>
-                  Course Details:
-                </h3>
+                <h3>Course Details:</h3>
                 <table class="table">
                   <tr>
-                    <td style="vertical-align:top"><span class="m-4">Name:</span></td>
-                    <td>{{currentCourse.name}}</td>
+                    <td style="vertical-align: top">
+                      <span class="m-4">Name:</span>
+                    </td>
+                    <td>{{ currentCourse.name }}</td>
                   </tr>
                   <tr>
-                    <td style="vertical-align:top"><span class="m-4">Description:</span></td>
-                    <td>{{currentCourse.description}}</td>
+                    <td style="vertical-align: top">
+                      <span class="m-4">Description:</span>
+                    </td>
+                    <td>{{ currentCourse.description }}</td>
                   </tr>
                   <tr>
-                    <td style="vertical-align:top"><span class="m-4">Semester:</span></td>
-                    <td>{{currentCourse.semester}}</td>
+                    <td style="vertical-align: top">
+                      <span class="m-4">Semester:</span>
+                    </td>
+                    <td>{{ currentCourse.semester }}</td>
                   </tr>
                 </table>
               </div>
@@ -38,8 +44,10 @@
           </li>
           <li class="list-group-item">
             <h3>Manage students</h3>
-            <hr>
-            <app-table-students [currentCourse]="currentCourse"></app-table-students>
+            <hr />
+            <app-table-students
+              [currentCourse]="currentCourse"
+            ></app-table-students>
           </li>
         </ul>
       </div>

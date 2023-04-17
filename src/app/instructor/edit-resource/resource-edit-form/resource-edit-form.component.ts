@@ -1,22 +1,28 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {Resource} from '../../../core/models/resource-models/resource.model';
-import {ResourceTypes} from '../../../core/models/resource-models/resource-types';
-import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import {ResourceLink} from '../../../core/models/resource-models/resource-link.model';
-import {InstructorCoursesService} from '../../courses/instructor-courses.service';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import { Resource } from '../../../core/models/resource-models/resource.model';
+import { ResourceTypes } from '../../../core/models/resource-models/resource-types';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { ResourceLink } from '../../../core/models/resource-models/resource-link.model';
+import { InstructorCoursesService } from '../../courses/instructor-courses.service';
 
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {ResourceFile} from '../../../core/models/resource-models/resource-file.model';
-import {ResourceRepository} from '../../../core/models/resource-models/resource-repository.model';
-import {ResourceCodeSnippet} from '../../../core/models/resource-models/resource-code-snippet.model';
-import {ResourceMarkdown} from '../../../core/models/resource-models/resource-markdown.model';
-import {ResourceGuide} from '../../../core/models/resource-models/resource-guide.model';
+import { ResourceFile } from '../../../core/models/resource-models/resource-file.model';
+import { ResourceRepository } from '../../../core/models/resource-models/resource-repository.model';
+import { ResourceCodeSnippet } from '../../../core/models/resource-models/resource-code-snippet.model';
+import { ResourceMarkdown } from '../../../core/models/resource-models/resource-markdown.model';
+import { ResourceGuide } from '../../../core/models/resource-models/resource-guide.model';
 
 @Component({
   selector: 'app-resource-edit-form',
   templateUrl: './resource-edit-form.component.html',
-  styleUrls: ['./resource-edit-form.component.css']
+  styleUrls: ['./resource-edit-form.component.css'],
 })
 export class ResourceEditFormComponent implements OnInit, OnChanges {
   @Input() resource: Resource;
@@ -25,14 +31,17 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
   form: FormGroup;
   uploadFile: File;
 
-  constructor(private instructorCoursesService: InstructorCoursesService) { }
+  constructor(private instructorCoursesService: InstructorCoursesService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resource && changes.resource.previousValue !== changes.resource.currentValue ||
-      changes.resourceType && changes.resourceType.previousValue !== changes.resourceType.currentValue
+    if (
+      (changes.resource &&
+        changes.resource.previousValue !== changes.resource.currentValue) ||
+      (changes.resourceType &&
+        changes.resourceType.previousValue !==
+          changes.resourceType.currentValue)
     ) {
       this.initForm();
     }
@@ -80,7 +89,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
         this.form.patchValue({
           resLinkName: res.name,
           resLinkUrl: res.link,
-          resLinkDescription: res.description
+          resLinkDescription: res.description,
         });
         break;
       case ResourceTypes.RESOURCE_REPOSITORY:
@@ -89,7 +98,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
           resRepoName: res.name,
           resRepositoryName: res.repoName,
           resRepoUrl: res.repoUrl,
-          repoNameRepo: res.repoNameRepo
+          repoNameRepo: res.repoNameRepo,
         });
         break;
       case ResourceTypes.RESOURCE_MARKDOWN:
@@ -98,7 +107,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
           mdName: res.name,
           mdTitle: res.documentTitle,
           mdDescription: res.description,
-          mdData: res.markdownDocumentData
+          mdData: res.markdownDocumentData,
         });
         break;
       case ResourceTypes.RESOURCE_CODE_SNIPPET:
@@ -108,7 +117,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
           csTitle: res.snippetTitle,
           csDescription: res.snippetDescription,
           csData: res.snippetDocumentData,
-          csLang: res.snippetLanguage
+          csLang: res.snippetLanguage,
         });
         break;
       case ResourceTypes.RESOURCE_GUIDE:
@@ -116,7 +125,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
         this.form.patchValue({
           gdName: res.name,
           gTitle: res.guideTitle,
-          gDescription: res.guideDescription
+          gDescription: res.guideDescription,
         });
         break;
     }
@@ -132,7 +141,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
     return new FormGroup({
       resLinkName: new FormControl(''),
       resLinkUrl: new FormControl('', [Validators.required]),
-      resLinkDescription: new FormControl('')
+      resLinkDescription: new FormControl(''),
     });
   }
 
@@ -141,7 +150,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
       resRepoName: new FormControl(''),
       resRepositoryName: new FormControl(''),
       resRepoUrl: new FormControl(''),
-      repoNameRepo: new FormControl('')
+      repoNameRepo: new FormControl(''),
     });
   }
 
@@ -150,7 +159,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
       resFileName: new FormControl(''),
       resFileData: new FormControl(''),
       resFileFileName: new FormControl(''),
-      resFileSummary: new FormControl('')
+      resFileSummary: new FormControl(''),
     });
   }
 
@@ -159,7 +168,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
       mdName: new FormControl(''),
       mdTitle: new FormControl(''),
       mdDescription: new FormControl(''),
-      mdData: new FormControl('')
+      mdData: new FormControl(''),
     });
   }
 
@@ -169,7 +178,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
       csTitle: new FormControl(''),
       csDescription: new FormControl(''),
       csData: new FormControl(''),
-      csLang: new FormControl('')
+      csLang: new FormControl(''),
     });
   }
 
@@ -177,7 +186,7 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
     return new FormGroup({
       gdName: new FormControl(''),
       gTitle: new FormControl(''),
-      gDescription: new FormControl('')
+      gDescription: new FormControl(''),
     });
   }
 
@@ -212,15 +221,18 @@ export class ResourceEditFormComponent implements OnInit, OnChanges {
         return submitData;
       case ResourceTypes.RESOURCE_REPOSITORY:
         (submitData as ResourceRepository).name = rawValue.resRepoName;
-        (submitData as ResourceRepository).repoName = rawValue.resRepositoryName;
+        (submitData as ResourceRepository).repoName =
+          rawValue.resRepositoryName;
         (submitData as ResourceRepository).repoUrl = rawValue.resRepoUrl;
         (submitData as ResourceRepository).repoNameRepo = rawValue.repoNameRepo;
         return submitData;
       case ResourceTypes.RESOURCE_CODE_SNIPPET:
         (submitData as ResourceCodeSnippet).name = rawValue.csName;
         (submitData as ResourceCodeSnippet).snippetTitle = rawValue.csTitle;
-        (submitData as ResourceCodeSnippet).snippetDescription = rawValue.csDescription;
-        (submitData as ResourceCodeSnippet).snippetDocumentData = rawValue.csData;
+        (submitData as ResourceCodeSnippet).snippetDescription =
+          rawValue.csDescription;
+        (submitData as ResourceCodeSnippet).snippetDocumentData =
+          rawValue.csData;
         (submitData as ResourceCodeSnippet).snippetLanguage = rawValue.csLang;
         return submitData;
       case ResourceTypes.RESOURCE_MARKDOWN:

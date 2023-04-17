@@ -1,39 +1,49 @@
 import { Injectable } from '@angular/core';
-import {Resource} from '../models/resource-models/resource.model';
-import {ResourceGuide} from '../models/resource-models/resource-guide.model';
-import {CourseResources, InstructorResourceService} from '../../instructor/resource/instructor-resource.service';
-import {map} from 'rxjs/operators';
-import {ResourceTypes} from '../models/resource-models/resource-types';
+import { Resource } from '../models/resource-models/resource.model';
+import { ResourceGuide } from '../models/resource-models/resource-guide.model';
+import {
+  CourseResources,
+  InstructorResourceService,
+} from '../../instructor/resource/instructor-resource.service';
+import { map } from 'rxjs/operators';
+import { ResourceTypes } from '../models/resource-models/resource-types';
 import * as _ from 'lodash';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DynamicGuideService {
-
-  constructor(private instructorResourceService: InstructorResourceService) { }
+  constructor(private instructorResourceService: InstructorResourceService) {}
 
   getGuideDataFromResource(guideResource: ResourceGuide) {
     const mGuideData: GuideData = {
       title: guideResource.guideTitle,
       description: guideResource.guideDescription,
       dateCreated: guideResource.dateCreated,
-      guideResource
+      guideResource,
     };
 
     // get the resource ids list in order to receive the resources
     const resourceIdsList = this.getResourceIdsList(guideResource.guideData);
 
-    return this.instructorResourceService.getResourcesByResourceIds(resourceIdsList)
-      // .pipe(map((receivedResources: {resources: CourseResources}) => {
-      .pipe(map((receivedResources: any) => {
-        console.log(receivedResources);
-        mGuideData.resources = this.getGuideResourcesFromReceivedResources(guideResource, receivedResources.resources);
-        return mGuideData;
-      }));
+    return (
+      this.instructorResourceService
+        .getResourcesByResourceIds(resourceIdsList)
+        // .pipe(map((receivedResources: {resources: CourseResources}) => {
+        .pipe(
+          map((receivedResources: any) => {
+            console.log(receivedResources);
+            mGuideData.resources = this.getGuideResourcesFromReceivedResources(
+              guideResource,
+              receivedResources.resources
+            );
+            return mGuideData;
+          })
+        )
+    );
   }
 
-   getResourceIdsList(guideData: string) {
+  getResourceIdsList(guideData: string) {
     const guideDataObject = JSON.parse(guideData);
     const resourceIdsList = [];
     if (!guideDataObject) {
@@ -45,7 +55,7 @@ export class DynamicGuideService {
     return resourceIdsList;
   }
 
-   getGuideResourcesFromResourcesList(resourcesList: Resource[]) {
+  getGuideResourcesFromResourcesList(resourcesList: Resource[]) {
     const guideDataResources: GuideDataResource[] = [];
     for (const res of resourcesList) {
       guideDataResources.push(this.getGuideDataResourceFromResource(res));
@@ -64,7 +74,10 @@ export class DynamicGuideService {
     return guideRes;
   }
 
-  private getGuideResourcesFromReceivedResources(guideResource: ResourceGuide, receivedResources: CourseResources) {
+  private getGuideResourcesFromReceivedResources(
+    guideResource: ResourceGuide,
+    receivedResources: CourseResources
+  ) {
     const guideDataResources: GuideDataResource[] = [];
     if (!guideResource.guideData) {
       return;
@@ -73,67 +86,97 @@ export class DynamicGuideService {
       let index: number;
       switch (guideResData.type) {
         case ResourceTypes.RESOURCE_LINK:
-          index = this.resourceIdExistsIn(guideResData.resourceId, receivedResources.linkResources);
+          index = this.resourceIdExistsIn(
+            guideResData.resourceId,
+            receivedResources.linkResources
+          );
           if (index >= 0) {
             // @ts-ignore
             const guideDataResource: GuideDataResource = {};
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
-            if (guideResData.options) { guideDataResource.options = guideResData.options; }
-            guideDataResource.resourceData = receivedResources.linkResources[index];
+            if (guideResData.options) {
+              guideDataResource.options = guideResData.options;
+            }
+            guideDataResource.resourceData =
+              receivedResources.linkResources[index];
             guideDataResources.push(guideDataResource);
           }
           break;
         case ResourceTypes.RESOURCE_MARKDOWN:
-          index = this.resourceIdExistsIn(guideResData.resourceId, receivedResources.markdownDocumentResources);
+          index = this.resourceIdExistsIn(
+            guideResData.resourceId,
+            receivedResources.markdownDocumentResources
+          );
           if (index >= 0) {
             // @ts-ignore
             const guideDataResource: GuideDataResource = {};
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
-            if (guideResData.options) { guideDataResource.options = guideResData.options; }
-            guideDataResource.resourceData = receivedResources.markdownDocumentResources[index];
+            if (guideResData.options) {
+              guideDataResource.options = guideResData.options;
+            }
+            guideDataResource.resourceData =
+              receivedResources.markdownDocumentResources[index];
             guideDataResources.push(guideDataResource);
           }
           break;
         case ResourceTypes.RESOURCE_REPOSITORY:
-          index = this.resourceIdExistsIn(guideResData.resourceId, receivedResources.repositoryResources);
+          index = this.resourceIdExistsIn(
+            guideResData.resourceId,
+            receivedResources.repositoryResources
+          );
           if (index >= 0) {
             // @ts-ignore
             const guideDataResource: GuideDataResource = {};
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
-            if (guideResData.options) { guideDataResource.options = guideResData.options; }
-            guideDataResource.resourceData = receivedResources.repositoryResources[index];
+            if (guideResData.options) {
+              guideDataResource.options = guideResData.options;
+            }
+            guideDataResource.resourceData =
+              receivedResources.repositoryResources[index];
             guideDataResources.push(guideDataResource);
           }
           break;
         case ResourceTypes.RESOURCE_CODE_SNIPPET:
-          index = this.resourceIdExistsIn(guideResData.resourceId, receivedResources.codeSnippetResources);
+          index = this.resourceIdExistsIn(
+            guideResData.resourceId,
+            receivedResources.codeSnippetResources
+          );
           if (index >= 0) {
             // @ts-ignore
             const guideDataResource: GuideDataResource = {};
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
-            if (guideResData.options) { guideDataResource.options = guideResData.options; }
-            guideDataResource.resourceData = receivedResources.codeSnippetResources[index];
+            if (guideResData.options) {
+              guideDataResource.options = guideResData.options;
+            }
+            guideDataResource.resourceData =
+              receivedResources.codeSnippetResources[index];
             guideDataResources.push(guideDataResource);
           }
           break;
         case ResourceTypes.RESOURCE_FILE:
-          index = this.resourceIdExistsIn(guideResData.resourceId, receivedResources.fileResources);
+          index = this.resourceIdExistsIn(
+            guideResData.resourceId,
+            receivedResources.fileResources
+          );
           if (index >= 0) {
             // @ts-ignore
             const guideDataResource: GuideDataResource = {};
             guideDataResource.resourceId = guideResData.resourceId;
             guideDataResource.order = guideResData.order;
             guideDataResource.type = guideResData.type;
-            if (guideResData.options) { guideDataResource.options = guideResData.options; }
-            guideDataResource.resourceData = receivedResources.fileResources[index];
+            if (guideResData.options) {
+              guideDataResource.options = guideResData.options;
+            }
+            guideDataResource.resourceData =
+              receivedResources.fileResources[index];
             guideDataResources.push(guideDataResource);
           }
           break;
@@ -173,7 +216,10 @@ export class DynamicGuideService {
 
     console.log(resourceToSave);
 
-    return this.instructorResourceService.updateResource(resourceToSave, courseId);
+    return this.instructorResourceService.updateResource(
+      resourceToSave,
+      courseId
+    );
   }
 }
 

@@ -1,19 +1,30 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {ResourceCodeSnippet} from '../../../models/resource-models/resource-code-snippet.model';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ResourceCodeSnippet } from '../../../models/resource-models/resource-code-snippet.model';
 import * as CodeMirror from 'codemirror';
-import {InstructorResourceService} from '../../../../instructor/resource/instructor-resource.service';
-import {ToastService} from '../../../toast/toast.service';
-import {Resource} from '../../../models/resource-models/resource.model';
+import { InstructorResourceService } from '../../../../instructor/resource/instructor-resource.service';
+import { ToastService } from '../../../toast/toast.service';
+import { Resource } from '../../../models/resource-models/resource.model';
 
 @Component({
   selector: 'app-code-viewer-editor',
   templateUrl: './code-viewer-editor.component.html',
-  styleUrls: ['./code-viewer-editor.component.css']
+  styleUrls: ['./code-viewer-editor.component.css'],
 })
-export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewInit {
-  @ViewChild('editor', {static: false}) editorElementRef: ElementRef;
-  @ViewChild('editForm', {static: false}) editForm: NgForm;
+export class CodeViewerEditorComponent
+  implements OnInit, OnChanges, AfterViewInit
+{
+  @ViewChild('editor', { static: false }) editorElementRef: ElementRef;
+  @ViewChild('editForm', { static: false }) editForm: NgForm;
   @Input() resource: ResourceCodeSnippet;
   @Input() editMode: boolean;
   @Input() courseId;
@@ -29,19 +40,20 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
   private isSaving = false;
 
   languageOptions = [
-    {value: '', key: ''},
-    {value: 'text/x-java', key: 'Java'},
-    {value: 'javascript', key: 'Javascript'},
-    {value: 'clike', key: 'C/C++'},
-    {value: 'python', key: 'Python'},
-    {value: 'php', key: 'PHP'},
-    {value: 'htmlmixed', key: 'HTML-mixed'},
-    {value: 'markdown', key: 'Markdown'}
+    { value: '', key: '' },
+    { value: 'text/x-java', key: 'Java' },
+    { value: 'javascript', key: 'Javascript' },
+    { value: 'clike', key: 'C/C++' },
+    { value: 'python', key: 'Python' },
+    { value: 'php', key: 'PHP' },
+    { value: 'htmlmixed', key: 'HTML-mixed' },
+    { value: 'markdown', key: 'Markdown' },
   ];
 
-
-  constructor(private instructorResourceService: InstructorResourceService,
-              private toastService: ToastService) { }
+  constructor(
+    private instructorResourceService: InstructorResourceService,
+    private toastService: ToastService
+  ) {}
 
   startEditMode() {
     if (this.editMode) {
@@ -51,7 +63,7 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
       this.isDisabled = false;
       this.editForm.setValue({
         title: this.resource.snippetTitle,
-        language: this.resource.snippetLanguage
+        language: this.resource.snippetLanguage,
       });
       this.editor.setOption('readOnly', this.isDisabled);
       // }
@@ -60,15 +72,16 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
 
   createEditor() {
     this.modeLanguage = this.language;
-    this.editor = new CodeMirror.fromTextArea(this.editorElementRef.nativeElement,
+    this.editor = new CodeMirror.fromTextArea(
+      this.editorElementRef.nativeElement,
       {
         lineNumbers: true,
         mode: {
           name: this.resource.snippetLanguage,
-          globalVars: true
+          globalVars: true,
         },
         readOnly: this.isDisabled,
-        viewportMargin: Infinity
+        viewportMargin: Infinity,
       }
     );
     this.editor.setOption('readOnly', this.isDisabled);
@@ -84,8 +97,6 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
     // // if (this.defaultValue != null) {
     // //   this.editor.setValue(this.defaultValue);
     // // }
-
-
     // if (this.isDisabled) {
     //   this.disabledMode = true;
     // }
@@ -96,7 +107,10 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.resource && (changes.resource.previousValue !== changes.resource.currentValue)) {
+    if (
+      changes.resource &&
+      changes.resource.previousValue !== changes.resource.currentValue
+    ) {
       // this.initEditor();
     }
   }
@@ -148,24 +162,29 @@ export class CodeViewerEditorComponent implements OnInit, OnChanges, AfterViewIn
       this.resource.snippetLanguage = this.editForm.value.language;
       this.resource.snippetTitle = this.editForm.value.title;
       this.isSaving = true;
-      this.saveChanges().subscribe((data) => {
-        this.toastService.addResourceSavedSuccessfully(data as Resource);
-        this.isEditing = false;
-        this.isSaving = false;
-        // if (this.disabledMode) {
-        this.isDisabled = true;
-        this.editor.setOption('readOnly', this.isDisabled);
-      },
-        error => {
-        this.isSaving = false;
-        this.toastService.addResourceSaveErrorSuccessfully(this.resource);
-        });
+      this.saveChanges().subscribe(
+        (data) => {
+          this.toastService.addResourceSavedSuccessfully(data as Resource);
+          this.isEditing = false;
+          this.isSaving = false;
+          // if (this.disabledMode) {
+          this.isDisabled = true;
+          this.editor.setOption('readOnly', this.isDisabled);
+        },
+        (error) => {
+          this.isSaving = false;
+          this.toastService.addResourceSaveErrorSuccessfully(this.resource);
+        }
+      );
       // }
     }
   }
 
   private saveChanges() {
     // here we save the changes to the sever
-    return this.instructorResourceService.updateResource(this.resource, this.courseId);
+    return this.instructorResourceService.updateResource(
+      this.resource,
+      this.courseId
+    );
   }
 }

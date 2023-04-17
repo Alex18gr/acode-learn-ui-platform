@@ -8,9 +8,8 @@ describe('ResourceTableComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceTableComponent ]
-    })
-    .compileComponents();
+      declarations: [ResourceTableComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

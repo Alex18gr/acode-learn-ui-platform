@@ -1,28 +1,39 @@
-import {Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import {InstructorCoursesService} from '../../courses/instructor-courses.service';
-import {Course} from '../../../course/course.model';
-import {Subscription} from 'rxjs';
-import {CourseSection} from '../../../core/models/course-section.model';
-import {ModalAddResourceComponent} from './modal-add-resource/modal-add-resource.component';
-import {Resource} from '../../../core/models/resource-models/resource.model';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { InstructorCoursesService } from '../../courses/instructor-courses.service';
+import { Course } from '../../../course/course.model';
+import { Subscription } from 'rxjs';
+import { CourseSection } from '../../../core/models/course-section.model';
+import { ModalAddResourceComponent } from './modal-add-resource/modal-add-resource.component';
+import { Resource } from '../../../core/models/resource-models/resource.model';
 import * as _ from 'lodash';
-import {ToastService} from '../../../core/toast/toast.service';
-import {ModalDeleteResourceComponent} from './modal-delete-resource/modal-delete-resource.component';
-import {ModalNewSectionComponent} from './modal-new-section/modal-new-section.component';
-import {ModalDeleteSectionComponent} from './modal-delete-section/modal-delete-section.component';
+import { ToastService } from '../../../core/toast/toast.service';
+import { ModalDeleteResourceComponent } from './modal-delete-resource/modal-delete-resource.component';
+import { ModalNewSectionComponent } from './modal-new-section/modal-new-section.component';
+import { ModalDeleteSectionComponent } from './modal-delete-section/modal-delete-section.component';
 
 @Component({
   selector: 'app-instructor-course-sections',
   templateUrl: './instructor-course-sections.component.html',
-  styleUrls: ['./instructor-course-sections.component.css']
+  styleUrls: ['./instructor-course-sections.component.css'],
 })
 export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
-  @ViewChild('listElement', {static: false}) listElementRef: ElementRef;
-  @ViewChild('modalAddResource', {static: false}) modalAddResource: ModalAddResourceComponent;
-  @ViewChild('modalDeleteResources', {static: false}) modalDeleteResources: ModalDeleteResourceComponent;
-  @ViewChild('modalNewSectionComponent', {static: false}) modalNewSectionComponent: ModalNewSectionComponent;
-  @ViewChild('modalDeleteSectionComponent', {static: false}) modalDeleteSectionComponent: ModalDeleteSectionComponent;
+  @ViewChild('listElement', { static: false }) listElementRef: ElementRef;
+  @ViewChild('modalAddResource', { static: false })
+  modalAddResource: ModalAddResourceComponent;
+  @ViewChild('modalDeleteResources', { static: false })
+  modalDeleteResources: ModalDeleteResourceComponent;
+  @ViewChild('modalNewSectionComponent', { static: false })
+  modalNewSectionComponent: ModalNewSectionComponent;
+  @ViewChild('modalDeleteSectionComponent', { static: false })
+  modalDeleteSectionComponent: ModalDeleteSectionComponent;
   currentCourse: Course;
   currentCourseSubscription: Subscription;
   editMode = false;
@@ -33,36 +44,42 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   savingData = false;
   savingOrderData = false;
 
-  constructor(private renderer: Renderer2,
-              private instructorCoursesService: InstructorCoursesService,
-              private toastService: ToastService) { }
+  constructor(
+    private renderer: Renderer2,
+    private instructorCoursesService: InstructorCoursesService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.currentCourse = this.instructorCoursesService.currentCourse;
     this.getCourseSections();
-    this.currentCourseSubscription = this.instructorCoursesService.currentCourseChanged.subscribe(
-      (course: Course) => {
-        this.currentCourse = course;
-        this.getCourseSections();
-      }
-    );
+    this.currentCourseSubscription =
+      this.instructorCoursesService.currentCourseChanged.subscribe(
+        (course: Course) => {
+          this.currentCourse = course;
+          this.getCourseSections();
+        }
+      );
   }
 
   getCourseSections() {
     if (this.currentCourse) {
-      this.instructorCoursesService.getCourseSections(this.currentCourse)
+      this.instructorCoursesService
+        .getCourseSections(this.currentCourse)
         .subscribe((courseSections) => {
           (courseSections as unknown as CourseSection[]).sort(
             (a: CourseSection, b: CourseSection) => {
-            if (a.order < b.order) {
-              return -1;
-            } else if (a.order > b.order) {
-              return 1;
-            } else {
-              return 0;
+              if (a.order < b.order) {
+                return -1;
+              } else if (a.order > b.order) {
+                return 1;
+              } else {
+                return 0;
+              }
             }
-          });
-          this.courseSectionsList = courseSections as unknown as CourseSection[];
+          );
+          this.courseSectionsList =
+            courseSections as unknown as CourseSection[];
         });
     }
   }
@@ -74,7 +91,11 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.courseSectionsList, event.previousIndex, event.currentIndex);
+    moveItemInArray(
+      this.courseSectionsList,
+      event.previousIndex,
+      event.currentIndex
+    );
   }
 
   onListItemClick(event: MouseEvent, courseSection: CourseSection) {
@@ -110,9 +131,7 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
     }
   }
   copyTempResourcesList() {
-    this.tempCourseSectionsList = _.cloneDeep(
-      this.courseSectionsList
-    );
+    this.tempCourseSectionsList = _.cloneDeep(this.courseSectionsList);
   }
 
   onDeleteResource(res: Resource) {
@@ -134,21 +153,25 @@ export class InstructorCourseSectionsComponent implements OnInit, OnDestroy {
       cs.order = this.courseSectionsList.indexOf(cs) + 1;
     }
 
-    this.instructorCoursesService.updateCourseSectionsOrder(
-      this.courseSectionsList,
-      this.currentCourse
-    ).subscribe((data: CourseSection[]) => {
-      this.tempCourseSectionsList = data;
-      this.courseSectionsList = this.tempCourseSectionsList;
-      this.toastService.addSaveToast(
-        'Order Updated',
-        'Course sections order updated successfully.'
+    this.instructorCoursesService
+      .updateCourseSectionsOrder(this.courseSectionsList, this.currentCourse)
+      .subscribe(
+        (data: CourseSection[]) => {
+          this.tempCourseSectionsList = data;
+          this.courseSectionsList = this.tempCourseSectionsList;
+          this.toastService.addSaveToast(
+            'Order Updated',
+            'Course sections order updated successfully.'
+          );
+          this.savingOrderData = false;
+        },
+        (error) => {
+          this.toastService.addErrorToast(
+            'Error',
+            'An error occurred while updating the course sections order.'
+          );
+        }
       );
-      this.savingOrderData = false;
-    },
-      error => {
-      this.toastService.addErrorToast('Error', 'An error occurred while updating the course sections order.');
-      });
     this.savingOrderData = false;
   }
 

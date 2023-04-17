@@ -8,9 +8,8 @@ describe('DynamicGuideComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DynamicGuideComponent ]
-    })
-    .compileComponents();
+      declarations: [DynamicGuideComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

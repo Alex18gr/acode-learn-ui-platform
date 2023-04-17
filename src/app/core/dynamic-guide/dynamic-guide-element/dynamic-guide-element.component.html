@@ -21,22 +21,33 @@
 <!--</table>-->
 
 <ng-container [ngSwitch]="resource.type">
-
-  <app-code-viewer-editor *ngSwitchCase="ResourceTypes.RESOURCE_CODE_SNIPPET"
-    [resource]="resource.resourceData" [editMode]="editMode" [courseId]="courseId"
+  <app-code-viewer-editor
+    *ngSwitchCase="ResourceTypes.RESOURCE_CODE_SNIPPET"
+    [resource]="resource.resourceData"
+    [editMode]="editMode"
+    [courseId]="courseId"
   ></app-code-viewer-editor>
 
-  <app-markdown-viewer-editor *ngSwitchCase="ResourceTypes.RESOURCE_MARKDOWN"
-    [resource]="resource.resourceData" [editMode]="editMode" [courseId]="courseId">
-
+  <app-markdown-viewer-editor
+    *ngSwitchCase="ResourceTypes.RESOURCE_MARKDOWN"
+    [resource]="resource.resourceData"
+    [editMode]="editMode"
+    [courseId]="courseId"
+  >
   </app-markdown-viewer-editor>
 
-  <app-repository-viewer *ngSwitchCase="ResourceTypes.RESOURCE_REPOSITORY" [courseId]="courseId"
-                         [resource]="resource.resourceData" [editMode]="editMode"
+  <app-repository-viewer
+    *ngSwitchCase="ResourceTypes.RESOURCE_REPOSITORY"
+    [courseId]="courseId"
+    [resource]="resource.resourceData"
+    [editMode]="editMode"
   ></app-repository-viewer>
 
-  <app-file-view *ngSwitchCase="ResourceTypes.RESOURCE_FILE" [courseId]="courseId"
-                 [resource]="resource.resourceData" [editMode]="editMode" [options]="resource.options"
+  <app-file-view
+    *ngSwitchCase="ResourceTypes.RESOURCE_FILE"
+    [courseId]="courseId"
+    [resource]="resource.resourceData"
+    [editMode]="editMode"
+    [options]="resource.options"
   ></app-file-view>
-
 </ng-container>

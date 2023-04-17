@@ -1,16 +1,19 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ResourceTypes} from '../../core/models/resource-models/resource-types';
-import {CourseResources, InstructorResourceService} from '../resource/instructor-resource.service';
-import {Course} from '../../course/course.model';
-import {ResourceFile} from '../../core/models/resource-models/resource-file.model';
-import {Resource} from '../../core/models/resource-models/resource.model';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ResourceService} from '../../course/resource/resource.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ResourceTypes } from '../../core/models/resource-models/resource-types';
+import {
+  CourseResources,
+  InstructorResourceService,
+} from '../resource/instructor-resource.service';
+import { Course } from '../../course/course.model';
+import { ResourceFile } from '../../core/models/resource-models/resource-file.model';
+import { Resource } from '../../core/models/resource-models/resource.model';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ResourceService } from '../../course/resource/resource.service';
 
 @Component({
   selector: 'app-resource-table',
   templateUrl: './resource-table.component.html',
-  styleUrls: ['./resource-table.component.css']
+  styleUrls: ['./resource-table.component.css'],
 })
 export class ResourceTableComponent implements OnInit {
   @Input() resourceType: string;
@@ -19,7 +22,8 @@ export class ResourceTableComponent implements OnInit {
   @Input() courseId: number;
   @Input() instructorMode: boolean;
   @Output() editResource: EventEmitter<Resource> = new EventEmitter<Resource>();
-  @Output() deleteResource: EventEmitter<Resource> = new EventEmitter<Resource>();
+  @Output() deleteResource: EventEmitter<Resource> =
+    new EventEmitter<Resource>();
   resourceTypes = ResourceTypes;
   get allResourcesEmpty() {
     for (const res in this.resources) {
@@ -36,13 +40,14 @@ export class ResourceTableComponent implements OnInit {
     return res.length <= 0;
   }
 
-  constructor(private instructorResourceService: InstructorResourceService,
-              private router: Router,
-              private route: ActivatedRoute,
-              private resourceService: ResourceService) { }
+  constructor(
+    private instructorResourceService: InstructorResourceService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private resourceService: ResourceService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   downloadFile(fileResource: ResourceFile) {
     this.instructorResourceService.downloadFile(fileResource);
@@ -53,8 +58,8 @@ export class ResourceTableComponent implements OnInit {
       this.router.navigate(['/instructor/editor/code'], {
         queryParams: {
           res: resourceId,
-          cid: this.currentCourse.id
-        }
+          cid: this.currentCourse.id,
+        },
       });
     } else {
       this.navigateToResource(resourceId);
@@ -66,8 +71,8 @@ export class ResourceTableComponent implements OnInit {
       this.router.navigate(['/instructor/editor/markdown'], {
         queryParams: {
           res: resourceId,
-          cid: this.currentCourse.id
-        }
+          cid: this.currentCourse.id,
+        },
       });
     } else {
       this.navigateToResource(resourceId);
@@ -79,8 +84,8 @@ export class ResourceTableComponent implements OnInit {
       this.router.navigate(['/instructor/editor/guide'], {
         queryParams: {
           res: resourceId,
-          cid: this.currentCourse.id
-        }
+          cid: this.currentCourse.id,
+        },
       });
     } else {
       this.navigateToResource(resourceId);
@@ -89,21 +94,25 @@ export class ResourceTableComponent implements OnInit {
 
   navigateToResource(resourceId: number) {
     if (!this.currentCourse) {
-      this.router.navigate(
-        ['student/course/', this.courseId, 'resources', resourceId], {
+      this.router
+        .navigate(['student/course/', this.courseId, 'resources', resourceId], {
           // relativeTo: this.route
-        }).then(data => {
-        // this.resourceService.selectedViewResourceChanged.next(true);
-      });
+        })
+        .then((data) => {
+          // this.resourceService.selectedViewResourceChanged.next(true);
+        });
     } else {
-      this.router.navigate(
-        ['student/course/', this.currentCourse.id, 'resources', resourceId], {
-          // relativeTo: this.route
-        }).then(data => {
-        // this.resourceService.selectedViewResourceChanged.next(true);
-      });
+      this.router
+        .navigate(
+          ['student/course/', this.currentCourse.id, 'resources', resourceId],
+          {
+            // relativeTo: this.route
+          }
+        )
+        .then((data) => {
+          // this.resourceService.selectedViewResourceChanged.next(true);
+        });
     }
-
   }
 
   getFileTypeClass(fileType: string) {

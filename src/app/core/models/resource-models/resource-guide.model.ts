@@ -1,4 +1,4 @@
-import {Resource} from './resource.model';
+import { Resource } from './resource.model';
 
 export class ResourceGuide extends Resource {
   public guideTitle: string;
@@ -11,6 +11,4 @@ export class ResourceGuide extends Resource {
     this.guideDescription = (options as any).guideDescription || '';
     this.guideData = (options as any).guideData || '';
   }
-
-
 }

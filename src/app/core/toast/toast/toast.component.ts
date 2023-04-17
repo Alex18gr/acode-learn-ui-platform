@@ -1,24 +1,31 @@
-import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Toast} from '../toast.model';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { Toast } from '../toast.model';
 
 declare var $: any;
 
 @Component({
   selector: 'app-toast',
   templateUrl: './toast.component.html',
-  styleUrls: ['./toast.component.css']
+  styleUrls: ['./toast.component.css'],
 })
 export class ToastComponent implements OnInit, AfterViewInit {
-  @ViewChild('toast', {static: false}) toast: ElementRef;
+  @ViewChild('toast', { static: false }) toast: ElementRef;
   @Input() toastData: Toast;
   @Input() toastIndex: number;
   @Output() toastDisposed: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.initToast();

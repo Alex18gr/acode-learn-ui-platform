@@ -1,9 +1,9 @@
-import {Directive, ElementRef, Input} from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 import Tooltip from 'tooltip.js';
-import {Placement} from 'popper.js';
+import { Placement } from 'popper.js';
 
 @Directive({
-  selector: '[appTooltip]'
+  selector: '[appTooltip]',
 })
 export class TooltipDirective {
   @Input() tooltipText = '';
@@ -15,7 +15,7 @@ export class TooltipDirective {
       // @ts-ignore
       placement: this.placement,
       title: this.tooltipText,
-      trigger: 'hover'
+      trigger: 'hover',
     });
   }
 }

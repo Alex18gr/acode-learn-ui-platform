@@ -1,32 +1,67 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse shadow-sm"
-     *ngIf="dataLoaded" #navbar>
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light navbar-inverse shadow-sm"
+  *ngIf="dataLoaded"
+  #navbar
+>
   <!--  <a class="navbar-brand" href="#">Navbar</a>-->
-  <a *ngIf="course" class="navbar-brand dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Course Title: {{course.name}}
+  <a
+    *ngIf="course"
+    class="navbar-brand dropdown-toggle"
+    href="#"
+    id="navbarDropdown"
+    role="button"
+    data-toggle="dropdown"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    Course Title: {{ course.name }}
   </a>
   <div *ngIf="courses" class="dropdown-menu" aria-labelledby="navbarDropdown">
     <span class="dropdown-item-text">Enrolled Courses</span>
     <div class="dropdown-divider"></div>
-    <a *ngFor="let c of courses; let i = index" class="dropdown-item" [routerLink]="['/student/course', c.id]">{{c.name}}</a>
+    <a
+      *ngFor="let c of courses; let i = index"
+      class="dropdown-item"
+      [routerLink]="['/student/course', c.id]"
+      >{{ c.name }}</a
+    >
   </div>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent2"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="./" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">Dashboard <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="resources" routerLinkActive="active">Resources <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="sections" routerLinkActive="active">Sections <span class="sr-only">(current)</span></a>
-        </li>
-<!--        <li class="nav-item">-->
-<!--          <a class="nav-link" routerLink="announcements">Announcements <span class="badge badge-pill badge-danger">4</span></a>-->
-<!--        </li>-->
-      </ul>
-    </div>
-  </nav>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="./"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active"
+          >Dashboard <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="resources" routerLinkActive="active"
+          >Resources <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="sections" routerLinkActive="active"
+          >Sections <span class="sr-only">(current)</span></a
+        >
+      </li>
+      <!--        <li class="nav-item">-->
+      <!--          <a class="nav-link" routerLink="announcements">Announcements <span class="badge badge-pill badge-danger">4</span></a>-->
+      <!--        </li>-->
+    </ul>
+  </div>
+</nav>

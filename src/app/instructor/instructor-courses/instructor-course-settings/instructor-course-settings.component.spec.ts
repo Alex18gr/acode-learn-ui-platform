@@ -8,9 +8,8 @@ describe('InstructorCourseSettingsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InstructorCourseSettingsComponent ]
-    })
-    .compileComponents();
+      declarations: [InstructorCourseSettingsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
